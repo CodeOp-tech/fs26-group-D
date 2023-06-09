@@ -1,16 +1,16 @@
 import "./App.css";
 import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./assets/Pages/Login";
-import Register from "./assets/Pages/Register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./assets/Pages/Dashboard";
+import Welcome from "./pages/Welcome"
 import AuthContext from "./context/AuthContext";
 import RequireAuth from "./assets/components/RequireAuth";
 
 function App() {
 
   const [user, setUser] = useState(null);
-  // const auth = useContext(AuthContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
