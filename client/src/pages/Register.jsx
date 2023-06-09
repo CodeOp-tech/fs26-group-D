@@ -119,12 +119,12 @@ function Register(props) {
         
 
     return (
-        <div className="auth-form-container">
+        <div>
             <section>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"></p>
             </section>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit} className="register-form">
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="firstname">
                     Firstname
                 </label>

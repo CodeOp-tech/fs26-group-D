@@ -40,8 +40,8 @@ function Login(props) {
 
 
   return (
-    <div className="auth-form-container">
-      <form onSubmit={login} className="login-form">
+    <div>
+      <form onSubmit={login}>
         <label htmlFor="email">
           Email
         </label>
