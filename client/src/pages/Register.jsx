@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState} from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import "../App.css"
 
 
 function Register(props) {
@@ -124,7 +125,7 @@ function Register(props) {
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"></p>
             </section>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="login-form">
                 <label htmlFor="firstname">
                     Firstname
                 </label>

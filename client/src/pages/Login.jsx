@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../components/context/AuthContext";
 import axios from "axios"
+import "../App.css"
 
 function Login(props) {
 
@@ -40,7 +41,7 @@ function Login(props) {
 
   return (
     <div>
-      <form onSubmit={login}>
+      <form onSubmit={login} className="login-form">
         <label htmlFor="email">
           Email
         </label>
