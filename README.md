@@ -14,7 +14,7 @@ Run `npm install` in the project folder to install dependencies related to Expre
 Create `.env` file in project directory and add
 
 ```
-DB_NAME=TBD
+DB_NAME=mealprepapp
 DB_PASS=YOUR_PASSWORD
 ```
 
