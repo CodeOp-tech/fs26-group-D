@@ -37,13 +37,10 @@ function App() {
   return (
   <AuthContext.Provider value={authObject}>
       <div>
-        <div>
-          <NavBar />
-        </div>
         <Routes>
+          <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
           <Route
             path="/private"
             element={
