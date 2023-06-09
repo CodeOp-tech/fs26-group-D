@@ -13,7 +13,7 @@ function Welcome() {
   return (
     <div>
       <div>
-        <h1>Meal Planner App 📖</h1>
+        <h1>👨‍🍳 ByteBite 👩‍🍳</h1>
         <div>
             {currentForm === 'login'? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm}/>}
         </div>
