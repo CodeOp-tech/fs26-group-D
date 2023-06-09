@@ -49,12 +49,4 @@ router.post("/login", async (req, res) => {
     }
   });
 
-  router.get("/pets", userShouldBeLoggedIn, (req, res) => {
-    db("SELECT * FROM petlist;")
-    .then(results => {
-      res.send(results.data);
-    })
-    .catch(err => res.status(500).send(err));
-  });
-
 module.exports = router;
