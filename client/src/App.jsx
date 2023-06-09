@@ -3,10 +3,10 @@ import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./assets/Pages/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import Welcome from "./pages/Welcome"
-import AuthContext from "./context/AuthContext";
-import RequireAuth from "./assets/components/RequireAuth";
+import AuthContext from "./components/context/AuthContext";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
 
