@@ -1,14 +1,10 @@
 import React, { useState, useContext } from "react";
-import AuthContext from "../components/context/AuthContext";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../App.css"
 
 function Dashboard() {
 
-  const auth = useContext(AuthContext);
   const [user, setUser] = useState([]);
-  const navigate = useNavigate();
   const [error, setError] = useState("")
 
   useEffect(() => {
@@ -41,16 +37,10 @@ function Dashboard() {
     }
   }
 
-  const logout = () => {
-    auth.logout();
-    setUser(false);
-    localStorage.removeItem("token");
-    navigate("/");
-  };
-
     return (
       <div>
-        <h1>Welcome to your Dashboard</h1>
+        <h1>BusyBytes</h1>
+        <h2>Welcome to your Dashboard</h2>
         <div className="profile-container">
           <div className="profile-pic">
             <img className="pic" src="https://i.pinimg.com/736x/44/76/18/447618cb49cf25bccc9ce1c252ca4c5a.jpg" height={300} width={300}/>
@@ -67,7 +57,6 @@ function Dashboard() {
           )}
           </div>
         </div>
-        <button onClick={logout} className="logoutBtn">Logout</button>
       </div>
     );
 };

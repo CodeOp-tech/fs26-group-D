@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from "react";
-import Login from "./Login.jsx";
-import Register from "./Register.jsx";
+import Login from "../components/Login.jsx";
+import Register from "../components/Register.jsx";
 import "../App.css"
 
 function Welcome() {
@@ -14,7 +14,7 @@ function Welcome() {
   return (
     <div>
       <div>
-        <h1>👨‍🍳 ByteBite 👩‍🍳</h1>
+        <h1>👨‍🍳 BusyBytes 👩‍🍳</h1>
         <div>
             {currentForm === 'login'? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm}/>}
         </div>
