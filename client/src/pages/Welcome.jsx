@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from "react";
-import Login from "./Login.jsx";
-import Register from "./Register.jsx";
+import Login from "../components/Login.jsx";
+import Register from "../components/Register.jsx";
 import "../App.css"
 
 function Welcome() {
