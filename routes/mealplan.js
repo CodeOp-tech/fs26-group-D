@@ -1,5 +1,5 @@
 const express = require("express");
-const spoonacular = require("./spoonacular");
+const spoonacular = require("../services/spoonacular");
 const router = express.Router();
 
 //conect user to the API
@@ -17,7 +17,7 @@ router.post("/connect", async (req, res) => {
 });
 
 //generate the meal plan
-router.get("/mealplan/generate", async (req, res) => {
+router.get("/generate", async (req, res) => {
   try {
     const { timeFrame, targetCalories, diet, exclude } = req.query;
     const mealPlan = await spoonacular.generateMealPlan(
@@ -38,22 +38,9 @@ router.get("/:username/week/:startDate", async (req, res) => {
   try {
     const { username, startDate, hash } = req.params;
 
-    const response = await axios.get(
-      `https://api.spoonacular.com/mealplanner/${username}/week/${startDate}`,
-      {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        params: {
-          username: username,
-          "start-date": startDate,
-          hash: hash,
-          apiKey: API_KEY
-        }
-      }
-    );
+    const plan = await spoonacular.getMealPlanForWeek(username, startDate, hash);
 
-    res.json(response.data);
+    res.json(plan);
   } catch (error) {
     console.error("Error retrieving meal plan for week:", error);
     res.status(500).json({ error: "Internal server error" });
