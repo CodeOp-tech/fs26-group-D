@@ -4,7 +4,7 @@ const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
 
-const mealPlanRouter = require("./routes/mealplan");
+const recipesRouter = require("./routes/recipes");
 
 // const apiRouter = require("./routes/api");
 
@@ -15,7 +15,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -24,7 +23,7 @@ app.get("/", function(req, res, next) {
 });
 
 // app.use("/api", apiRouter);
-app.use("/api/mealplan", mealPlanRouter);
+app.use("/api/recipes", recipesRouter);
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
