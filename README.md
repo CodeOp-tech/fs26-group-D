@@ -14,7 +14,7 @@ Run `npm install` in the project folder to install dependencies related to Expre
 Create `.env` file in project directory and add
 
 ```
-DB_NAME=TBD
+DB_NAME=mealprepapp
 DB_PASS=YOUR_PASSWORD
 ```
 
@@ -24,7 +24,7 @@ Alternatively, you can rename the provided `.env.example` file to `.env`.
 
 Type `mysql -u root -p` to access the MySQL CLI using your password.
 
-In the MySQL CLI, type `create database todos;` to create a database in MySQL.
+In the MySQL CLI, type `create database mealprepapp;` to create a database in MySQL.
 
 Run the following in the MySQL CLI: `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YOUR_PASSWORD';` (replace `YOUR_PASSWORD` with your actual password)
 

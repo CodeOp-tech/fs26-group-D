@@ -1,7 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const db = require("../model/helper");
 
-router.get("/", (req, res) => {
-  res.send("Welcome to the API");
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.send({ title: 'Express' });
 });
+
+
+module.exports = router;
