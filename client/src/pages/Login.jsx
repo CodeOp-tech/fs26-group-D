@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../components/context/AuthContext";
-import axios from "axios"
-import "../App.css"
+import axios from "axios";
+import "../App.css";
 
 function Login(props) {
 
@@ -31,7 +31,7 @@ function Login(props) {
 
       localStorage.setItem("token", data.token);
       auth.login();
-      navigate ("/private")
+      navigate ("/private/dashboard")
       console.log(data.message, data.token);
     } catch (err) {
       console.log("Error:", err);

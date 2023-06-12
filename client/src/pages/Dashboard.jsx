@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import AuthContext from "../components/context/AuthContext";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css"
 
@@ -8,6 +9,7 @@ function Dashboard() {
   const auth = useContext(AuthContext);
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
+  const [error, setError] = useState("")
 
   useEffect(() => {
     getUserInfo();
@@ -15,7 +17,7 @@ function Dashboard() {
 
   async function getUserInfo() {
     try {
-      const response = await fetch(`/api/user`, {
+      const response = await fetch(`/api/auth/user`, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -51,7 +53,7 @@ function Dashboard() {
         <h1>Welcome to your Dashboard</h1>
         <div className="profile-container">
           <div className="profile-pic">
-            <img className="pic" src="https://i.pinimg.com/736x/44/76/18/447618cb49cf25bccc9ce1c252ca4c5a.jpg" />
+            <img className="pic" src="https://i.pinimg.com/736x/44/76/18/447618cb49cf25bccc9ce1c252ca4c5a.jpg" height={300} width={300}/>
           </div>
           <div className="profile-info">
             <h2>User Information:</h2>
