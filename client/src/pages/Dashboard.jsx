@@ -39,7 +39,8 @@ function Dashboard() {
 
     return (
       <div>
-        <h1>Welcome to your Dashboard</h1>
+        <h1>BusyBytes</h1>
+        <h2>Welcome to your Dashboard</h2>
         <div className="profile-container">
           <div className="profile-pic">
             <img className="pic" src="https://i.pinimg.com/736x/44/76/18/447618cb49cf25bccc9ce1c252ca4c5a.jpg" height={300} width={300}/>
