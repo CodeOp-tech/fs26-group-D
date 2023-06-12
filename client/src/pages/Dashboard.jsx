@@ -1,12 +1,10 @@
 import React, { useState, useContext } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../App.css"
 
 function Dashboard() {
 
   const [user, setUser] = useState([]);
-  const navigate = useNavigate();
   const [error, setError] = useState("")
 
   useEffect(() => {

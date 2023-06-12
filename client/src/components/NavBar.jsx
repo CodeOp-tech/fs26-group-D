@@ -34,7 +34,7 @@ function NavBar() {
                         onClick={showSidebar}
                     ><FaBars/>
                     </button>
-                    <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`}>
+                    <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : 'hide'}`}>
                         <div>
                             <ul>
                                 <li>

@@ -13,6 +13,7 @@ import NewMealPlan from "./pages/NewMealPlan";
 import AuthContext from "./components/context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import NavBar from "./components/NavBar";
+import Recipe from "./pages/Recipe";
 
 function App() {
 
@@ -95,6 +96,14 @@ function App() {
             element={
               <RequireAuth>
                 <Settings />
+              </RequireAuth>
+            }
+          />
+        <Route
+            path="/private/meal/recipe"
+            element={
+              <RequireAuth>
+                <Recipe />
               </RequireAuth>
             }
           />
