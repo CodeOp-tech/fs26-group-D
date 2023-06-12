@@ -6,6 +6,7 @@ const cors = require('cors');
 const createError = require("http-errors");
 
 const apiRouter = require("./routes/api");
+const authRouter = require('./routes/auth');
 
 const app = express();
 

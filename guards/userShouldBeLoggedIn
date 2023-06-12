@@ -1,4 +1,4 @@
-let jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const supersecret = process.env.SUPER_SECRET;
 

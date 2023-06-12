@@ -10,12 +10,12 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUsersInfo();
+    getUserInfo();
   }, []);
 
-  async function getUsersInfo() {
+  async function getUserInfo() {
     try {
-      const response = await fetch(`/api/users`, {
+      const response = await fetch(`/api/user`, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token"),
         },

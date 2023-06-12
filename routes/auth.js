@@ -1,10 +1,10 @@
-var express = require("express");
-var router = express.Router();
-var jwt = require("jsonwebtoken");
-var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
-var db = require("../model/helper");
+const express = require("express");
+const router = express.Router();
+const jwt = require("jsonwebtoken");
+const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
+const db = require("../model/helper");
 require("dotenv").config();
-var bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const supersecret = process.env.SUPER_SECRET;
@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
 
       if (!correctPassword) throw new Error("Incorrect password");
 
-      var token = jwt.sign({ user_id }, supersecret);
+      let token = jwt.sign({ user_id }, supersecret);
       res.send({ message: "Login successful, here is your token", token, user_id });
     } else {
       throw new Error("User does not exist");
@@ -49,14 +49,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-router.get('/', userShouldBeLoggedIn, function(req, res) {
+router.get('/user', userShouldBeLoggedIn, function(req, res) {
   db(`SELECT * FROM users WHERE id=${req.user_id};`)
     .then(results => {
       res.send(results.data);
     })
     .catch(err => res.status(500).send(err));
 });
-
 
 module.exports = router;
