@@ -1,11 +1,12 @@
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const cors = require('cors');
 const createError = require("http-errors");
-const express = require("express");
-const path = require("path");
-const logger = require("morgan");
-const cors = require("cors");
+
 
 const mealPlanRouter = require("./routes/mealplan");
-
+const authRouter = require('./routes/auth');
 // const apiRouter = require("./routes/api");
 
 const app = express();
@@ -23,8 +24,11 @@ app.get("/", function(req, res, next) {
   res.send("Access the API at path /api");
 });
 
+
 // app.use("/api", apiRouter);
 app.use("/api/mealplan", mealPlanRouter);
+app.use('/api/auth', authRouter);
+
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {

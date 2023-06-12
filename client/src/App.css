@@ -1,0 +1,12 @@
+.offscreen {
+    display: none;
+}
+
+.hide {
+    display: none;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
