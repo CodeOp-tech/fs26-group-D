@@ -1,34 +1,94 @@
-import React, { useState } from 'react';
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai"
+import React, { useState, useContext } from 'react';
+import { FaBars } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from "./context/AuthContext";
 
 
 function NavBar() {
 
-    const [sidebar, setSidebar] = useState(false);
+    const auth = useContext(AuthContext);
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate()
+    const [isNavOpen, setIsNavOpen] = useState(false);
 
     const showSidebar = () => {
-        setSidebar(!sidebar)
+        setIsNavOpen(!isNavOpen);
     }
+
+    const logout = () => {
+        auth.logout();
+        setUser(false);
+        localStorage.removeItem("token");
+        navigate("/");
+      };
 
 
     return (
-    <>
-    <div className='navbar'>
-        <Link to="#" className='menu-bars'>
-              <FaIcons.FaBars onClick={showSidebar}/>
-        </Link>
-    </div>
-            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'} />
-            <ul className='nav-menu-items'>
-                <li className='navbar-toggle'>
-                    <Link to="#" className='menu-bars'>
-                        <AiIcons.AiOutlineClose />
-                    </Link>
-                </li>
-            </ul>
-    </>
+        <div>
+            { auth.user ? (
+            <nav>
+                <div>
+                    <button
+                        type="button"
+                        onClick={showSidebar}
+                    ><FaBars/>
+                    </button>
+                    <div className={`collapse navbar-collapse ${isNavOpen ? 'show' : ''}`}>
+                        <div>
+                            <ul>
+                                <li>
+                                    <Link className="nav-link" to="/private/dashboard">
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                <li >
+                                    <Link className="nav-link" to="/private/mymealplan">
+                                        My Meal Plan
+                                    </Link>
+                                </li>
+                                <li>  
+                                    <Link
+                                        className="nav-link"
+                                        to="/private/shoppinglist"
+                                    >
+                                        Shopping List
+                                    </Link>
+                                </li>
+                                <li>  
+                                    <Link
+                                        className="nav-link"
+                                        to="/private/newmealplan"
+                                    >
+                                        New Meal Plan
+                                    </Link>
+                                </li> 
+                                <li>  
+                                    <Link
+                                        className="nav-link"
+                                        to="/private/myfavourites"
+                                    >
+                                        My Favourites
+                                    </Link>
+                                </li> 
+                                <li>  
+                                    <Link
+                                        className="nav-link"
+                                        to="/private/settings"
+                                    >
+                                        Settings
+                                    </Link>
+                                </li>     
+                            </ul>
+                            <button onClick={logout} className="logoutBtn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+                </nav>
+                ) : (
+                    <div></div>
+                )}
+        </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./pages/Dashboard";
@@ -43,10 +43,10 @@ function App() {
   return (
   <AuthContext.Provider value={authObject}>
       <div>
+        <div>
+          <NavBar />
+        </div>
         <Routes>
-          <Switch>
-            <Route path="/navbar" element={<NavBar />} />
-          </Switch>
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
