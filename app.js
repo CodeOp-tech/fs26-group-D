@@ -4,6 +4,8 @@ const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
 
+const mealPlanRouter = require("./routes/mealplan");
+
 const apiRouter = require("./routes/api");
 
 const app = express();
@@ -12,6 +14,7 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use("/mealplan", mealPlanRouter);
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "client/build")));
