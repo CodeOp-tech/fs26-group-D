@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./pages/Dashboard";
@@ -12,6 +12,7 @@ import ShoppingList from "./pages/ShoppingList";
 import NewMealPlan from "./pages/NewMealPlan";
 import AuthContext from "./components/context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
+import NavBar from "./components/NavBar";
 
 function App() {
 
@@ -43,6 +44,9 @@ function App() {
   <AuthContext.Provider value={authObject}>
       <div>
         <Routes>
+          <Switch>
+            <Route path="/navbar" element={<NavBar />} />
+          </Switch>
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
