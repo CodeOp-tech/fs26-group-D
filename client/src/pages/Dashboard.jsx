@@ -6,8 +6,38 @@ import "../App.css"
 function Dashboard() {
 
   const auth = useContext(AuthContext);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getUsersInfo();
+  }, []);
+
+  async function getUsersInfo() {
+    try {
+      const response = await fetch(`/api/users`, {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+        // console.log(data)
+      } else {
+        throw new Error(response.statusText);
+      }
+    } catch (err) {
+      setError(err.message);
+    }
+    if (error) {
+      return <div>Error: {error}</div>;
+    }
+  
+    if (!user) {
+      return <div>Loading...</div>;
+    }
+  }
 
   const logout = () => {
     auth.logout();
@@ -19,6 +49,22 @@ function Dashboard() {
     return (
       <div>
         <h1>Welcome to your Dashboard</h1>
+        <div className="profile-container">
+          <div className="profile-pic">
+            <img className="pic" src="https://i.pinimg.com/736x/44/76/18/447618cb49cf25bccc9ce1c252ca4c5a.jpg" />
+          </div>
+          <div className="profile-info">
+            <h2>User Information:</h2>
+            {user.map((obj) => (
+              <div>
+                  <p>First Name: {obj.firstname}</p>
+                  <p>Last Name: {obj.lastname}</p>
+                  <p>Email: {obj.email}</p>
+              </div>
+            )
+          )}
+          </div>
+        </div>
         <button onClick={logout} className="logoutBtn">Logout</button>
       </div>
     );
