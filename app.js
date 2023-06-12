@@ -5,6 +5,10 @@ const cors = require('cors');
 const createError = require("http-errors");
 
 
+const recipesRouter = require("./routes/recipes");
+
+
+
 const mealPlanRouter = require("./routes/mealplan");
 const authRouter = require('./routes/auth');
 // const apiRouter = require("./routes/api");
@@ -16,7 +20,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "client/build")));
 
@@ -26,8 +29,12 @@ app.get("/", function(req, res, next) {
 
 
 // app.use("/api", apiRouter);
-app.use("/api/mealplan", mealPlanRouter);
+
+app.use("/api/recipes", recipesRouter);
+
+
 app.use('/api/auth', authRouter);
+
 
 
 // Anything that doesn't match the above, send back index.html
