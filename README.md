@@ -1,6 +1,5 @@
 # fs26-Foo-D-ies-group
 
-
 ## Setup
 
 ### Dependencies
@@ -14,13 +13,14 @@ Run `npm install` in the project folder to install dependencies related to Expre
 Create `.env` file in project directory and add
 
 ```
-DB_NAME=mealprepapp
-DB_PASS=YOUR_PASSWORD
+  DB_HOST=localhost
+  DB_USER=root
+  DB_NAME=mealprepapp
+  DB_PASS=YOUR PASSWORD
+  SUPER_SECRET=WHATEVER YOU WANT
 ```
 
 (replace `YOUR_PASSWORD` with your actual password)
-
-Alternatively, you can rename the provided `.env.example` file to `.env`.
 
 Type `mysql -u root -p` to access the MySQL CLI using your password.
 
