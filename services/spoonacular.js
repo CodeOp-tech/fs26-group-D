@@ -42,8 +42,29 @@ async function searchRecipes(
     throw error;
   }
 }
+
+async function getRecipeInformation(id, includeNutrition) {
+  try {
+    const response = await axios.get(
+      `https://api.spoonacular.com/recipes/${id}/information`,
+      {
+        params: {
+          apiKey: API_KEY,
+          id: id,
+          includeNutrition: includeNutrition
+        }
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error retrieving recipes information:", error);
+    throw error;
+  }
+}
+
 module.exports = {
-  searchRecipes
+  searchRecipes,
+  getRecipeInformation
 };
 
 // var SpoonacularApi = require('spoonacular_api');
