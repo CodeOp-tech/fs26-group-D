@@ -6,10 +6,7 @@ const createError = require("http-errors");
 
 
 const recipesRouter = require("./routes/recipes");
-
-
-
-const mealPlanRouter = require("./routes/mealplan");
+// const mealPlanRouter = require("./routes/mealplan");
 const authRouter = require('./routes/auth');
 // const apiRouter = require("./routes/api");
 
@@ -31,10 +28,8 @@ app.get("/", function(req, res, next) {
 // app.use("/api", apiRouter);
 
 app.use("/api/recipes", recipesRouter);
-
-
+// app.use("/api/mealplan", mealPlanRouter);
 app.use('/api/auth', authRouter);
-
 
 
 // Anything that doesn't match the above, send back index.html
