@@ -3,11 +3,11 @@ import "./Calendar.css";
 
 export default function Calendar() {
   const mealName = [
-    "breakfast",
-    "elevensies",
-    "lunch",
-    "afternoon tea",
-    "diner"
+    "Breakfast",
+    "Elevensies",
+    "Lunch",
+    "Afternoon tea",
+    "Diner"
   ];
 
   // function to create an array with 7 days of the current week, starting from Monday
@@ -54,7 +54,7 @@ export default function Calendar() {
           ))}
         </tr>
         {mealName.map((meal, index) => (
-          <tr key={index} className="meal">
+          <tr key={index} className="mealName">
             {meal}
             {days.map((day, index) => (
               <td key={index}>
