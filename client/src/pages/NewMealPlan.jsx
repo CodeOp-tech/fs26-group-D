@@ -7,7 +7,8 @@ function NewMealPlan() {
 
   return (
     <div>
-        New Meal Plan page
+      New Meal Plan page
+      <button type="button">Meal Generator</button>
     </div>
   );
 }
