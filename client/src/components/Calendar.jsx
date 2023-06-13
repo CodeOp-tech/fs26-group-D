@@ -1,28 +1,74 @@
 import React from "react";
 import "./Calendar.css";
 
-export default function Calendar({ days }) {
+export default function Calendar() {
+  const mealName = [
+    "breakfast",
+    "elevensies",
+    "lunch",
+    "afternoon tea",
+    "diner"
+  ];
+
+  // function to create an array with 7 days of the current week, starting from Monday
+  const getDays = () => {
+    const days = [];
+    const weekday = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+    const today = new Date();
+    const day = today.getDay();
+    const diff = today.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+    const currentDay = new Date(today.setDate(diff));
+
+    for (let i = 0; i < 7; i++) {
+      days.push({
+        date: new Date(currentDay),
+        dayName: weekday[currentDay.getDay()],
+        meal: mealName.map(() => ({ name: "", img: "" }))
+      });
+      currentDay.setDate(currentDay.getDate() + 1);
+    }
+    return days;
+  };
+
+  const days = getDays();
+
   return (
-    <div class="calendar">
-      {days.map((day, index) => {
-        return (
-          <div key={index}>
-            <div>{day.date.toLocaleDateString()}</div>
-            <div>{day.date.getDay()}</div>
-            <div>
-              {day.meals &&
-                day.meals.map((meal, index) => {
-                  return (
-                    <div key={index}>
-                      <div>{meal.name}</div>
-                      <div>{meal.food}</div>
+    <div>
+      <table className="calendar">
+        <tr>
+          <th></th>
+          {days.map((day, index) => (
+            <th key={index} className="dates">
+              {day.date ? day.date.toLocaleDateString() : ""}
+              <br />
+              {day.dayName}
+            </th>
+          ))}
+        </tr>
+        {mealName.map((meal, index) => (
+          <tr key={index} className="meal">
+            {meal}
+            {days.map((day, index) => (
+              <td key={index}>
+                {day.meals &&
+                  day.meals.map((meal, index) => (
+                    <div key={index} className="meal">
+                      {meal.name}
                     </div>
-                  );
-                })}
-            </div>
-          </div>
-        );
-      })}
+                  ))}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </table>
     </div>
   );
 }

@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+  gap: 2px;
+}
+
+tr {
+  height: 20px;
+}
+
+td {
+  border: white 1px solid;
+  border-radius: 10px;
+  background-color: #ccc;
+}

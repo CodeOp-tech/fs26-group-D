@@ -62,6 +62,7 @@ function Dashboard() {
         </div>
       </div>
       <div>
+        <h2>Weekly Calendar</h2>
         <Calendar />
       </div>
     </div>
