@@ -1,5 +1,5 @@
 const express = require("express");
-const { searchRecipes } = require("../services/spoonacular");
+const spoonacular = require("../services/spoonacular");
 
 const router = express.Router();
 
@@ -18,8 +18,8 @@ router.get("/search", async (req, res) => {
       maxCalories,
       maxFat,
       maxFiber
-    } = req.body;
-    const recipes = await searchRecipes(
+    } = req.query;
+    const recipes = await spoonacular.searchRecipes(
       query,
       diet,
       intolerances,
@@ -39,6 +39,21 @@ router.get("/search", async (req, res) => {
     res
       .status(500)
       .json({ error: "An error occurred while searching recipes." });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { includeNutrition } = req.query;
+
+    const recipe = await spoonacular.getRecipeInformation(id, includeNutrition);
+    res.json(recipe);
+  } catch (error) {
+    console.error("Error retrieving recipe information:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while retieving recipe information." });
   }
 });
 
