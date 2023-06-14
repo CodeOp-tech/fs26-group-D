@@ -13,6 +13,7 @@ export default function Calendar() {
     "afternoon tea",
     "diner"
   ];
+  const [startDate, setStartDate] = useState(new Date()); // Start with the current date
 
   useEffect(() => {
     getMealPlan();
@@ -35,7 +36,7 @@ export default function Calendar() {
   }
 
   // function to create an array with 7 days of the current week, starting from Monday
-  const getDays = () => {
+  const getDays = startDate => {
     const days = [];
     const weekday = [
       "Sunday",
@@ -46,10 +47,9 @@ export default function Calendar() {
       "Friday",
       "Saturday"
     ];
-    const today = new Date();
-    const day = today.getDay();
-    const diff = today.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
-    const currentDay = new Date(today.setDate(diff));
+    const currentDay = new Date(startDate);
+
+    currentDay.setDate(currentDay.getDate() - currentDay.getDay() + 1); // Set the current day to Monday
 
     for (let i = 0; i < 7; i++) {
       const formattedCurrentDay = dayjs(currentDay).format("DD/MM/YYYY");
@@ -71,10 +71,28 @@ export default function Calendar() {
     return days;
   };
 
-  const days = getDays();
+  const seePreviousWeek = () => {
+    const newStartDate = new Date(startDate);
+    newStartDate.setDate(startDate.getDate() - 7); // Move the start date 7 days back
+    setStartDate(newStartDate); // Update the start date
+    setDays(getDays(newStartDate)); // Retrieve the days for the new week
+  };
+
+  const seeNextWeek = () => {
+    const newStartDate = new Date(startDate);
+    newStartDate.setDate(startDate.getDate() + 7); // Move the start date 7 days ahead
+    setStartDate(newStartDate); // Update the start date
+    setDays(getDays(newStartDate)); // Retrieve the days for the new week
+  };
+
+  const [days, setDays] = useState(getDays(startDate));
 
   return (
     <div>
+      <div>
+        <button onClick={seePreviousWeek}>⬅️</button>
+        <button onClick={seeNextWeek}>➡️</button>
+      </div>
       <table className="calendar">
         <thead>
           <tr>
