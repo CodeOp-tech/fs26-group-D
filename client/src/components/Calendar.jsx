@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import dayjs from "dayjs";
 import "./Calendar.css";
 
 export default function Calendar() {
   const [mealPlan, setMealPlan] = useState([]);
   const [error, setError] = useState("");
   const mealName = [
-    "Breakfast",
-    "Elevensies",
-    "Lunch",
-    "Afternoon tea",
-    "Diner"
+    "breakfast",
+    "elevensies",
+    "lunch",
+    "afternoon tea",
+    "diner"
   ];
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function Calendar() {
       const data = await response.json();
       if (!response.ok) throw new Error(response.statusText);
       setMealPlan(data);
-      console.log(mealPlan);
+      console.log(data);
     } catch (err) {
       setError(err.message);
     }
@@ -51,10 +52,16 @@ export default function Calendar() {
     const currentDay = new Date(today.setDate(diff));
 
     for (let i = 0; i < 7; i++) {
+      const formattedCurrentDay = dayjs(currentDay).format("DD/MM/YYYY");
+      const mealsForCurrentDay = mealPlan.filter(
+        meal => dayjs(meal.date).format("DD/MM/YYYY") === formattedCurrentDay
+      );
+
       days.push({
         date: new Date(currentDay),
         dayName: weekday[currentDay.getDay()],
-        meal: mealPlan.map(meal => ({
+        meal: mealsForCurrentDay.map(meal => ({
+          type: meal.meal_type,
           name: meal.recipe_title,
           img: meal.recipe_image
         }))
@@ -82,15 +89,16 @@ export default function Calendar() {
           </tr>
         </thead>
         <tbody>
-          {mealName.map((meal, index) => (
-            <tr>
-              <th key={index} className="mealName">
-                {meal}
-              </th>
-              {mealPlan.map((meal, index) => (
-                <td key={index} className="meal">
-                  {meal.recipe_title}
-                  <img src={meal.recipe_image} alt={meal.recipe_title} />
+          {mealName.map((mealType, mealTypeIndex) => (
+            <tr key={mealTypeIndex}>
+              <th className="mealName">{mealType}</th>
+              {days.map((day, dayIndex) => (
+                <td key={dayIndex} className="meal">
+                  {day.meal.find(meal => meal.type === mealType)?.name}
+                  <img
+                    src={day.meal.find(meal => meal.type === mealType)?.img}
+                    alt={day.meal.find(meal => meal.type === mealType)?.name}
+                  />
                   <button type="button">See Recipe</button>
                 </td>
               ))}

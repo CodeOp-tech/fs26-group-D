@@ -60,6 +60,7 @@ router.get("/user", userShouldBeLoggedIn, function(req, res) {
 });
 
 router.get("/calendar", userShouldBeLoggedIn, (req, res) => {
+  console.log(req.user_id);
   db(`SELECT * FROM calendar WHERE user_id=${req.user_id};`)
     .then(results => {
       res.send(results.data);
