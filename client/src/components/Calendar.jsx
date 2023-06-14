@@ -62,6 +62,7 @@ export default function Calendar() {
                   day.meals.map((meal, index) => (
                     <div key={index} className="meal">
                       {meal.name}
+                      <button type="button">See Recipe</button>
                     </div>
                   ))}
               </td>

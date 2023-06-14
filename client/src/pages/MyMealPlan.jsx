@@ -1,19 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../App.css"
+import Calendar from "../components/Calendar";
+import "../App.css";
 
 function MyMealPlan() {
-
   const navigate = useNavigate();
-  
+
   const showRecipe = () => {
-    navigate("/private/meal/recipe")
-  }
+    navigate("/private/meal/recipe");
+  };
 
   return (
     <div>
       My Meal Plan page
-      <button type="button" onClick={showRecipe}>See Recipe</button>
+      <Calendar />
     </div>
   );
 }
