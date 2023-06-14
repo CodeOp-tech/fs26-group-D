@@ -7,6 +7,7 @@ function NewMealPlan() {
   const [diet, setDiet] = useState("");
   const [intolerances, setIntolerances] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const searchRecipes = async () => {
     try {
@@ -30,6 +31,21 @@ function NewMealPlan() {
     setDiet("");
     setIntolerances("");
   }
+
+  const handleRecipeInformation = async recipeId => {
+    try {
+      const response = await axios.get(`/api/recipes/${recipeId}`, {
+        params: {
+          includeNutrition: true
+        }
+      });
+      const recipeInfo = response.data;
+      console.log(recipeInfo);
+      setSelectedRecipe(recipeInfo);
+    } catch (error) {
+      console.error("Error retrieving recipe information:", error);
+    }
+  };
 
   return (
     <div>
@@ -67,11 +83,22 @@ function NewMealPlan() {
       </form>
       {recipes.map(recipe => (
         <div key={recipe.id}>
-          <h3>{recipe.title}</h3>
+          <h2>{recipe.title}</h2>
           <img src={recipe.image} alt={recipe.title} />
-          <button>Get recipe information</button>
+          <button onClick={() => handleRecipeInformation(recipe.id)}>
+            Get recipe information
+          </button>
         </div>
       ))}
+      {selectedRecipe && (
+        <div>
+          <h3>{selectedRecipe.title}</h3>
+          <p>preparation time: {selectedRecipe.readyInMinutes} minutes</p>
+          <p>{selectedRecipe.servings}</p>
+          <p>{selectedRecipe.summary}</p>
+          <p>{selectedRecipe.instruccions}</p>
+        </div>
+      )}
     </div>
   );
 }
