@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Calendar from "../components/Calendar";
 import "../App.css";
 
 function NewMealPlan() {
@@ -7,7 +8,11 @@ function NewMealPlan() {
   const [diet, setDiet] = useState("");
   const [intolerances, setIntolerances] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [date, setDate] = useState("");
+  const [mealType, setMealType] = useState("");
+  const [error, setError] = useState("");
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+
 
   const searchRecipes = async () => {
     try {
@@ -31,6 +36,32 @@ function NewMealPlan() {
     setDiet("");
     setIntolerances("");
   }
+
+  const addMealToCalendar = async recipe => {
+    const input = {
+      date,
+      meal_type: mealType,
+      recipe_id: recipe.id,
+      recipe_title: recipe.title,
+      recipe_image: recipe.image
+    };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify(input)
+    };
+    try {
+      const response = await fetch("/api/recipes/calendar", options);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      // Handle successful response here
+      console.log("Meal added successfully");
+    } catch (err) {
+      setError(err.message);
 
   const handleRecipeInformation = async recipeId => {
     try {
@@ -88,17 +119,48 @@ function NewMealPlan() {
           <button onClick={() => handleRecipeInformation(recipe.id)}>
             Get recipe information
           </button>
+          {selectedRecipe && (
+          <div>
+            <h3>{selectedRecipe.title}</h3>
+            <p>preparation time: {selectedRecipe.readyInMinutes} minutes</p>
+            <p>{selectedRecipe.servings}</p>
+            <p>{selectedRecipe.summary}</p>
+            <p>{selectedRecipe.instruccions}</p>
+          </div>
+          )}
+          <div>
+            <label htmlFor="date">Date:</label>
+            <input
+              placeholder="DD/MM/YYYY"
+              type="date"
+              id="date"
+              value={date}
+              onChange={e => setDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="mealType">Meal Type:</label>
+            <select
+              id="mealType"
+              value={mealType}
+              onChange={e => setMealType(e.target.value)}
+            >
+              <option value="">Select a meal type</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="elevensies">Elevensies</option>
+              <option value="lunch">Lunch</option>
+              <option value="afternoon tea">Afternoon tea</option>
+              <option value="diner">Diner</option>
+            </select>
+          </div>
+          <button onClick={() => addMealToCalendar(recipe)}>
+            Add to Calendar
+          </button>
         </div>
       ))}
-      {selectedRecipe && (
-        <div>
-          <h3>{selectedRecipe.title}</h3>
-          <p>preparation time: {selectedRecipe.readyInMinutes} minutes</p>
-          <p>{selectedRecipe.servings}</p>
-          <p>{selectedRecipe.summary}</p>
-          <p>{selectedRecipe.instruccions}</p>
-        </div>
-      )}
+      <div>
+        <Calendar />
+      </div>
     </div>
   );
 }
