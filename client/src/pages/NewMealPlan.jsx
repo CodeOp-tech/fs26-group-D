@@ -38,7 +38,7 @@ function NewMealPlan() {
   const addMealToCalendar = async recipe => {
     const input = {
       date,
-      meal_type: "",
+      meal_type: mealType,
       recipe_id: recipe.id,
       recipe_title: recipe.title,
       recipe_image: recipe.image
@@ -132,7 +132,9 @@ function NewMealPlan() {
           </button>
         </div>
       ))}
-      <Calendar />
+      <div>
+        <Calendar />
+      </div>
     </div>
   );
 }
