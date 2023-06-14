@@ -13,7 +13,6 @@ function NewMealPlan() {
   const [error, setError] = useState("");
   const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-
   const searchRecipes = async () => {
     try {
       const response = await axios.get("/api/recipes/search", {
@@ -62,6 +61,8 @@ function NewMealPlan() {
       console.log("Meal added successfully");
     } catch (err) {
       setError(err.message);
+    }
+  };
 
   const handleRecipeInformation = async recipeId => {
     try {
@@ -120,13 +121,13 @@ function NewMealPlan() {
             Get recipe information
           </button>
           {selectedRecipe && (
-          <div>
-            <h3>{selectedRecipe.title}</h3>
-            <p>preparation time: {selectedRecipe.readyInMinutes} minutes</p>
-            <p>{selectedRecipe.servings}</p>
-            <p>{selectedRecipe.summary}</p>
-            <p>{selectedRecipe.instruccions}</p>
-          </div>
+            <div>
+              <h3>{selectedRecipe.title}</h3>
+              <p>preparation time: {selectedRecipe.readyInMinutes} minutes</p>
+              <p>{selectedRecipe.servings}</p>
+              <p>{selectedRecipe.summary}</p>
+              <p>{selectedRecipe.instruccions}</p>
+            </div>
           )}
           <div>
             <label htmlFor="date">Date:</label>
