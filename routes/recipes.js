@@ -1,5 +1,6 @@
 const express = require("express");
 const spoonacular = require("../services/spoonacular");
+const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 
 const router = express.Router();
 
@@ -54,6 +55,19 @@ router.get("/:id", async (req, res) => {
     res
       .status(500)
       .json({ error: "An error occurred while retieving recipe information." });
+  }
+});
+
+router.post("/calendar", userShouldBeLoggedIn, async function(req, res) {
+  const { date, meal_type, recipe_id, recipe_title, recipe_image } = req.body;
+  try {
+    const results = await db(
+      `INSERT INTO calendar (date, meal_type, recipe_id, recipe_title, recipe_image, user_id) VALUES("${date}","${meal_type}","${recipe_id}","${recipe_title}", "${recipe_image}", "${req.user_id}");`
+    );
+    res.send({ message: `"${recipe_title}" was added to you calendar` });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
   }
 });
 

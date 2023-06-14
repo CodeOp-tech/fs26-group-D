@@ -31,6 +31,27 @@ function NewMealPlan() {
     setIntolerances("");
   }
 
+  const addMealToCalendar = async id => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify(input)
+    };
+    try {
+      const response = await fetch("/api/recipes/calendar", options);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      // Handle successful response here
+      console.log("Meal added successfully");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div>
       New Meal Plan page
@@ -70,6 +91,9 @@ function NewMealPlan() {
           <h3>{recipe.title}</h3>
           <img src={recipe.image} alt={recipe.title} />
           <button>Get recipe information</button>
+          <button onClick={addMealToCalendar(recipe.id)}>
+            Add to Calendar
+          </button>
         </div>
       ))}
     </div>
