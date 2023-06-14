@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Calendar from "../components/Calendar";
 import "../App.css";
 
 function NewMealPlan() {
@@ -7,6 +8,9 @@ function NewMealPlan() {
   const [diet, setDiet] = useState("");
   const [intolerances, setIntolerances] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [date, setDate] = useState("");
+  const [mealType, setMealType] = useState("");
+  const [error, setError] = useState("");
 
   const searchRecipes = async () => {
     try {
@@ -31,7 +35,14 @@ function NewMealPlan() {
     setIntolerances("");
   }
 
-  const addMealToCalendar = async id => {
+  const addMealToCalendar = async recipe => {
+    const input = {
+      date,
+      meal_type: "",
+      recipe_id: recipe.id,
+      recipe_title: recipe.title,
+      recipe_image: recipe.image
+    };
     const options = {
       method: "POST",
       headers: {
@@ -91,11 +102,37 @@ function NewMealPlan() {
           <h3>{recipe.title}</h3>
           <img src={recipe.image} alt={recipe.title} />
           <button>Get recipe information</button>
-          <button onClick={addMealToCalendar(recipe.id)}>
+          <div>
+            <label htmlFor="date">Date:</label>
+            <input
+              placeholder="DD/MM/YYYY"
+              type="date"
+              id="date"
+              value={date}
+              onChange={e => setDate(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="mealType">Meal Type:</label>
+            <select
+              id="mealType"
+              value={mealType}
+              onChange={e => setMealType(e.target.value)}
+            >
+              <option value="">Select a meal type</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="elevensies">Elevensies</option>
+              <option value="lunch">Lunch</option>
+              <option value="afternoon tea">Afternoon tea</option>
+              <option value="diner">Diner</option>
+            </select>
+          </div>
+          <button onClick={() => addMealToCalendar(recipe)}>
             Add to Calendar
           </button>
         </div>
       ))}
+      <Calendar />
     </div>
   );
 }
