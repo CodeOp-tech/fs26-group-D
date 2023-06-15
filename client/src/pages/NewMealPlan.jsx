@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Recipe from "./Recipe";
 import Calendar from "../components/Calendar";
 import "../App.css";
 
@@ -13,7 +12,6 @@ function NewMealPlan() {
   const [date, setDate] = useState("");
   const [mealType, setMealType] = useState("");
   const [error, setError] = useState("");
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const searchRecipes = async () => {
     try {
@@ -66,21 +64,6 @@ function NewMealPlan() {
       setMealType("");
     } catch (err) {
       setError(err.message);
-    }
-  };
-
-  const handleRecipeInformation = async recipeId => {
-    try {
-      const response = await axios.get(`/api/recipes/${recipeId}`, {
-        params: {
-          includeNutrition: true
-        }
-      });
-      const recipeInfo = response.data;
-      console.log(recipeInfo);
-      setSelectedRecipe(recipeInfo);
-    } catch (error) {
-      console.error("Error retrieving recipe information:", error);
     }
   };
 
