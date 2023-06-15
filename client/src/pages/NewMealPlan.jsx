@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import Recipe from "./Recipe";
 import Calendar from "../components/Calendar";
 import "../App.css";
 
@@ -113,22 +115,15 @@ function NewMealPlan() {
         </label>
         <button type="submit">Get Recipes</button>
       </form>
+      {/* <Recipe selectedRecipe={selectedRecipe} /> */}
       {recipes.map(recipe => (
         <div key={recipe.id}>
           <h2>{recipe.title}</h2>
-          <img src={recipe.image} alt={recipe.title} />
-          <button onClick={() => handleRecipeInformation(recipe.id)}>
-            Get recipe information
-          </button>
-          {selectedRecipe && (
-            <div>
-              <h3>{selectedRecipe.title}</h3>
-              <p>preparation time: {selectedRecipe.readyInMinutes} minutes</p>
-              <p>{selectedRecipe.servings}</p>
-              <p>{selectedRecipe.summary}</p>
-              <p>{selectedRecipe.instruccions}</p>
-            </div>
-          )}
+          <Link to={`/private/recipe/${recipe.id}`}>
+            <img src={recipe.image} alt={recipe.title} />
+          </Link>
+        </div>
+      ))}
           <div>
             <label htmlFor="date">Date:</label>
             <input
