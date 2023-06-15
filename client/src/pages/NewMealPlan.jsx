@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import Recipe from "./Recipe";
 import "../App.css";
 
 function NewMealPlan() {
@@ -32,21 +34,7 @@ function NewMealPlan() {
     setIntolerances("");
   }
 
-  const handleRecipeInformation = async recipeId => {
-    try {
-      const response = await axios.get(`/api/recipes/${recipeId}`, {
-        params: {
-          includeNutrition: true
-        }
-      });
-      const recipeInfo = response.data;
-      console.log(recipeInfo);
-      setSelectedRecipe(recipeInfo);
-    } catch (error) {
-      console.error("Error retrieving recipe information:", error);
-    }
-  };
-
+  console.log(selectedRecipe);
   return (
     <div>
       New Meal Plan page
@@ -81,24 +69,15 @@ function NewMealPlan() {
         </label>
         <button type="submit">Get Recipes</button>
       </form>
+      {/* <Recipe selectedRecipe={selectedRecipe} /> */}
       {recipes.map(recipe => (
         <div key={recipe.id}>
           <h2>{recipe.title}</h2>
-          <img src={recipe.image} alt={recipe.title} />
-          <button onClick={() => handleRecipeInformation(recipe.id)}>
-            Get recipe information
-          </button>
+          <Link to={`/private/recipe/${recipe.id}`}>
+            <img src={recipe.image} alt={recipe.title} />
+          </Link>
         </div>
       ))}
-      {selectedRecipe && (
-        <div>
-          <h3>{selectedRecipe.title}</h3>
-          <p>preparation time: {selectedRecipe.readyInMinutes} minutes</p>
-          <p>{selectedRecipe.servings}</p>
-          <p>{selectedRecipe.summary}</p>
-          <p>{selectedRecipe.instruccions}</p>
-        </div>
-      )}
     </div>
   );
 }

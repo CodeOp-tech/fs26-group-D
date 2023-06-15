@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./pages/Dashboard";
-import Welcome from "./pages/Welcome"
+import Welcome from "./pages/Welcome";
 import Settings from "./pages/Settings";
 import MyFavourites from "./pages/MyFavourites";
 import MyMealPlan from "./pages/MyMealPlan";
@@ -16,18 +16,17 @@ import NavBar from "./components/NavBar";
 import Recipe from "./pages/Recipe";
 
 function App() {
-
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setUser(true)
+      setUser(true);
     }
   }, []);
 
   function login(email, password) {
-    setUser(true)
+    setUser(true);
   }
 
   const logout = () => {
@@ -38,11 +37,11 @@ function App() {
   const authObject = {
     user,
     login,
-    logout,
-  }
+    logout
+  };
 
   return (
-  <AuthContext.Provider value={authObject}>
+    <AuthContext.Provider value={authObject}>
       <div>
         <div>
           <NavBar />
@@ -51,6 +50,7 @@ function App() {
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
           <Route
             path="/private/dashboard"
             element={
@@ -99,8 +99,8 @@ function App() {
               </RequireAuth>
             }
           />
-        <Route
-            path="/private/meal/recipe"
+          <Route
+            path="/private/recipe/:id"
             element={
               <RequireAuth>
                 <Recipe />
