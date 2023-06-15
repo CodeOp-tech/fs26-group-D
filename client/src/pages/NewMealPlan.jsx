@@ -117,13 +117,13 @@ function NewMealPlan() {
       </form>
       {/* <Recipe selectedRecipe={selectedRecipe} /> */}
       {recipes.map(recipe => (
-        <div key={recipe.id}>
-          <h2>{recipe.title}</h2>
-          <Link to={`/private/recipe/${recipe.id}`}>
-            <img src={recipe.image} alt={recipe.title} />
-          </Link>
-        </div>
-      ))}
+        <div>
+          <div key={recipe.id}>
+            <h2>{recipe.title}</h2>
+            <Link to={`/private/recipe/${recipe.id}`}>
+              <img src={recipe.image} alt={recipe.title} />
+            </Link>
+          </div>
           <div>
             <label htmlFor="date">Date:</label>
             <input
@@ -149,9 +149,11 @@ function NewMealPlan() {
               <option value="diner">Diner</option>
             </select>
           </div>
-          <button onClick={() => addMealToCalendar(recipe)}>
-            Add to Calendar
-          </button>
+          <div>
+            <button onClick={() => addMealToCalendar(recipe)}>
+              Add to Calendar
+            </button>
+          </div>
         </div>
       ))}
       <div>
