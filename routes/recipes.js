@@ -72,18 +72,4 @@ router.post("/calendar", userShouldBeLoggedIn, async function(req, res) {
   }
 });
 
-router.delete(
-  "/calendar/:recipe_id",
-  userShouldBeLoggedIn,
-  async (req, res) => {
-    const { recipe_id } = req.params;
-    try {
-      await db(`DELETE FROM calendar WHERE recipe_id = ${recipe_id};`);
-      res.send("Meal removed");
-    } catch (err) {
-      res.status(500).send(err);
-    }
-  }
-);
-
 module.exports = router;

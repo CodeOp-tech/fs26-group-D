@@ -60,12 +60,21 @@ router.get("/user", userShouldBeLoggedIn, function(req, res) {
 });
 
 router.get("/calendar", userShouldBeLoggedIn, (req, res) => {
-  console.log(req.user_id);
   db(`SELECT * FROM calendar WHERE user_id=${req.user_id};`)
     .then(results => {
       res.send(results.data);
     })
     .catch(err => res.status(500).send(err));
+});
+
+router.delete("/calendar/:meal_id", userShouldBeLoggedIn, async (req, res) => {
+  const { meal_id } = req.params;
+  try {
+    await db(`DELETE FROM calendar WHERE id = ${meal_id};`);
+    res.send("Meal removed");
+  } catch (err) {
+    res.status(500).send(err);
+  }
 });
 
 module.exports = router;

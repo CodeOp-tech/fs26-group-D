@@ -15,10 +15,10 @@ export default function Calendar() {
     "diner"
   ];
   const [startDate, setStartDate] = useState(new Date()); // Start with the current date
-  const { id } = useParams();
 
   useEffect(() => {
     getMealPlan();
+    getDays();
   }, []);
 
   async function getMealPlan() {
@@ -63,6 +63,7 @@ export default function Calendar() {
         date: new Date(currentDay),
         dayName: weekday[currentDay.getDay()],
         meal: mealsForCurrentDay.map(meal => ({
+          id: meal.id,
           type: meal.meal_type,
           name: meal.recipe_title,
           img: meal.recipe_image
@@ -89,9 +90,9 @@ export default function Calendar() {
 
   const [days, setDays] = useState(getDays(startDate));
 
-  const handleDelete = async () => {
+  const handleDelete = async mealId => {
     try {
-      const response = await fetch(`/api/recipes/calendar/${id}`, {
+      const response = await fetch(`/api/auth/calendar/${mealId}`, {
         method: "DELETE",
         headers: {
           authorization: "Bearer " + localStorage.getItem("token")
@@ -99,6 +100,7 @@ export default function Calendar() {
       });
       if (response.ok) {
         console.log("Meal deleted");
+        getMealPlan();
         getDays();
       } else {
         console.log("Error:", response.status);
@@ -145,7 +147,15 @@ export default function Calendar() {
                           <button type="button">See Recipe</button>
                         </div>
                         <div>
-                          <button type="button" onClick={handleDelete}>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleDelete(
+                                day.meal.find(meal => meal.type === mealType)
+                                  ?.id
+                              )
+                            }
+                          >
                             ❌
                           </button>
                         </div>
