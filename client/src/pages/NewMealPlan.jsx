@@ -3,17 +3,24 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Recipe from "./Recipe";
 import Calendar from "../components/Calendar";
+import Select from "react-select";
 import "../App.css";
 
 function NewMealPlan() {
   const [query, setQuery] = useState("");
   const [diet, setDiet] = useState("");
-  const [intolerances, setIntolerances] = useState("");
+  const [intolerances, setIntolerances] = useState([]);
+  const [type, setType] = useState("");
+  const [equipment, setEquipment] = useState("");
+  const [includeIngredients, setIncludeIngredients] = useState("");
+  const [excludeIngredients, setExcludeIngredients] = useState("");
+  const [cuisine, setCuisine] = useState("");
+  const [maxReadyTime, setMaxReadyTime] = useState("");
+  const [maxCalories, setMaxCalories] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [date, setDate] = useState("");
   const [mealType, setMealType] = useState("");
   const [error, setError] = useState("");
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const searchRecipes = async () => {
     try {
@@ -21,7 +28,14 @@ function NewMealPlan() {
         params: {
           query,
           diet,
-          intolerances
+          intolerances,
+          type,
+          includeIngredients,
+          excludeIngredients,
+          cuisine,
+          equipment,
+          maxReadyTime,
+          maxCalories
         }
       });
       setRecipes(response.data.results);
@@ -32,10 +46,29 @@ function NewMealPlan() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    searchRecipes(query, diet, intolerances);
+    const formData = {
+      query,
+      diet,
+      intolerances,
+      type,
+      includeIngredients,
+      excludeIngredients,
+      cuisine,
+      equipment,
+      maxReadyTime,
+      maxCalories
+    };
+    searchRecipes(formData);
     setQuery("");
     setDiet("");
-    setIntolerances("");
+    setIntolerances([]);
+    setType("");
+    setIncludeIngredients("");
+    setExcludeIngredients("");
+    setCuisine("");
+    setEquipment("");
+    setMaxReadyTime("");
+    setMaxCalories("");
   }
 
   const addMealToCalendar = async recipe => {
@@ -66,21 +99,6 @@ function NewMealPlan() {
     }
   };
 
-  const handleRecipeInformation = async recipeId => {
-    try {
-      const response = await axios.get(`/api/recipes/${recipeId}`, {
-        params: {
-          includeNutrition: true
-        }
-      });
-      const recipeInfo = response.data;
-      console.log(recipeInfo);
-      setSelectedRecipe(recipeInfo);
-    } catch (error) {
-      console.error("Error retrieving recipe information:", error);
-    }
-  };
-
   return (
     <div>
       New Meal Plan page
@@ -91,31 +109,144 @@ function NewMealPlan() {
           <input
             type="text"
             name="query"
+            placeholder="e.g. pizza, chicken"
             value={query}
             onChange={e => setQuery(e.target.value)}
           />
         </label>
+
         <label>
-          {" "}
           Diet
-          <input
-            type="text"
-            value={diet}
-            onChange={e => setDiet(e.target.value)}
+          <Select
+            value={diet ? { value: diet, label: diet } : null}
+            onChange={selectedOption => setDiet(selectedOption.value)}
+            options={[
+              { value: "", label: "Select a diet" },
+              { value: "gluten free", label: "Gluten Free" },
+              { value: "ketogenic", label: "Ketogenic" },
+              { value: "vegetarian", label: "Vegetarian" },
+              { value: "lacto-vegetarian", label: "Lacto-Vegetarian" },
+              { value: "ovo-vegetarian", label: "Ovo-Vegetarian" },
+              { value: "vegan", label: "Vegan" },
+              { value: "pescetarian", label: "Pescetarian" },
+              { value: "paleo", label: "Paleo" },
+              { value: "primal", label: "Primal" },
+              { value: "low FODMAP", label: "Low FODMAP" },
+              { value: "whole30", label: "Whole30" }
+            ]}
           />
         </label>
+
+        <label>
+          Intolerances
+          <Select
+            value={intolerances.map(intolerance => ({
+              value: intolerance,
+              label: intolerance
+            }))}
+            onChange={selectedOptions =>
+              setIntolerances(selectedOptions.map(option => option.value))
+            }
+            options={[
+              { value: "dairy", label: "Dairy" },
+              { value: "egg", label: "Egg" },
+              { value: "gluten", label: "Gluten" },
+              { value: "grain", label: "Grain" },
+              { value: "peanut", label: "Peanut" },
+              { value: "seafood", label: "Seafood" },
+              { value: "sesame", label: "Sesame" },
+              { value: "shellfish", label: "Shellfish" },
+              { value: "soy", label: "Soy" },
+              { value: "sulfite", label: "Sulfite" },
+              { value: "tree nut", label: "Tree Nut" },
+              { value: "wheat", label: "Wheat" }
+            ]}
+            isMulti
+          />
+        </label>
+
         <label>
           {" "}
-          Intolerances
+          Type
           <input
             type="text"
-            value={intolerances}
-            onChange={e => setIntolerances(e.target.value)}
+            name="type"
+            placeholder="e.g. breakfast, drink, dinner, snack"
+            value={type}
+            onChange={e => setType(e.target.value)}
           />
         </label>
+
+        <label>
+          {" "}
+          Cuisine:
+          <input
+            type="text"
+            name="cuisine"
+            placeholder="e.g. chinese, corean, latinamerican"
+            value={cuisine}
+            onChange={e => setCuisine(e.target.value)}
+          />
+        </label>
+
+        <label>
+          {" "}
+          Ingredients to include:
+          <input
+            type="text"
+            name="includeIngredients"
+            value={includeIngredients}
+            onChange={e => setIncludeIngredients(e.target.value)}
+          />
+        </label>
+
+        <label>
+          {" "}
+          Ingredients to exclude:
+          <input
+            type="text"
+            name="excludeIngredients"
+            value={excludeIngredients}
+            onChange={e => setExcludeIngredients(e.target.value)}
+          />
+        </label>
+
+        <label>
+          {" "}
+          Maximun Ready Time:
+          <input
+            type="text"
+            name="maxReadyTime"
+            placeholder="e.g. 45"
+            value={maxReadyTime}
+            onChange={e => setMaxReadyTime(e.target.value)}
+          />
+        </label>
+
+        <label>
+          {" "}
+          Maximun Calories:
+          <input
+            type="text"
+            name="maxCalories"
+            placeholder="e.g. 45"
+            value={maxCalories}
+            onChange={e => setMaxCalories(e.target.value)}
+          />
+        </label>
+
+        <label>
+          {" "}
+          equipment
+          <input
+            type="text"
+            value={equipment}
+            onChange={e => setEquipment(e.target.value)}
+          />
+        </label>
+
         <button type="submit">Get Recipes</button>
       </form>
-      {/* <Recipe selectedRecipe={selectedRecipe} /> */}
       {recipes.map(recipe => (
         <div>
           <div key={recipe.id}>
