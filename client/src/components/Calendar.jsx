@@ -151,22 +151,16 @@ export default function Calendar() {
                   <div>
                     {day.meal.find(meal => meal.type === mealType) && (
                       <div>
-                        <div>
-                          <button type="button">See Recipe</button>
-                        </div>
-                        <div>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              handleDelete(
-                                day.meal.find(meal => meal.type === mealType)
-                                  ?.id
-                              )
-                            }
-                          >
-                            ❌
-                          </button>
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleDelete(
+                              day.meal.find(meal => meal.type === mealType)?.id
+                            )
+                          }
+                        >
+                          ❌
+                        </button>
                       </div>
                     )}
                   </div>
