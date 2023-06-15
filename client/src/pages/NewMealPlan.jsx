@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Calendar from "../components/Calendar";
 import "../App.css";
@@ -12,8 +12,6 @@ function NewMealPlan() {
   const [mealType, setMealType] = useState("");
   const [error, setError] = useState("");
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [calendarKey, setCalendarKey] = useState("");
-  const calendar = useMemo(() => <Calendar />, []);
 
   const searchRecipes = async () => {
     try {
@@ -64,8 +62,6 @@ function NewMealPlan() {
       console.log("Meal added successfully");
       setDate("");
       setMealType("");
-      setCalendarKey(Math.random().toString()); // Update calendarKey with a new value
-      calendar;
     } catch (err) {
       setError(err.message);
     }
@@ -167,7 +163,7 @@ function NewMealPlan() {
         </div>
       ))}
       <div>
-        <Calendar key={calendarKey} />
+        <Calendar />
       </div>
     </div>
   );
