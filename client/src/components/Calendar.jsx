@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import "./Calendar.css";
 
@@ -14,6 +15,7 @@ export default function Calendar() {
     "diner"
   ];
   const [startDate, setStartDate] = useState(new Date()); // Start with the current date
+  const { id } = useParams();
 
   useEffect(() => {
     getMealPlan();
@@ -87,6 +89,25 @@ export default function Calendar() {
 
   const [days, setDays] = useState(getDays(startDate));
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/recipes/calendar/${id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token")
+        }
+      });
+      if (response.ok) {
+        console.log("Meal deleted");
+        getDays();
+      } else {
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -117,7 +138,20 @@ export default function Calendar() {
                     src={day.meal.find(meal => meal.type === mealType)?.img}
                     alt={day.meal.find(meal => meal.type === mealType)?.name}
                   />
-                  <button type="button">See Recipe</button>
+                  <div>
+                    {day.meal.find(meal => meal.type === mealType) && (
+                      <div>
+                        <div>
+                          <button type="button">See Recipe</button>
+                        </div>
+                        <div>
+                          <button type="button" onClick={handleDelete}>
+                            ❌
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </td>
               ))}
             </tr>
