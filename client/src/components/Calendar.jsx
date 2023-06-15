@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import "./Calendar.css";
 
@@ -13,6 +14,8 @@ export default function Calendar() {
     "afternoon tea",
     "diner"
   ];
+  const [startDate, setStartDate] = useState(new Date()); // Start with the current date
+  const [days, setDays] = useState([]);
 
   useEffect(() => {
     getMealPlan();
@@ -28,6 +31,7 @@ export default function Calendar() {
       const data = await response.json();
       if (!response.ok) throw new Error(response.statusText);
       setMealPlan(data);
+      setDays(getDays(undefined, data));
       console.log(data);
     } catch (err) {
       setError(err.message);
@@ -35,7 +39,9 @@ export default function Calendar() {
   }
 
   // function to create an array with 7 days of the current week, starting from Monday
-  const getDays = () => {
+  const getDays = (startDate, data = mealPlan) => {
+    console.log(data);
+    console.log(startDate);
     const days = [];
     const weekday = [
       "Sunday",
@@ -46,24 +52,25 @@ export default function Calendar() {
       "Friday",
       "Saturday"
     ];
-    const today = new Date();
-    const day = today.getDay();
-    const diff = today.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
-    const currentDay = new Date(today.setDate(diff));
+    const currentDay = new Date(startDate || new Date());
+
+    currentDay.setDate(currentDay.getDate() - currentDay.getDay() + 1); // Set the current day to Monday
 
     for (let i = 0; i < 7; i++) {
       const formattedCurrentDay = dayjs(currentDay).format("DD/MM/YYYY");
-      const mealsForCurrentDay = mealPlan.filter(
+      const mealsForCurrentDay = data.filter(
         meal => dayjs(meal.date).format("DD/MM/YYYY") === formattedCurrentDay
       );
-
+      console.log(currentDay);
       days.push({
         date: new Date(currentDay),
         dayName: weekday[currentDay.getDay()],
         meal: mealsForCurrentDay.map(meal => ({
+          id: meal.id,
           type: meal.meal_type,
           name: meal.recipe_title,
-          img: meal.recipe_image
+          img: meal.recipe_image,
+          recipe_id: meal.recipe_id
         }))
       });
       currentDay.setDate(currentDay.getDate() + 1);
@@ -71,10 +78,46 @@ export default function Calendar() {
     return days;
   };
 
-  const days = getDays();
+  const seePreviousWeek = () => {
+    const newStartDate = new Date(startDate);
+    newStartDate.setDate(startDate.getDate() - 7); // Move the start date 7 days back
+    setStartDate(newStartDate); // Update the start date
+    setDays(getDays(newStartDate)); // Retrieve the days for the new week
+  };
+
+  const seeNextWeek = () => {
+    const newStartDate = new Date(startDate);
+    newStartDate.setDate(startDate.getDate() + 7); // Move the start date 7 days ahead
+    setStartDate(newStartDate); // Update the start date
+    setDays(getDays(newStartDate)); // Retrieve the days for the new week
+  };
+
+  const handleDelete = async mealId => {
+    try {
+      const response = await fetch(`/api/auth/calendar/${mealId}`, {
+        method: "DELETE",
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token")
+        }
+      });
+      if (response.ok) {
+        console.log("Meal deleted");
+        getMealPlan();
+        getDays();
+      } else {
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
+      <div>
+        <button onClick={seePreviousWeek}>⬅️</button>
+        <button onClick={seeNextWeek}>➡️</button>
+      </div>
       <table className="calendar">
         <thead>
           <tr>
@@ -95,11 +138,38 @@ export default function Calendar() {
               {days.map((day, dayIndex) => (
                 <td key={dayIndex} className="meal">
                   {day.meal.find(meal => meal.type === mealType)?.name}
-                  <img
-                    src={day.meal.find(meal => meal.type === mealType)?.img}
-                    alt={day.meal.find(meal => meal.type === mealType)?.name}
-                  />
-                  <button type="button">See Recipe</button>
+                  <Link
+                    to={`/private/recipe/${
+                      day.meal.find(meal => meal.type === mealType)?.recipe_id
+                    }`}
+                  >
+                    <img
+                      src={day.meal.find(meal => meal.type === mealType)?.img}
+                      alt={day.meal.find(meal => meal.type === mealType)?.name}
+                    />
+                  </Link>
+                  <div>
+                    {day.meal.find(meal => meal.type === mealType) && (
+                      <div>
+                        <div>
+                          <button type="button">See Recipe</button>
+                        </div>
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleDelete(
+                                day.meal.find(meal => meal.type === mealType)
+                                  ?.id
+                              )
+                            }
+                          >
+                            ❌
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </td>
               ))}
             </tr>

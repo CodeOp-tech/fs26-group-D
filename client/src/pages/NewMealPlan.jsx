@@ -60,7 +60,10 @@ function NewMealPlan() {
         throw new Error(response.statusText);
       }
       // Handle successful response here
+      alert(`${input.recipe_title} has been added to your calendar`);
       console.log("Meal added successfully");
+      setDate("");
+      setMealType("");
     } catch (err) {
       setError(err.message);
     }
