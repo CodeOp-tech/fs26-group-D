@@ -70,7 +70,8 @@ export default function Calendar() {
           type: meal.meal_type,
           name: meal.recipe_title,
           img: meal.recipe_image,
-          recipe_id: meal.recipe_id
+          recipe_id: meal.recipe_id,
+          favourite: meal.favourite
         }))
       });
       currentDay.setDate(currentDay.getDate() + 1);
@@ -151,16 +152,22 @@ export default function Calendar() {
                   <div>
                     {day.meal.find(meal => meal.type === mealType) && (
                       <div>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleDelete(
-                              day.meal.find(meal => meal.type === mealType)?.id
-                            )
-                          }
-                        >
-                          ❌
-                        </button>
+                        <div>
+                          <button type="button">⭐</button>
+                        </div>
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleDelete(
+                                day.meal.find(meal => meal.type === mealType)
+                                  ?.id
+                              )
+                            }
+                          >
+                            ❌
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
