@@ -13,13 +13,25 @@ router.get("/search", async (req, res) => {
       intolerances,
       type,
       includeIngredients,
-      addRecipeNutrition,
+      excludeIngredients,
+      cuisine,
+      equipment,
       maxReadyTime,
+      minCalories,
+      maxCalories,
+      minCarbs,
       maxCarbs,
       minProtein,
-      maxCalories,
+      maxProtein,
+      minFat,
       maxFat,
-      maxFiber
+      minCholesterol,
+      maxCholesterol,
+      minSaturatedFat,
+      maxSaturatedFat,
+      minFiber,
+      maxFiber,
+      maxSugar
     } = req.query;
     const recipes = await spoonacular.searchRecipes(
       query,
@@ -27,13 +39,25 @@ router.get("/search", async (req, res) => {
       intolerances,
       type,
       includeIngredients,
-      addRecipeNutrition,
+      excludeIngredients,
+      cuisine,
+      equipment,
       maxReadyTime,
+      minCalories,
+      maxCalories,
+      minCarbs,
       maxCarbs,
       minProtein,
-      maxCalories,
+      maxProtein,
+      minFat,
       maxFat,
-      maxFiber
+      minCholesterol,
+      maxCholesterol,
+      minSaturatedFat,
+      maxSaturatedFat,
+      minFiber,
+      maxFiber,
+      maxSugar
     );
     res.json(recipes);
   } catch (error) {
