@@ -24,20 +24,30 @@ function NewMealPlan() {
 
   const searchRecipes = async () => {
     try {
-      const response = await axios.get("/api/recipes/search", {
-        params: {
-          query,
-          diet,
-          intolerances,
-          type,
-          includeIngredients,
-          excludeIngredients,
-          cuisine,
-          equipment,
-          maxReadyTime,
-          maxCalories
+      const params = {
+        query,
+        diet,
+        intolerances: intolerances.join(","),
+        type,
+        includeIngredients,
+        excludeIngredients,
+        cuisine,
+        equipment,
+        maxReadyTime,
+        maxCalories
+      };
+
+      // Remove parameters with empty values
+      Object.keys(params).forEach(key => {
+        if (!params[key]) {
+          delete params[key];
         }
       });
+
+      const response = await axios.get("/api/recipes/search", {
+        params
+      });
+
       setRecipes(response.data.results);
     } catch (error) {
       console.error("Error searching recipes:", error);
@@ -213,7 +223,7 @@ function NewMealPlan() {
 
         <label>
           {" "}
-          Maximun Ready Time:
+          Maximun Ready Time in minutes:
           <input
             type="text"
             name="maxReadyTime"
@@ -229,7 +239,7 @@ function NewMealPlan() {
           <input
             type="text"
             name="maxCalories"
-            placeholder="e.g. 45"
+            placeholder="e.g. 250"
             value={maxCalories}
             onChange={e => setMaxCalories(e.target.value)}
           />
