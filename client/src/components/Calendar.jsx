@@ -104,7 +104,27 @@ export default function Calendar() {
       if (response.ok) {
         console.log("Meal deleted");
         getMealPlan();
-        getDays();
+      } else {
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const toggleFavourite = async mealId => {
+    try {
+      const response = await fetch(`/api/recipe/${mealId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify(mealId)
+      });
+      if (response.ok) {
+        const data = await response.json();
+        getMealPlan();
       } else {
         console.log("Error:", response.status);
       }
@@ -153,7 +173,17 @@ export default function Calendar() {
                     {day.meal.find(meal => meal.type === mealType) && (
                       <div>
                         <div>
-                          <button type="button">⭐</button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              toggleFavourite(
+                                day.meal.find(meal => meal.type === mealType)
+                                  ?.favourite
+                              )
+                            }
+                          >
+                            ⭐
+                          </button>
                         </div>
                         <div>
                           <button

@@ -78,7 +78,7 @@ router.put("/:meal_id", userShouldBeLoggedIn, async (req, res) => {
 
   try {
     const results = await db(
-      `UPDATE calendar SET favourite=${favourite} WHERE WHERE id = ${meal_id}; `
+      `UPDATE calendar SET favourite=${!favourite} WHERE WHERE id = ${meal_id}; `
     );
     res.send({ message: `"${recipe_title}" was added to you calendar` });
   } catch (err) {

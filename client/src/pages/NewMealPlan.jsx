@@ -103,8 +103,8 @@ function NewMealPlan() {
       </form>
       {/* <Recipe selectedRecipe={selectedRecipe} /> */}
       {recipes.map(recipe => (
-        <div>
-          <div key={recipe.id}>
+        <div key={recipe.id}>
+          <div>
             <h2>{recipe.title}</h2>
             <Link to={`/private/recipe/${recipe.id}`}>
               <img src={recipe.image} alt={recipe.title} />
