@@ -32,7 +32,6 @@ export default function Calendar() {
       if (!response.ok) throw new Error(response.statusText);
       setMealPlan(data);
       setDays(getDays(undefined, data));
-      console.log(data);
     } catch (err) {
       setError(err.message);
     }
@@ -40,8 +39,6 @@ export default function Calendar() {
 
   // function to create an array with 7 days of the current week, starting from Monday
   const getDays = (startDate, data = mealPlan) => {
-    console.log(data);
-    console.log(startDate);
     const days = [];
     const weekday = [
       "Sunday",
@@ -53,7 +50,6 @@ export default function Calendar() {
       "Saturday"
     ];
     const currentDay = new Date(startDate || new Date());
-
     currentDay.setDate(currentDay.getDate() - currentDay.getDay() + 1); // Set the current day to Monday
 
     for (let i = 0; i < 7; i++) {
@@ -61,7 +57,6 @@ export default function Calendar() {
       const mealsForCurrentDay = data.filter(
         meal => dayjs(meal.date).format("DD/MM/YYYY") === formattedCurrentDay
       );
-      console.log(currentDay);
       days.push({
         date: new Date(currentDay),
         dayName: weekday[currentDay.getDay()],
@@ -70,7 +65,8 @@ export default function Calendar() {
           type: meal.meal_type,
           name: meal.recipe_title,
           img: meal.recipe_image,
-          recipe_id: meal.recipe_id
+          recipe_id: meal.recipe_id,
+          favourite: meal.favourite
         }))
       });
       currentDay.setDate(currentDay.getDate() + 1);
@@ -103,7 +99,27 @@ export default function Calendar() {
       if (response.ok) {
         console.log("Meal deleted");
         getMealPlan();
-        getDays();
+      } else {
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const toggleFavourite = async (mealId, newFavourite) => {
+    try {
+      const response = await fetch(`/api/recipes/${mealId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ favourite: newFavourite })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        getMealPlan();
       } else {
         console.log("Error:", response.status);
       }
@@ -151,16 +167,34 @@ export default function Calendar() {
                   <div>
                     {day.meal.find(meal => meal.type === mealType) && (
                       <div>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleDelete(
-                              day.meal.find(meal => meal.type === mealType)?.id
-                            )
-                          }
-                        >
-                          ❌
-                        </button>
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              toggleFavourite(
+                                day.meal.find(meal => meal.type === mealType)
+                                  ?.id,
+                                !day.meal.find(meal => meal.type === mealType)
+                                  ?.favourite
+                              )
+                            }
+                          >
+                            ⭐
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleDelete(
+                                day.meal.find(meal => meal.type === mealType)
+                                  ?.id
+                              )
+                            }
+                          >
+                            ❌
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
