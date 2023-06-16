@@ -53,7 +53,7 @@ function Dashboard() {
         <div className="profile-info">
           <h2>User Information:</h2>
           {user.map(obj => (
-            <div>
+            <div key={obj.id}>
               <p>First Name: {obj.firstname}</p>
               <p>Last Name: {obj.lastname}</p>
               <p>Email: {obj.email}</p>

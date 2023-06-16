@@ -32,7 +32,6 @@ export default function Calendar() {
       if (!response.ok) throw new Error(response.statusText);
       setMealPlan(data);
       setDays(getDays(undefined, data));
-      console.log(data);
     } catch (err) {
       setError(err.message);
     }
@@ -40,8 +39,6 @@ export default function Calendar() {
 
   // function to create an array with 7 days of the current week, starting from Monday
   const getDays = (startDate, data = mealPlan) => {
-    console.log(data);
-    console.log(startDate);
     const days = [];
     const weekday = [
       "Sunday",
@@ -53,7 +50,6 @@ export default function Calendar() {
       "Saturday"
     ];
     const currentDay = new Date(startDate || new Date());
-
     currentDay.setDate(currentDay.getDate() - currentDay.getDay() + 1); // Set the current day to Monday
 
     for (let i = 0; i < 7; i++) {
@@ -61,7 +57,6 @@ export default function Calendar() {
       const mealsForCurrentDay = data.filter(
         meal => dayjs(meal.date).format("DD/MM/YYYY") === formattedCurrentDay
       );
-      console.log(currentDay);
       days.push({
         date: new Date(currentDay),
         dayName: weekday[currentDay.getDay()],
@@ -112,15 +107,15 @@ export default function Calendar() {
     }
   };
 
-  const toggleFavourite = async mealId => {
+  const toggleFavourite = async (mealId, newFavourite) => {
     try {
-      const response = await fetch(`/api/recipe/${mealId}`, {
+      const response = await fetch(`/api/recipes/${mealId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(mealId)
+        body: JSON.stringify({ favourite: newFavourite })
       });
       if (response.ok) {
         const data = await response.json();
@@ -178,6 +173,8 @@ export default function Calendar() {
                             onClick={() =>
                               toggleFavourite(
                                 day.meal.find(meal => meal.type === mealType)
+                                  ?.id,
+                                !day.meal.find(meal => meal.type === mealType)
                                   ?.favourite
                               )
                             }

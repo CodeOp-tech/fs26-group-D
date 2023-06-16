@@ -65,7 +65,7 @@ router.post("/calendar", userShouldBeLoggedIn, async function(req, res) {
     const results = await db(
       `INSERT INTO calendar (user_id, date, meal_type, recipe_id, recipe_title, recipe_image, favourite) VALUES("${req.user_id}", "${date}","${meal_type}","${recipe_id}","${recipe_title}", "${recipe_image}", 0);`
     );
-    res.send({ message: `"${recipe_title}" was added to you calendar` });
+    res.send({ message: `"${recipe_title}" was added to your calendar` });
   } catch (err) {
     console.log(err);
     res.status(500).send(err);
@@ -73,14 +73,13 @@ router.post("/calendar", userShouldBeLoggedIn, async function(req, res) {
 });
 
 router.put("/:meal_id", userShouldBeLoggedIn, async (req, res) => {
-  const { meal_id, recipe_title } = req.params;
+  const { meal_id } = req.params;
   const { favourite } = req.body;
-
   try {
-    const results = await db(
-      `UPDATE calendar SET favourite=${!favourite} WHERE WHERE id = ${meal_id}; `
+    await db(
+      `UPDATE calendar SET favourite=${favourite} WHERE id = ${meal_id}; `
     );
-    res.send({ message: `"${recipe_title}" was added to you calendar` });
+    res.send({ message: `Meal added to/removed from your favourites` });
   } catch (err) {
     res.status(500).send(err);
   }
