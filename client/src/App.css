@@ -82,3 +82,15 @@
 .pushable:focus:not(:focus-visible) {
   outline: none;
 }
+
+/* ------------------ */
+
+.hero-banner {
+  height: calc(100vh - 54.03px);
+}
+
+#hero-image {
+  height: 40vh;
+  width: 40vh;
+  border: solid;
+}
