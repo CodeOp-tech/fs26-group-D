@@ -15,13 +15,16 @@ function Welcome() {
   return (
     <>
       <section id="hero" className="text-light bg-dark hero-banner">
-        <div className="grid container-lg">
+        <div className="container-lg">
           <div className="row">
             <div className="col text-start ">
               <h1 className="display-3 mt-5 pt-5 mb-3">
                 EAT, <span className="text-secondary">CODE, </span>{" "}
                 <span className="text-primary display-2">REPEAT</span>
               </h1>
+              <p className="lead text-white text-opacity-50">
+                Debug your meal prep with Busy Bytes!
+              </p>
             </div>
 
             <div className="col-6 text-center">
@@ -35,54 +38,158 @@ function Welcome() {
                   <button className="btn btn-primary btn-lg">
                     GET STARTED
                   </button>
+
+                  {/* <!-- Button trigger modal --> */}
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#auth"
+                  >
+                    GET STARTED
+                  </button>
+
+                  <div className="modal fade" id="auth">
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-body">
+                          <p>test</p>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* <!-- Modal --> */}
+                  <div
+                    class="modal fade"
+                    id="authentication"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Modal title
+                          </h1>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">...</div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="button" class="btn btn-primary">
+                            Save changes
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button className="pushable btn btn-sm">
+                    <span className="shadow"></span>
+                    <span className="edge"></span>
+                    <span className="front">GET STARTED</span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="row justify-content-center text-center mt-5">
-            <p className="mb-0 pb-0">Learn more </p>
+          <div className="row justify-content-center text-center mt-4">
+            <p className="mb-0 pb-0 h6">Learn more </p>
 
             <i class="bi bi-caret-down-fill white pt-0"></i>
           </div>
         </div>
       </section>
 
-      {/* <div className="container my-5"> */}
-      {/* <section id="intro">
-<div className="container-lg">
-  <div className="row justify-content-center bg-primary">
-    <div className="text-center">
-    <h2 className="display-5 fs-3">Eat, Code, Repeat</h2>
-      
-      test column
-      
-      
-      </div>
-  </div>
-</div>
-</section> */}
+      <section id="features">
+        <div className="">
+          <div className="container-lg text-center p-5 pb-0 text-dark">
+            <h1 className="display-5 fs-3 text-dark border-bottom border-dark border-3">
+              <span className="">Features</span>
+            </h1>
 
-      {/* <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Alias omnis consectetur
-          aperiam dicta itaque iste, nobis nesciunt culpa ratione. Repellat ad
-          ut delectus tenetur facere. Ducimus corrupti fugiat sunt quo!
-        </p> */}
-      {/* </div> */}
+            <div className="mx-5 my-5 border-bottom border-end border-secondary border-3 rounded bg-aquaLight text-end shadow-sm">
+              <div className="container p-4">
+                <h2 className="display-5 fs-5">Program your Plates</h2>
+
+                <div className="">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Blanditiis dicta illum voluptas, provident et accusantium,
+                  necessitatibus nulla unde iusto neque voluptates dolor
+                  aliquam? Praesentium esse nemo aut nisi, dolorum natus!
+                </div>
+              </div>
+            </div>
+
+            <div className="mx-5 mt-5 border-bottom border-end border-primary border-3 rounded bg-blueLight text-start shadow-sm">
+              <div className="container p-4">
+                <h2 className="display-5 fs-5">Develop your dishes</h2>
+
+                <div className="">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Repellendus, sequi tempore corrupti suscipit molestiae ducimus
+                  voluptate illo minus praesentium magni facilis maxime adipisci
+                  labore deserunt iste necessitatibus mollitia cumque
+                  quibusdam.y
+                </div>
+              </div>
+            </div>
+
+            <div className="mx-5 my-5 border-bottom border-end border-secondary border-3 rounded bg-aquaLight text-end shadow-sm">
+              <div className="container p-4">
+                <h2 className="display-5 fs-5">Repo your recipes</h2>
+
+                <div className="">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Exercitationem totam, labore beatae quo accusantium doloremque
+                  repudiandae deleniti praesentium omnis esse eum voluptatem
+                  ipsum, voluptas eligendi sunt itaque nam commodi temporibus!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row justify-content-center text-center mt-4">
+          <p className="mb-0 pb-0 h6">About </p>
+
+          <i class="bi bi-caret-down-fill white pt-0"></i>
+        </div>
+      </section>
+
+      <section className=" text-light bg-dark text-center" id="about">
+        <div className="p-5">
+          <small>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+            sequi maxime beatae quasi quidem iusto unde fuga atque soluta
+            laborum!
+          </small>
+        </div>
+      </section>
 
       {/* <div>
-      <div>
-        <h1 className="display-1">BusyBytes</h1>
-                <div>
+      
 
-        <button className="pushable btn btn-sm">
-  <span className="shadow"></span>
-  <span className="edge"></span>
-  <span className="front">
-    LOG IN
-  </span>
-</button>
+        
             {currentForm === 'login'? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm}/>}
         </div>
       </div>

@@ -86,11 +86,15 @@
 /* ------------------ */
 
 .hero-banner {
-  height: calc(100vh - 54.03px);
+  height: calc(100vh - 50.08px);
 }
 
 #hero-image {
   height: 40vh;
   width: 40vh;
   border: solid;
+}
+
+.vh {
+  height: 100vh;
 }

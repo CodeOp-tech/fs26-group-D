@@ -26,7 +26,7 @@ function NavBar() {
       <div className="bg-dark">
         <div>
           {!auth.user ? (
-            <nav className="navbar navbar-expand-md p-2 sticky-top bg-dark navbar-dark border border-solid border-secondary rounded border-4">
+            <nav className="navbar navbar-expand-md p-2 sticky-top bg-dark navbar-dark border-bottom border-solid border-secondary rounded border-4">
               <div className="container-xxl">
                 <a href="#test" className="navbar-brand p-0">
                   <span className="display-5 fs-5 align-middle">BusyBytes</span>
