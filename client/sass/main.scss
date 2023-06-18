@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree&family=Monomaniac+One&family=Press+Start+2P&family=Silkscreen&family=VT323&display=swap");
+
+//changing existing
+$primary: #34e3fe;
+$secondary: #5dfdcb;
+$info: #01a7c2;
+$dark: #0b2545;
+
+$display-font-family: "Press Start 2P";
+$font-family-sans-serif: "Figtree";
+$headings-font-family: "Silkscreen";
+$font-family-monospace: "VT323";
+
+// $btn-font-family: "Silkscreen";
+// $btn-font-family: "Monomaniac One";
+// $btn-font-family: "VT323";
+
+// $btn-font-family: "Silkscreen";
+
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+
+//Adding to theme
+$custom-theme-colors: (
+  "midDark": #13315c,
+  "altLight": #f6f4f3,
+  "blueLight": #ebfcff,
+  "aquaLight": #d7fef2,
+  "darkLight": #dceaf9
+);
+
+// $theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+// $custom-fonts: (
+//     "titles": "Press Start 2P"
+// );
+
+// $font-family-sans-serif: map-merge($custom-fonts, $font-family-sans-serif);
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

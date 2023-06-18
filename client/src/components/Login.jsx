@@ -5,33 +5,32 @@ import axios from "axios";
 import "../App.css";
 
 function Login(props) {
-
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
     email: "",
-    password: "",
+    password: ""
   });
-  
+
   const { email, password } = credentials;
-  
-  const handleChange = (e) => {
+
+  const handleChange = e => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const login = async (e) => {
+  const login = async e => {
     e.preventDefault();
     try {
       const { data } = await axios("/api/auth/login", {
         method: "POST",
-        data: credentials,
+        data: credentials
       });
 
       localStorage.setItem("token", data.token);
       auth.login();
-      navigate ("/private/dashboard")
+      navigate("/private/dashboard");
       console.log(data.message, data.token);
     } catch (err) {
       console.log("Error:", err);
@@ -41,9 +40,7 @@ function Login(props) {
   return (
     <div>
       <form onSubmit={login} className="login-form">
-        <label htmlFor="email">
-          Email
-        </label>
+        <label htmlFor="email">Email</label>
         <input
           value={email}
           type="email"
@@ -51,9 +48,7 @@ function Login(props) {
           name="email"
           onChange={handleChange}
         />
-        <label htmlFor="password">
-          Password
-        </label>
+        <label htmlFor="password">Password</label>
         <input
           value={password}
           name="password"
@@ -61,12 +56,18 @@ function Login(props) {
           placeholder="***********"
           onChange={handleChange}
         />
-        <button type="submit">Log In</button>
+        <button className="btn btn-primary" type="submit">
+          Log In
+        </button>
       </form>
-      <button className="link-btn" onClick={() => props.onFormSwitch("register")}>Don't have an account? Register here.</button>
+      <button
+        className="btn btn-secondary"
+        onClick={() => props.onFormSwitch("register")}
+      >
+        Don't have an account? Register here.
+      </button>
     </div>
   );
-
 }
 
 export default Login;
