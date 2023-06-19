@@ -3,8 +3,7 @@ import { useState } from "react";
 import Login from "../components/Login.jsx";
 import Register from "../components/Register.jsx";
 import "../App.css";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
+
 import Modal from "react-bootstrap/Modal";
 
 function Welcome() {
