@@ -14,6 +14,16 @@ function Welcome() {
     setCurrentForm(formName);
   };
 
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const hideModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <section id="hero" className="text-light bg-dark vh-nav">
@@ -37,60 +47,27 @@ function Welcome() {
               </div>
               <div className="row mt-5 pt-5 mb-0 pb-0 ">
                 <div className="text-end">
-                  <button className="btn btn-primary btn-lg">
+                  <button
+                    className="btn btn-primary btn-lg"
+                    onClick={showModal}
+                  >
                     GET STARTED
                   </button>
-
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                  <Modal
+                    show={isOpen}
+                    size="lg"
+                    onHide={hideModal}
+                    dialogClassName={""}
                   >
-                    Launch demo modal
-                  </button>
-
-                  <div
-                    class="modal fade"
-                    id="exampleModal"
-                    tabIndex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            Modal title
-                          </h1>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div class="modal-body">...</div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button type="button" class="btn btn-primary">
-                            Save changes
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Modal show={true}>
-                    <Modal.Header>Hi</Modal.Header>
-                    <Modal.Body>asdfasdf</Modal.Body>
-                    <Modal.Footer>This is the footer</Modal.Footer>
+                    <Modal.Body>
+                      {currentForm === "login" ? (
+                        <Login onFormSwitch={toggleForm} />
+                      ) : (
+                        <Register onFormSwitch={toggleForm} />
+                      )}
+                    </Modal.Body>
+                    {/* <Modal.Footer>This is the footer</Modal.Footer> */}
+                    {/* <button onClick={hideModal}>Cancel</button> */}
                   </Modal>
 
                   {/* <button className="pushable btn btn-sm">
@@ -175,15 +152,6 @@ function Welcome() {
           </small>
         </div>
       </section>
-
-      {/* <div>
-      
-
-        
-            {currentForm === 'login'? <Login onFormSwitch={toggleForm}/> : <Register onFormSwitch={toggleForm}/>}
-        </div>
-      </div>
-    </div> */}
     </>
   );
 }

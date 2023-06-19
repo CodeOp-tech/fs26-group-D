@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Calendar from "../components/Calendar";
-import Select from "react-select";
+// import Select from "react-select";
 import "../App.css";
 
 function NewMealPlan() {
