@@ -9,6 +9,7 @@ import Recipe from "./Recipe";
 import ShoppingList from "./ShoppingList";
 import MyMealPlan from "./MyMealPlan";
 import { Link } from "react-router-dom";
+import MyFavourites from "./MyFavourites";
 
 function Dashboard() {
   return (
@@ -25,7 +26,7 @@ function Dashboard() {
             <NewMealPlan />
           </Tab>
           <Tab eventKey="recipes" title="Recipe Repo">
-            Add a favourite recipes section
+            <MyFavourites />
           </Tab>
           <Tab eventKey="shopping" title="Shopping List">
             <ShoppingList />{" "}
