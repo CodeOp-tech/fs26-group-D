@@ -134,8 +134,8 @@ export default function Calendar() {
         <button onClick={seePreviousWeek}>⬅️</button>
         <button onClick={seeNextWeek}>➡️</button>
       </div>
-      <table className="calendar">
-        <thead>
+      <table className="calendar table table-hover">
+        <thead className="table-primary">
           <tr>
             <th></th>
             {days.map((day, index) => (
@@ -150,7 +150,7 @@ export default function Calendar() {
         <tbody>
           {mealName.map((mealType, mealTypeIndex) => (
             <tr key={mealTypeIndex}>
-              <th className="mealName">{mealType}</th>
+              <th className="mealName table-primary">{mealType}</th>
               {days.map((day, dayIndex) => (
                 <td key={dayIndex} className="meal">
                   {day.meal.find(meal => meal.type === mealType)?.name}
