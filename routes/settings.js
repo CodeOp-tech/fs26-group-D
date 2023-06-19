@@ -16,7 +16,7 @@ router.post("/restrictions", userShouldBeLoggedIn, async (req, res) => {
 
   try {
     await db(
-      `INSERT INTO settings (user_id, diet, allergies, bad_food) VALUES("${req.user_id}, ${diet}","${allergies}","${bad_food}");`
+      `INSERT INTO settings (user_id, diet, allergies, bad_food) VALUES(${req.user_id}, "${diet}","${allergies}","${bad_food}");`
     );
     res.send({ message: "Dietary restrictions added" });
   } catch (err) {
@@ -24,13 +24,20 @@ router.post("/restrictions", userShouldBeLoggedIn, async (req, res) => {
   }
 });
 
-router.delete("/restrictions", userShouldBeLoggedIn, async (req, res) => {
-  try {
-    await db(`DELETE FROM settings WHERE user_id = ${req.user_id};`);
-    res.send("Dietary restrictions removed");
-  } catch (err) {
-    res.status(500).send(err);
+router.delete(
+  "/restrictions/:restriction",
+  userShouldBeLoggedIn,
+  async (req, res) => {
+    const { restriction } = req.params;
+    try {
+      await db(
+        `DELETE FROM settings WHERE (user_id = ${req.user_id} AND diet = ${restriction}) OR (user_id = ${req.user_id} AND allergies = ${restriction}) OR (user_id = ${req.user_id} AND bad_food= ${restriction}) ;`
+      );
+      res.send("Dietary restriction removed");
+    } catch (err) {
+      res.status(500).send(err);
+    }
   }
-});
+);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
 import "../App.css";
@@ -10,12 +10,18 @@ function Settings() {
   const [restrictions, setRestrictions] = useState([]);
   const [error, setError] = useState("");
 
-  const addRestrictions = async () => {
+  useEffect(() => {
+    getRestrictions();
+  }, []);
+
+  const addRestrictions = async e => {
+    e.preventDefault();
     const input = {
       diet: diet,
-      intolerances: intolerances,
+      allergies: intolerances,
       bad_food: excludeIngredients
     };
+    console.log(input);
     const options = {
       method: "POST",
       headers: {
@@ -30,11 +36,12 @@ function Settings() {
         throw new Error(response.statusText);
       }
       // Handle successful response here
-      alert(`Diestary restrictions have been added to your settings`);
+      alert(`Dietary restrictions have been added to your settings`);
       console.log("Restrictions added successfully");
-      setIntolerances("");
+      setIntolerances([]);
       setDiet("");
       setExcludeIngredients("");
+      getRestrictions();
     } catch (err) {
       setError(err.message);
     }
@@ -54,6 +61,28 @@ function Settings() {
       setError(err.message);
     }
   }
+
+  const handleDelete = async restriction => {
+    try {
+      const response = await fetch(
+        `/api/settings/restrictions/${restriction}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token")
+          }
+        }
+      );
+      if (response.ok) {
+        console.log("Restriction deleted");
+        getMealPlan();
+      } else {
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -124,23 +153,44 @@ function Settings() {
         <div>
           <h4>Your Diet</h4>
           {restrictions.map((restriction, index) => (
-            <p key={index}>{restriction.diet}</p>
+            <div key={index}>
+              <p>{restriction.diet}</p>
+              <button
+                type="button"
+                onClick={() => handleDelete(`${restriction.diet}`)}
+              >
+                ❌
+              </button>
+            </div>
           ))}
-          ;
         </div>
         <div>
           <h4>Your Allergies</h4>
           {restrictions.map((restriction, index) => (
-            <p key={index}>{restriction.allergies}</p>
+            <div key={index}>
+              <p>{restriction.allergies}</p>
+              <button
+                type="button"
+                onClick={() => handleDelete(`${restriction.allergies}`)}
+              >
+                ❌
+              </button>
+            </div>
           ))}
-          ;
         </div>
         <div>
           <h4>Food you don't like</h4>
           {restrictions.map((restriction, index) => (
-            <p key={index}>{restriction.bad_food}</p>
+            <div key={index}>
+              <p>{restriction.bad_food}</p>
+              <button
+                type="button"
+                onClick={() => handleDelete(`${restriction.bad_food}`)}
+              >
+                ❌
+              </button>
+            </div>
           ))}
-          ;
         </div>
       </div>
     </div>
