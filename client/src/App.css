@@ -11,6 +11,11 @@
   flex-direction: column;
 }
 
+.bought {
+  color: red;
+  text-decoration: line-through;
+
+
 .hide {
   visibility: hidden;
 }
@@ -101,4 +106,5 @@
 
 .vh {
   height: 100vh;
+
 }

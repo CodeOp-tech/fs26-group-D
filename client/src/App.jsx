@@ -14,10 +14,15 @@ import AuthContext from "./components/context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import NavBar from "./components/NavBar";
 import Recipe from "./pages/Recipe";
+
+import IngredientContext from "./components/context/IngredientContext";
+
 import Profile from "./pages/Profile";
+
 
 function App() {
   const [user, setUser] = useState(null);
+  const [ingredientData, setIngredientData] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,85 +46,93 @@ function App() {
     logout
   };
 
+  const shoppingCartObject = {
+    ingredientData,
+    setIngredientData
+  };
+
   return (
     <AuthContext.Provider value={authObject}>
-      <div>
+      <IngredientContext.Provider value={shoppingCartObject}>
         <div>
-          <NavBar />
-        </div>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <div>
+            <NavBar />
+          </div>
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          <Route
-            path="/private/dashboard"
-            element={
-              <RequireAuth>
-                <Dashboard />
-              </RequireAuth>
-            }
-          />
 
-          <Route
+            <Route
+              path="/private/dashboard"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
+                
+              <Route
             path="/private/profile"
             element={
               <RequireAuth>
                 <Profile />
               </RequireAuth>
             }
-          />
+          />   
+            <Route
+              path="/private/newmealplan"
+              element={
+                <RequireAuth>
+                  <NewMealPlan />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/private/shoppinglist"
+              element={
+                <RequireAuth>
+                  <ShoppingList />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/private/mymealplan"
+              element={
+                <RequireAuth>
+                  <MyMealPlan />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/private/myfavourites"
+              element={
+                <RequireAuth>
+                  <MyFavourites />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/private/settings"
+              element={
+                <RequireAuth>
+                  <Settings />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/private/recipe/:id"
+              element={
+                <RequireAuth>
+                  <Recipe />
+                </RequireAuth>
+              }
+            />
+          </Routes>
+        </div>
+      </IngredientContext.Provider>
 
-          <Route
-            path="/private/newmealplan"
-            element={
-              <RequireAuth>
-                <NewMealPlan />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/shoppinglist"
-            element={
-              <RequireAuth>
-                <ShoppingList />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/mymealplan"
-            element={
-              <RequireAuth>
-                <MyMealPlan />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/myfavourites"
-            element={
-              <RequireAuth>
-                <MyFavourites />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/settings"
-            element={
-              <RequireAuth>
-                <Settings />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/recipe/:id"
-            element={
-              <RequireAuth>
-                <Recipe />
-              </RequireAuth>
-            }
-          />
-        </Routes>
-      </div>
     </AuthContext.Provider>
   );
 }
