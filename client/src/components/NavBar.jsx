@@ -61,7 +61,7 @@ function NavBar() {
           ) : (
             <nav className="navbar navbar-expand-md p-2 sticky-top bg-dark navbar-dark">
               <div className="container-xxl">
-                <a href="#test" className="navbar-brand p-0">
+                <a href="/" className="navbar-brand p-0">
                   <span className="display-5 fs-5 align-middle">BusyBytes</span>
                 </a>
 

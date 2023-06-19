@@ -4,6 +4,8 @@ import Login from "../components/Login.jsx";
 import Register from "../components/Register.jsx";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import Modal from "react-bootstrap/Modal";
 
 function Welcome() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -39,37 +41,19 @@ function Welcome() {
                     GET STARTED
                   </button>
 
-                  {/* <!-- Button trigger modal --> */}
                   <button
                     type="button"
                     class="btn btn-primary"
                     data-bs-toggle="modal"
-                    data-bs-target="#auth"
+                    data-bs-target="#exampleModal"
                   >
-                    GET STARTED
+                    Launch demo modal
                   </button>
 
-                  <div className="modal fade" id="auth">
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-body">
-                          <p>test</p>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* <!-- Modal --> */}
                   <div
                     class="modal fade"
-                    id="authentication"
-                    tabindex="-1"
+                    id="exampleModal"
+                    tabIndex="-1"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden="true"
                   >
@@ -103,11 +87,17 @@ function Welcome() {
                     </div>
                   </div>
 
-                  <button className="pushable btn btn-sm">
+                  <Modal show={true}>
+                    <Modal.Header>Hi</Modal.Header>
+                    <Modal.Body>asdfasdf</Modal.Body>
+                    <Modal.Footer>This is the footer</Modal.Footer>
+                  </Modal>
+
+                  {/* <button className="pushable btn btn-sm">
                     <span className="shadow"></span>
                     <span className="edge"></span>
                     <span className="front">GET STARTED</span>
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
