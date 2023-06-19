@@ -75,7 +75,7 @@ function Settings() {
       );
       if (response.ok) {
         console.log("Restriction deleted");
-        getMealPlan();
+        getRestrictions();
       } else {
         console.log("Error:", response.status);
       }
@@ -154,13 +154,17 @@ function Settings() {
           <h4>Your Diet</h4>
           {restrictions.map((restriction, index) => (
             <div key={index}>
-              <p>{restriction.diet}</p>
-              <button
-                type="button"
-                onClick={() => handleDelete(`${restriction.diet}`)}
-              >
-                ❌
-              </button>
+              {restriction.diet && (
+                <>
+                  <p>{restriction.diet}</p>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(restriction.diet)}
+                  >
+                    ❌
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>
@@ -168,13 +172,17 @@ function Settings() {
           <h4>Your Allergies</h4>
           {restrictions.map((restriction, index) => (
             <div key={index}>
-              <p>{restriction.allergies}</p>
-              <button
-                type="button"
-                onClick={() => handleDelete(`${restriction.allergies}`)}
-              >
-                ❌
-              </button>
+              {restriction.allergies && (
+                <>
+                  <p>{restriction.allergies}</p>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(restriction.allergies)}
+                  >
+                    ❌
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>
@@ -182,13 +190,17 @@ function Settings() {
           <h4>Food you don't like</h4>
           {restrictions.map((restriction, index) => (
             <div key={index}>
-              <p>{restriction.bad_food}</p>
-              <button
-                type="button"
-                onClick={() => handleDelete(`${restriction.bad_food}`)}
-              >
-                ❌
-              </button>
+              {restriction.bad_food && (
+                <>
+                  <p>{restriction.bad_food}</p>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(restriction.bad_food)}
+                  >
+                    ❌
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>

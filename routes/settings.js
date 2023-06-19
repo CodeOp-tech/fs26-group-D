@@ -31,7 +31,17 @@ router.delete(
     const { restriction } = req.params;
     try {
       await db(
-        `DELETE FROM settings WHERE (user_id = ${req.user_id} AND diet = ${restriction}) OR (user_id = ${req.user_id} AND allergies = ${restriction}) OR (user_id = ${req.user_id} AND bad_food= ${restriction}) ;`
+        `UPDATE settings 
+        SET diet = NULL 
+        WHERE user_id = '${req.user_id}' AND diet = '${restriction}';
+        
+        UPDATE settings 
+        SET allergies = NULL 
+        WHERE user_id = '${req.user_id}' AND allergies = '${restriction}';
+        
+        UPDATE settings 
+        SET bad_food = NULL 
+        WHERE user_id = '${req.user_id}' AND bad_food = '${restriction}';`
       );
       res.send("Dietary restriction removed");
     } catch (err) {
