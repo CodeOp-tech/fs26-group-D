@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useEffect } from "react";
 import Calendar from "../components/Calendar";
 import "../App.css";
-import { Tabs, Tab } from "react-bootstrap";
+import { Tabs, Tab, Nav } from "react-bootstrap";
 import Profile from "./Profile";
 import NewMealPlan from "./NewMealPlan";
 import Recipe from "./Recipe";
@@ -11,54 +11,49 @@ import MyMealPlan from "./MyMealPlan";
 import { Link, Outlet } from "react-router-dom";
 import MyFavourites from "./MyFavourites";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const [key, setKey] = useState("/private/dashboard/calendar");
+  const [initialPageLoad, setInitialPageLoad] = useState(true);
+
+  let navigate = useNavigate();
+
+  const navigateToDestination = k => {
+    navigate(k);
+  };
+
   return (
     <>
       <div className="container my-4">
-        <Tabs defaultActiveKey="calendar">
-          <Tab eventKey="profile" title="Profile">
-            {/* <NavLink to ="/private/profile"> */}
-            <Profile />
-            {/* <Outlet/>
-             test in panel
-             </NavLink> */}
+        <Tabs
+          activeKey={key}
+          onSelect={k => {
+            setKey(k), navigateToDestination(k), setInitialPageLoad(false);
+          }}
+        >
+          <Tab eventKey="/private/dashboard/profile" title="Profile"></Tab>
+          <Tab eventKey="/private/dashboard/calendar" title="Calendar">
+            {initialPageLoad && <Calendar />}
           </Tab>
-          <Tab eventKey="calendar" title="Calendar">
-            <Calendar />{" "}
-          </Tab>
-          <Tab eventKey="new" title="New Meal Plan">
-            <NewMealPlan />
-          </Tab>
-          <Tab eventKey="recipes" title="Recipe Repo">
-            <MyFavourites />
-          </Tab>
-          <Tab eventKey="shopping" title="Shopping List">
-            <ShoppingList />{" "}
-          </Tab>
+          <Tab
+            eventKey="/private/dashboard/newmealplan"
+            title="New Meal Plan"
+          ></Tab>
+          <Tab
+            eventKey="/private/dashboard/myfavourites"
+            title="Recipe Repo"
+          ></Tab>
+          <Tab
+            eventKey="/private/dashboard/shoppinglist"
+            title="Shopping List"
+          ></Tab>
+          <Tab eventKey="/private/dashboard/settings" title="Settings"></Tab>
         </Tabs>
+        <div>
+          <Outlet />
+        </div>
       </div>
-
-      <div className="nav-panel"></div>
-
-      {/* <div>OUTLET TEST
-<ul class="nav nav-tabs">
-  <li class="nav-item"> */}
-      {/* <a class="nav-link active" aria-current="page" href="#">Active</a> */}
-      {/* <NavLink to ="/private/profile"> test </NavLink>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">Disabled</a>
-  </li>
-</ul>
-  <Outlet/>
-</div> */}
     </>
   );
 }

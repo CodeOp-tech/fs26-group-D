@@ -90,6 +90,11 @@ function NavBar() {
                       Dashboard
                     </Link>
                   </li>
+                  <li>
+                    <Link className="nav-link" to="/login">
+                      Profile
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <button
                       className="btn btn-primary btn-sm logoutBtn"

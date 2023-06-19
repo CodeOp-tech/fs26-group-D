@@ -15,6 +15,7 @@ import RequireAuth from "./components/RequireAuth";
 import NavBar from "./components/NavBar";
 import Recipe from "./pages/Recipe";
 import Profile from "./pages/Profile";
+import Calendar from "./components/Calendar";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,65 +60,74 @@ function App() {
                 <Dashboard />
               </RequireAuth>
             }
-          />
+          >
+            <Route
+              path="profile"
+              element={
+                <RequireAuth>
+                  <Profile />
+                </RequireAuth>
+              }
+            />
 
-          <Route
-            path="/private/profile"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />
+            <Route
+              path="calendar"
+              element={
+                <RequireAuth>
+                  <Calendar />
+                </RequireAuth>
+              }
+            />
 
-          <Route
-            path="/private/newmealplan"
-            element={
-              <RequireAuth>
-                <NewMealPlan />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/shoppinglist"
-            element={
-              <RequireAuth>
-                <ShoppingList />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/mymealplan"
-            element={
-              <RequireAuth>
-                <MyMealPlan />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/myfavourites"
-            element={
-              <RequireAuth>
-                <MyFavourites />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/settings"
-            element={
-              <RequireAuth>
-                <Settings />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/private/recipe/:id"
-            element={
-              <RequireAuth>
-                <Recipe />
-              </RequireAuth>
-            }
-          />
+            <Route
+              path="newmealplan"
+              element={
+                <RequireAuth>
+                  <NewMealPlan />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="shoppinglist"
+              element={
+                <RequireAuth>
+                  <ShoppingList />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="mymealplan"
+              element={
+                <RequireAuth>
+                  <MyMealPlan />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="myfavourites"
+              element={
+                <RequireAuth>
+                  <MyFavourites />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="settings"
+              element={
+                <RequireAuth>
+                  <Settings />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="recipe/:id"
+              element={
+                <RequireAuth>
+                  <Recipe />
+                </RequireAuth>
+              }
+            />
+          </Route>
         </Routes>
       </div>
     </AuthContext.Provider>

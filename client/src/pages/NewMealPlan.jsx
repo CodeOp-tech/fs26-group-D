@@ -286,7 +286,7 @@ function NewMealPlan() {
               <div key={recipe.id}>
                 <div>
                   <h2>{recipe.title}</h2>
-                  <Link to={`/private/recipe/${recipe.id}`}>
+                  <Link to={`/private/dashboard/recipe/${recipe.id}`}>
                     <img
                       src={recipe.image}
                       alt={recipe.title}
