@@ -93,6 +93,7 @@ function NewMealPlan() {
       recipe_title: recipe.title,
       recipe_image: recipe.image
     };
+    console.log(input);
     const options = {
       method: "POST",
       headers: {

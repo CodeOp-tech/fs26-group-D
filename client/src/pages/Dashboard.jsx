@@ -8,8 +8,9 @@ import NewMealPlan from "./NewMealPlan";
 import Recipe from "./Recipe";
 import ShoppingList from "./ShoppingList";
 import MyMealPlan from "./MyMealPlan";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import MyFavourites from "./MyFavourites";
+import { NavLink } from "react-router-dom";
 
 function Dashboard() {
   return (
@@ -17,7 +18,11 @@ function Dashboard() {
       <div className="container my-4">
         <Tabs defaultActiveKey="calendar">
           <Tab eventKey="profile" title="Profile">
+            {/* <NavLink to ="/private/profile"> */}
             <Profile />
+            {/* <Outlet/>
+             test in panel
+             </NavLink> */}
           </Tab>
           <Tab eventKey="calendar" title="Calendar">
             <Calendar />{" "}
@@ -33,6 +38,27 @@ function Dashboard() {
           </Tab>
         </Tabs>
       </div>
+
+      <div className="nav-panel"></div>
+
+      {/* <div>OUTLET TEST
+<ul class="nav nav-tabs">
+  <li class="nav-item"> */}
+      {/* <a class="nav-link active" aria-current="page" href="#">Active</a> */}
+      {/* <NavLink to ="/private/profile"> test </NavLink>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled">Disabled</a>
+  </li>
+</ul>
+  <Outlet/>
+</div> */}
     </>
   );
 }
