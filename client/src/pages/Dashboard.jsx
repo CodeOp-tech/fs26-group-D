@@ -16,7 +16,7 @@ function Dashboard() {
           <Tab eventKey="profile" title="Profile">
             <Profile />{" "}
           </Tab>
-          <Tab eventKey="calendar" title="Dashboard">
+          <Tab eventKey="calendar" title="Calendar">
             <Calendar />{" "}
           </Tab>
           <Tab eventKey="new" title="New Meal Plan"></Tab>
