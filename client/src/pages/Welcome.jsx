@@ -14,7 +14,7 @@ function Welcome() {
 
   return (
     <>
-      <section id="hero" className="text-light bg-dark hero-banner">
+      <section id="hero" className="text-light bg-dark vh-nav">
         <div className="container-lg">
           <div className="row">
             <div className="col text-start ">
