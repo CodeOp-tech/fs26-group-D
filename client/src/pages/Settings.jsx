@@ -156,13 +156,15 @@ function Settings() {
             <div key={index}>
               {restriction.diet && (
                 <>
-                  <p>{restriction.diet}</p>
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(restriction.diet)}
-                  >
-                    ❌
-                  </button>
+                  <p>
+                    {restriction.diet}
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(restriction.diet)}
+                    >
+                      ❌
+                    </button>
+                  </p>
                 </>
               )}
             </div>
@@ -174,13 +176,15 @@ function Settings() {
             <div key={index}>
               {restriction.allergies && (
                 <>
-                  <p>{restriction.allergies}</p>
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(restriction.allergies)}
-                  >
-                    ❌
-                  </button>
+                  <p>
+                    {restriction.allergies}
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(restriction.allergies)}
+                    >
+                      ❌
+                    </button>
+                  </p>
                 </>
               )}
             </div>
@@ -192,13 +196,15 @@ function Settings() {
             <div key={index}>
               {restriction.bad_food && (
                 <>
-                  <p>{restriction.bad_food}</p>
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(restriction.bad_food)}
-                  >
-                    ❌
-                  </button>
+                  <p>
+                    {restriction.bad_food}
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(restriction.bad_food)}
+                    >
+                      ❌
+                    </button>
+                  </p>
                 </>
               )}
             </div>
