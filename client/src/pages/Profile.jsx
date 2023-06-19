@@ -37,8 +37,6 @@ export default function Profile() {
 
   return (
     <>
-      <div>Profile</div>
-
       <div className="profile-container">
         <div className="profile-pic">
           <img

@@ -134,76 +134,80 @@ export default function Calendar() {
         <button onClick={seePreviousWeek}>⬅️</button>
         <button onClick={seeNextWeek}>➡️</button>
       </div>
-      <table className="calendar table table-hover">
-        <thead className="table-primary">
-          <tr>
-            <th></th>
-            {days.map((day, index) => (
-              <th key={index} className="dates">
-                {day.date ? day.date.toLocaleDateString() : ""}
-                <br />
-                {day.dayName}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {mealName.map((mealType, mealTypeIndex) => (
-            <tr key={mealTypeIndex}>
-              <th className="mealName table-primary">{mealType}</th>
-              {days.map((day, dayIndex) => (
-                <td key={dayIndex} className="meal">
-                  {day.meal.find(meal => meal.type === mealType)?.name}
-                  <Link
-                    to={`/private/recipe/${
-                      day.meal.find(meal => meal.type === mealType)?.recipe_id
-                    }`}
-                  >
-                    <img
-                      src={day.meal.find(meal => meal.type === mealType)?.img}
-                      alt={day.meal.find(meal => meal.type === mealType)?.name}
-                    />
-                  </Link>
-                  <div>
-                    {day.meal.find(meal => meal.type === mealType) && (
-                      <div>
-                        <div>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              toggleFavourite(
-                                day.meal.find(meal => meal.type === mealType)
-                                  ?.id,
-                                !day.meal.find(meal => meal.type === mealType)
-                                  ?.favourite
-                              )
-                            }
-                          >
-                            ⭐
-                          </button>
-                        </div>
-                        <div>
-                          <button
-                            type="button"
-                            onClick={() =>
-                              handleDelete(
-                                day.meal.find(meal => meal.type === mealType)
-                                  ?.id
-                              )
-                            }
-                          >
-                            ❌
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </td>
+      <div className="table-responsive">
+        <table className="calendar table table-hover">
+          <thead className="table-primary">
+            <tr>
+              <th></th>
+              {days.map((day, index) => (
+                <th key={index} className="dates">
+                  {day.date ? day.date.toLocaleDateString() : ""}
+                  <br />
+                  {day.dayName}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {mealName.map((mealType, mealTypeIndex) => (
+              <tr key={mealTypeIndex}>
+                <th className="mealName table-primary">{mealType}</th>
+                {days.map((day, dayIndex) => (
+                  <td key={dayIndex} className="meal">
+                    {day.meal.find(meal => meal.type === mealType)?.name}
+                    <Link
+                      to={`/private/recipe/${
+                        day.meal.find(meal => meal.type === mealType)?.recipe_id
+                      }`}
+                    >
+                      <img
+                        src={day.meal.find(meal => meal.type === mealType)?.img}
+                        alt={
+                          day.meal.find(meal => meal.type === mealType)?.name
+                        }
+                      />
+                    </Link>
+                    <div>
+                      {day.meal.find(meal => meal.type === mealType) && (
+                        <div>
+                          <div>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                toggleFavourite(
+                                  day.meal.find(meal => meal.type === mealType)
+                                    ?.id,
+                                  !day.meal.find(meal => meal.type === mealType)
+                                    ?.favourite
+                                )
+                              }
+                            >
+                              ⭐
+                            </button>
+                          </div>
+                          <div>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleDelete(
+                                  day.meal.find(meal => meal.type === mealType)
+                                    ?.id
+                                )
+                              }
+                            >
+                              ❌
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
