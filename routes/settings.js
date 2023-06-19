@@ -4,7 +4,7 @@ const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 const db = require("../model/helper");
 
 router.get("/restrictions", userShouldBeLoggedIn, function(req, res) {
-  db(`SELECT * FROM settings WHERE id=${req.user_id};`)
+  db(`SELECT * FROM settings WHERE user_id=${req.user_id};`)
     .then(results => {
       res.send(results.data);
     })
@@ -16,19 +16,18 @@ router.post("/restrictions", userShouldBeLoggedIn, async (req, res) => {
 
   try {
     await db(
-      `INSERT INTO users (user_id, diet, allergies, bad_food) VALUES("${req.user_id}, ${diet}","${allergies}","${bad_food}");`
+      `INSERT INTO settings (user_id, diet, allergies, bad_food) VALUES("${req.user_id}, ${diet}","${allergies}","${bad_food}");`
     );
-    res.send({ message: "Diestary restrictions added" });
+    res.send({ message: "Dietary restrictions added" });
   } catch (err) {
     res.status(400).send({ message: err.message });
   }
 });
 
-router.delete("/calendar/:meal_id", userShouldBeLoggedIn, async (req, res) => {
-  const { meal_id } = req.params;
+router.delete("/restrictions", userShouldBeLoggedIn, async (req, res) => {
   try {
-    await db(`DELETE FROM calendar WHERE id = ${meal_id};`);
-    res.send("Meal removed");
+    await db(`DELETE FROM settings WHERE user_id = ${req.user_id};`);
+    res.send("Dietary restrictions removed");
   } catch (err) {
     res.status(500).send(err);
   }
