@@ -1,13 +1,13 @@
 import React from "react";
-import "../App.css"
+import "../App.css";
 
 function Settings() {
-  
-    
-
   return (
     <div>
-       Settings page
+      <h2>Settings page</h2>
+      <div>
+        <h3>Default Dietary restrictions</h3>
+      </div>
     </div>
   );
 }
