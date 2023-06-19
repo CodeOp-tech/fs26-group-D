@@ -2,18 +2,36 @@ import React, { useState, useContext } from "react";
 import { useEffect } from "react";
 import Calendar from "../components/Calendar";
 import "../App.css";
+import { Tabs, Tab } from "react-bootstrap";
+import Profile from "./Profile";
+import NewMealPlan from "./NewMealPlan";
+import Recipe from "./Recipe";
+import ShoppingList from "./ShoppingList";
 
 function Dashboard() {
   return (
     <>
       <div>
-        <h1>BusyBytes</h1>
-        <h2>Welcome to your Dashboard</h2>
+        <Tabs defaultActiveKey="calendar">
+          <Tab eventKey="profile" title="Profile">
+            <Profile />{" "}
+          </Tab>
+          <Tab eventKey="calendar" title="Dashboard">
+            <Calendar />{" "}
+          </Tab>
+          <Tab eventKey="new" title="New Meal Plan"></Tab>
+          <Tab eventKey="recipes" title="Recipe">
+            <Recipe />{" "}
+          </Tab>
+          <Tab eventKey="shopping" title="Shopping List">
+            <ShoppingList />{" "}
+          </Tab>
+        </Tabs>
 
-        <div>
-          <h2>Weekly Calendar</h2>
-          <Calendar />
-        </div>
+        {/* <div>
+        <Calendar />
+          
+        </div> */}
       </div>
     </>
   );
