@@ -7,13 +7,25 @@ async function searchRecipes(
   intolerances,
   type,
   includeIngredients,
-  addRecipeNutrition,
+  excludeIngredients,
+  cuisine,
+  equipment,
   maxReadyTime,
+  minCalories,
+  maxCalories,
+  minCarbs,
   maxCarbs,
   minProtein,
-  maxCalories,
+  maxProtein,
+  minFat,
   maxFat,
-  maxFiber
+  minCholesterol,
+  maxCholesterol,
+  minSaturatedFat,
+  maxSaturatedFat,
+  minFiber,
+  maxFiber,
+  maxSugar
 ) {
   try {
     const response = await axios.get(
@@ -26,13 +38,25 @@ async function searchRecipes(
           intolerances: intolerances,
           type: type,
           includeIngredients: includeIngredients,
-          addRecipeNutrition: addRecipeNutrition,
+          excludeIngredients: excludeIngredients,
+          cuisine: cuisine,
+          equipment: equipment,
           maxReadyTime: maxReadyTime,
+          minCalories: minCalories,
+          maxCalories: maxCalories,
+          minCarbs: minCarbs,
           maxCarbs: maxCarbs,
           minProtein: minProtein,
-          maxCalories: maxCalories,
+          maxProtein: maxProtein,
+          minFat: minFat,
           maxFat: maxFat,
-          maxFiber: maxFiber
+          minCholesterol: minCholesterol,
+          maxCholesterol: maxCholesterol,
+          minSaturatedFat: minSaturatedFat,
+          maxSaturatedFat: maxSaturatedFat,
+          minFiber: minFiber,
+          maxFiber: maxFiber,
+          maxSugar: maxSugar
         }
       }
     );
