@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import IngredientContext from "../components/context/IngredientContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
 
 function Recipe() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const { ingredientData, setIngredientData } = useContext(IngredientContext);
 
   useEffect(() => {
     handleRecipeInformation();
@@ -26,6 +30,12 @@ function Recipe() {
     }
   };
 
+  const handleAddToShoppingList = ingredient => {
+    setIngredientData(state => [...state, ingredient]);
+    console.log(ingredientData);
+    alert(`${ingredient.name} has been added to the shopping list`);
+  };
+
   return (
     <div>
       {recipe && (
@@ -36,7 +46,9 @@ function Recipe() {
             {recipe.extendedIngredients.map(ingredient => (
               <div>
                 <li key={ingredient.id}>{ingredient.original}</li>
-                <button>add to shoping list</button>
+                <button onClick={() => handleAddToShoppingList(ingredient)}>
+                  <FontAwesomeIcon icon={faShoppingCart} />
+                </button>
               </div>
             ))}
           </ul>
@@ -71,7 +83,6 @@ function Recipe() {
               return null;
             })}
           </ul>
-          <button>Add to favorites</button>
         </div>
       )}
     </div>

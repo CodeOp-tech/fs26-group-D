@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
-const db = require("../model/helper");
+const { User } = require("../models");
+const { Calendar } = require("../models");
+
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
 const supersecret = process.env.SUPER_SECRET;
 
 router.post("/register", async (req, res) => {
@@ -15,9 +16,13 @@ router.post("/register", async (req, res) => {
   try {
     const hash = await bcrypt.hash(password, saltRounds);
 
-    await db(
-      `INSERT INTO users (firstname, lastname, email, password) VALUES("${firstname}","${lastname}","${email}", "${hash}");`
-    );
+    const user = await User.create({
+      firstname,
+      lastname,
+      email,
+      password: hash
+    });
+    console.log(user);
     res.send({ message: "You are now registered." });
   } catch (err) {
     res.status(400).send({ message: err.message });
@@ -28,8 +33,8 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const results = await db(`SELECT * FROM users WHERE email = "${email}"`);
-    const user = results.data[0];
+    const user = await User.findOne({ where: { email } });
+
     if (user) {
       const user_id = user.id;
 
@@ -51,26 +56,36 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/user", userShouldBeLoggedIn, function(req, res) {
-  db(`SELECT * FROM users WHERE id=${req.user_id};`)
-    .then(results => {
-      res.send(results.data);
-    })
-    .catch(err => res.status(500).send(err));
+router.get("/user", userShouldBeLoggedIn, async (req, res) => {
+  const { user_id } = req;
+
+  try {
+    const user = await User.findByPk(user_id);
+    if (user) {
+      res.send(user);
+    } else {
+      throw new Error("User not found");
+    }
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
 });
 
-router.get("/calendar", userShouldBeLoggedIn, (req, res) => {
-  db(`SELECT * FROM calendar WHERE user_id=${req.user_id};`)
-    .then(results => {
-      res.send(results.data);
-    })
-    .catch(err => res.status(500).send(err));
+router.get("/calendar", userShouldBeLoggedIn, async (req, res) => {
+  try {
+    const calendarEvents = await Calendar.findAll({
+      where: { user_id: req.user_id }
+    });
+    res.send(calendarEvents);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
 });
 
 router.delete("/calendar/:meal_id", userShouldBeLoggedIn, async (req, res) => {
   const { meal_id } = req.params;
   try {
-    await db(`DELETE FROM calendar WHERE id = ${meal_id};`);
+    await Calendar.destroy({ where: { id: meal_id } });
     res.send("Meal removed");
   } catch (err) {
     res.status(500).send(err);

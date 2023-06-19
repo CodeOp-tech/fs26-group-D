@@ -1,12 +1,16 @@
 .offscreen {
-    display: none;
+  display: none;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .login-form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+.bought {
+  color: red;
+  text-decoration: line-through;
 }
