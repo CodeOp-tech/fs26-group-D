@@ -14,7 +14,11 @@ import AuthContext from "./components/context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import NavBar from "./components/NavBar";
 import Recipe from "./pages/Recipe";
+
 import IngredientContext from "./components/context/IngredientContext";
+
+import Profile from "./pages/Profile";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,6 +63,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
+
             <Route
               path="/private/dashboard"
               element={
@@ -67,6 +72,15 @@ function App() {
                 </RequireAuth>
               }
             />
+                
+              <Route
+            path="/private/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />   
             <Route
               path="/private/newmealplan"
               element={
@@ -118,6 +132,7 @@ function App() {
           </Routes>
         </div>
       </IngredientContext.Provider>
+
     </AuthContext.Provider>
   );
 }

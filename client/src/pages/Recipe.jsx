@@ -37,6 +37,7 @@ function Recipe() {
   };
 
   return (
+
     <div>
       {recipe && (
         <div>
@@ -83,9 +84,11 @@ function Recipe() {
               return null;
             })}
           </ul>
+<button>Add to favorites</button>
         </div>
       )}
     </div>
+
   );
 }
 
