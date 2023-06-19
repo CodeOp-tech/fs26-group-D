@@ -85,10 +85,13 @@ function Login(props) {
                           />
                           <div className="">
                             <button
-                              className="btn btn-primary mb-3"
                               type="submit"
+                              className="btn mb-3 pushable-s"
+                              // onClick={showModal}
                             >
-                              Log In
+                              <span className="shadow-btn-s"></span>
+                              <span className="edge-s"></span>
+                              <span className="front-s">LOG IN </span>
                             </button>
                           </div>
                         </form>

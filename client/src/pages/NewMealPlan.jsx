@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Calendar from "../components/Calendar";
 import Select from "react-select";
 import "../App.css";
+import Accordion from "react-bootstrap/Accordion";
 
 function NewMealPlan() {
   const [query, setQuery] = useState("");
@@ -122,158 +123,209 @@ function NewMealPlan() {
       <div className="container py-3">
         <div
           className={
-            queryToggle
-              ? "row g-0 border pb-3 mb-3 "
-              : "row g-0 hide pb-3 mb-3 "
+            queryToggle ? "row g-0  pb-3 mb-3 " : "row g-0 hide pb-3 mb-3 "
           }
         >
           <div>
             <form onSubmit={handleSubmit}>
-              <label>
-                {" "}
-                Query
-                <input
-                  type="text"
-                  name="query"
-                  placeholder="e.g. pizza, chicken"
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                />
-              </label>
+              <div className="row">
+                <div className="col  shadow-lg border-bottom border-secondary border-5 p-0">
+                  <Accordion defaultActiveKey="0" flush>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>Food Search</Accordion.Header>
+                      <Accordion.Body>
+                        <label className="font-monospace fs-5">Query</label>
+                        <input
+                          type="text"
+                          name="query"
+                          placeholder="e.g. pizza, chicken"
+                          value={query}
+                          onChange={e => setQuery(e.target.value)}
+                          className="form-control mt-0 mb-2"
+                        />
 
-              <label>
-                Diet
-                <Select
-                  value={diet ? { value: diet, label: diet } : null}
-                  onChange={selectedOption => setDiet(selectedOption.value)}
-                  options={[
-                    { value: "", label: "Select a diet" },
-                    { value: "gluten free", label: "Gluten Free" },
-                    { value: "ketogenic", label: "Ketogenic" },
-                    { value: "vegetarian", label: "Vegetarian" },
-                    { value: "lacto-vegetarian", label: "Lacto-Vegetarian" },
-                    { value: "ovo-vegetarian", label: "Ovo-Vegetarian" },
-                    { value: "vegan", label: "Vegan" },
-                    { value: "pescetarian", label: "Pescetarian" },
-                    { value: "paleo", label: "Paleo" },
-                    { value: "primal", label: "Primal" },
-                    { value: "low FODMAP", label: "Low FODMAP" },
-                    { value: "whole30", label: "Whole30" }
-                  ]}
-                />
-              </label>
+                        <label className="font-monospace fs-5">Meal Type</label>
+                        <input
+                          type="text"
+                          name="type"
+                          placeholder="e.g. breakfast, drink, dinner, snack"
+                          value={type}
+                          onChange={e => setType(e.target.value)}
+                          className="form-control mb-2"
+                        />
 
-              <label>
-                Intolerances
-                <Select
-                  value={intolerances.map(intolerance => ({
-                    value: intolerance,
-                    label: intolerance
-                  }))}
-                  onChange={selectedOptions =>
-                    setIntolerances(selectedOptions.map(option => option.value))
-                  }
-                  options={[
-                    { value: "dairy", label: "Dairy" },
-                    { value: "egg", label: "Egg" },
-                    { value: "gluten", label: "Gluten" },
-                    { value: "grain", label: "Grain" },
-                    { value: "peanut", label: "Peanut" },
-                    { value: "seafood", label: "Seafood" },
-                    { value: "sesame", label: "Sesame" },
-                    { value: "shellfish", label: "Shellfish" },
-                    { value: "soy", label: "Soy" },
-                    { value: "sulfite", label: "Sulfite" },
-                    { value: "tree nut", label: "Tree Nut" },
-                    { value: "wheat", label: "Wheat" }
-                  ]}
-                  isMulti
-                />
-              </label>
+                        <label className="font-monospace fs-5">Cuisine:</label>
+                        <input
+                          type="text"
+                          name="cuisine"
+                          placeholder="e.g. Chinese, Korean, Latinamerican"
+                          value={cuisine}
+                          onChange={e => setCuisine(e.target.value)}
+                          className="form-control mb-2"
+                        />
+                      </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="1">
+                      <Accordion.Header>Include / Exclude</Accordion.Header>
+                      <Accordion.Body>
+                        <label className="font-monospace fs-5">
+                          Ingredients to include:
+                        </label>
+                        <input
+                          type="text"
+                          name="includeIngredients"
+                          value={includeIngredients}
+                          onChange={e => setIncludeIngredients(e.target.value)}
+                          className="form-control"
+                        />
 
-              <label>
-                {" "}
-                Type
-                <input
-                  type="text"
-                  name="type"
-                  placeholder="e.g. breakfast, drink, dinner, snack"
-                  value={type}
-                  onChange={e => setType(e.target.value)}
-                />
-              </label>
+                        <label className="font-monospace fs-5">
+                          {" "}
+                          Ingredients to exclude:
+                        </label>
+                        <input
+                          type="text"
+                          name="excludeIngredients"
+                          value={excludeIngredients}
+                          onChange={e => setExcludeIngredients(e.target.value)}
+                          className="form-control"
+                        />
+                      </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="2">
+                      <Accordion.Header>Diet Specifications</Accordion.Header>
+                      <Accordion.Body>
+                        <label className="font-monospace fs-5">Diet</label>
+                        <Select
+                          value={diet ? { value: diet, label: diet } : null}
+                          onChange={selectedOption =>
+                            setDiet(selectedOption.value)
+                          }
+                          options={[
+                            { value: "", label: "Select a diet" },
+                            { value: "gluten free", label: "Gluten Free" },
+                            { value: "ketogenic", label: "Ketogenic" },
+                            { value: "vegetarian", label: "Vegetarian" },
+                            {
+                              value: "lacto-vegetarian",
+                              label: "Lacto-Vegetarian"
+                            },
+                            {
+                              value: "ovo-vegetarian",
+                              label: "Ovo-Vegetarian"
+                            },
+                            { value: "vegan", label: "Vegan" },
+                            { value: "pescetarian", label: "Pescetarian" },
+                            { value: "paleo", label: "Paleo" },
+                            { value: "primal", label: "Primal" },
+                            { value: "low FODMAP", label: "Low FODMAP" },
+                            { value: "whole30", label: "Whole30" }
+                          ]}
+                          className="form-control"
+                        />
 
-              <label>
-                {" "}
-                Cuisine:
-                <input
-                  type="text"
-                  name="cuisine"
-                  placeholder="e.g. chinese, corean, latinamerican"
-                  value={cuisine}
-                  onChange={e => setCuisine(e.target.value)}
-                />
-              </label>
+                        <label className="font-monospace fs-5">
+                          Intolerances
+                        </label>
+                        <Select
+                          value={intolerances.map(intolerance => ({
+                            value: intolerance,
+                            label: intolerance
+                          }))}
+                          onChange={selectedOptions =>
+                            setIntolerances(
+                              selectedOptions.map(option => option.value)
+                            )
+                          }
+                          options={[
+                            { value: "dairy", label: "Dairy" },
+                            { value: "egg", label: "Egg" },
+                            { value: "gluten", label: "Gluten" },
+                            { value: "grain", label: "Grain" },
+                            { value: "peanut", label: "Peanut" },
+                            { value: "seafood", label: "Seafood" },
+                            { value: "sesame", label: "Sesame" },
+                            { value: "shellfish", label: "Shellfish" },
+                            { value: "soy", label: "Soy" },
+                            { value: "sulfite", label: "Sulfite" },
+                            { value: "tree nut", label: "Tree Nut" },
+                            { value: "wheat", label: "Wheat" }
+                          ]}
+                          isMulti
+                          className="form-control"
+                        />
+                      </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="3">
+                      <Accordion.Header>Preparation</Accordion.Header>
+                      <Accordion.Body>
+                        <label className="font-monospace fs-5">
+                          Maximum Ready Time in minutes:
+                        </label>
+                        <input
+                          type="text"
+                          name="maxReadyTime"
+                          placeholder="e.g. 45"
+                          value={maxReadyTime}
+                          onChange={e => setMaxReadyTime(e.target.value)}
+                          className="form-control"
+                        />
 
-              <label>
-                {" "}
-                Ingredients to include:
-                <input
-                  type="text"
-                  name="includeIngredients"
-                  value={includeIngredients}
-                  onChange={e => setIncludeIngredients(e.target.value)}
-                />
-              </label>
+                        <label className="font-monospace fs-5">Equipment</label>
+                        <input
+                          type="text"
+                          value={equipment}
+                          onChange={e => setEquipment(e.target.value)}
+                          className="form-control"
+                        />
+                      </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="4">
+                      <Accordion.Header>Nutrition</Accordion.Header>
+                      <Accordion.Body>
+                        <label className="font-monospace fs-5">
+                          Maximum Calories:
+                        </label>
+                        <input
+                          type="text"
+                          name="maxCalories"
+                          placeholder="e.g. 250"
+                          value={maxCalories}
+                          onChange={e => setMaxCalories(e.target.value)}
+                          className="form-control"
+                        />
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                </div>
 
-              <label>
-                {" "}
-                Ingredients to exclude:
-                <input
-                  type="text"
-                  name="excludeIngredients"
-                  value={excludeIngredients}
-                  onChange={e => setExcludeIngredients(e.target.value)}
-                />
-              </label>
+                <div className="col">
+                  <div>
+                    <p>
+                      {}
+                      {/* MAKE A SUMMARY OF QUERY */}
+                    </p>
 
-              <label>
-                {" "}
-                Maximun Ready Time in minutes:
-                <input
-                  type="text"
-                  name="maxReadyTime"
-                  placeholder="e.g. 45"
-                  value={maxReadyTime}
-                  onChange={e => setMaxReadyTime(e.target.value)}
-                />
-              </label>
+                    <textarea
+                      className="form-control"
+                      name=""
+                      id=""
+                      cols="30"
+                      rows="10"
+                    ></textarea>
+                  </div>
 
-              <label>
-                {" "}
-                Maximun Calories:
-                <input
-                  type="text"
-                  name="maxCalories"
-                  placeholder="e.g. 250"
-                  value={maxCalories}
-                  onChange={e => setMaxCalories(e.target.value)}
-                />
-              </label>
-
-              <label>
-                {" "}
-                equipment
-                <input
-                  type="text"
-                  value={equipment}
-                  onChange={e => setEquipment(e.target.value)}
-                />
-              </label>
-
-              <button type="submit" onClick={() => setQueryToggle(false)}>
-                Get Recipes
-              </button>
+                  <button
+                    type="submit"
+                    onClick={() => setQueryToggle(false)}
+                    className="btn pushable-b-sm"
+                  >
+                    <span className="shadow-btn-b-sm"></span>
+                    <span className="edge-b-sm"></span>
+                    <span className="front-b-sm">GET RECIPES </span>
+                  </button>
+                </div>
+              </div>
             </form>
           </div>
         </div>

@@ -46,12 +46,12 @@ function Welcome() {
               </div>
               <div className="row mt-5 pt-5 mb-0 pb-0 ">
                 <div className="text-end">
-                  <button
-                    className="btn btn-primary btn-lg"
-                    onClick={showModal}
-                  >
-                    GET STARTED
+                  <button className="btn pushable-b-lg" onClick={showModal}>
+                    <span className="shadow-btn-b-lg"></span>
+                    <span className="edge-b-lg"></span>
+                    <span className="front-b-lg">GET STARTED </span>
                   </button>
+
                   <Modal
                     show={isOpen}
                     size="lg"
@@ -68,12 +68,6 @@ function Welcome() {
                     {/* <Modal.Footer>This is the footer</Modal.Footer> */}
                     {/* <button onClick={hideModal}>Cancel</button> */}
                   </Modal>
-
-                  {/* <button className="pushable btn btn-sm">
-                    <span className="shadow"></span>
-                    <span className="edge"></span>
-                    <span className="front">GET STARTED</span>
-                  </button> */}
                 </div>
               </div>
             </div>
