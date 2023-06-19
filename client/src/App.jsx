@@ -14,6 +14,7 @@ import AuthContext from "./components/context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import NavBar from "./components/NavBar";
 import Recipe from "./pages/Recipe";
+import Profile from "./pages/Profile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,6 +60,16 @@ function App() {
               </RequireAuth>
             }
           />
+
+          <Route
+            path="/private/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
+
           <Route
             path="/private/newmealplan"
             element={
