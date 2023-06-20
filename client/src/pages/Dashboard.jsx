@@ -2,70 +2,60 @@ import React, { useState, useContext } from "react";
 import { useEffect } from "react";
 import Calendar from "../components/Calendar";
 import "../App.css";
+import { Tabs, Tab, Nav } from "react-bootstrap";
+import Profile from "./Profile";
+import NewMealPlan from "./NewMealPlan";
+import Recipe from "./Recipe";
+import ShoppingList from "./ShoppingList";
+import MyMealPlan from "./MyMealPlan";
+import { Link, Outlet } from "react-router-dom";
+import MyFavourites from "./MyFavourites";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const [user, setUser] = useState([]);
-  const [error, setError] = useState("");
+  const [key, setKey] = useState("/private/dashboard/calendar");
+  const [initialPageLoad, setInitialPageLoad] = useState(true);
 
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+  let navigate = useNavigate();
 
-  async function getUserInfo() {
-    try {
-      const response = await fetch(`/api/auth/user`, {
-        headers: {
-          authorization: "Bearer " + localStorage.getItem("token")
-        }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data);
-        // console.log(data)
-      } else {
-        throw new Error(response.statusText);
-      }
-    } catch (err) {
-      setError(err.message);
-    }
-    if (error) {
-      return <div>Error: {error}</div>;
-    }
-
-    if (!user) {
-      return <div>Loading...</div>;
-    }
-  }
+  const navigateToDestination = k => {
+    navigate(k);
+  };
 
   return (
-    <div>
-      <h1>BusyBytes</h1>
-      <h2>Welcome to your Dashboard</h2>
-      <div className="profile-container">
-        <div className="profile-pic">
-          <img
-            className="pic"
-            src="https://i.pinimg.com/736x/44/76/18/447618cb49cf25bccc9ce1c252ca4c5a.jpg"
-            height={300}
-            width={300}
-          />
-        </div>
-        <div className="profile-info">
-          <h2>User Information:</h2>
-          {user.map(obj => (
-            <div key={obj.id}>
-              <p>First Name: {obj.firstname}</p>
-              <p>Last Name: {obj.lastname}</p>
-              <p>Email: {obj.email}</p>
-            </div>
-          ))}
+    <>
+      <div className="container my-4 ">
+        <Tabs
+          className="h6"
+          activeKey={key}
+          onSelect={k => {
+            setKey(k), navigateToDestination(k), setInitialPageLoad(false);
+          }}
+        >
+          <Tab eventKey="/private/dashboard/profile" title="Profile"></Tab>
+          <Tab eventKey="/private/dashboard/calendar" title="Calendar">
+            {initialPageLoad && <Calendar />}
+          </Tab>
+          <Tab
+            eventKey="/private/dashboard/newmealplan"
+            title="New Meal Plan"
+          ></Tab>
+          <Tab
+            eventKey="/private/dashboard/myfavourites"
+            title="Recipe Repo"
+          ></Tab>
+          <Tab
+            eventKey="/private/dashboard/shoppinglist"
+            title="Shopping List"
+          ></Tab>
+          <Tab eventKey="/private/dashboard/settings" title="Settings"></Tab>
+        </Tabs>
+        <div>
+          <Outlet />
         </div>
       </div>
-      <div>
-        <h2>Weekly Calendar</h2>
-        <Calendar />
-      </div>
-    </div>
+    </>
   );
 }
 

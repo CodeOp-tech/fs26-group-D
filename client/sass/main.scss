@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Figtree&family=Monomaniac+One&family=Press+Start+2P&family=Silkscreen&family=VT323&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+//changing existing
+$primary: #34e3fe;
+$secondary: #5dfdcb;
+$info: #01a7c2;
+$dark: #0b2545;
+
+$display-font-family: "Press Start 2P";
+$font-family-sans-serif: "Figtree";
+$headings-font-family: "Silkscreen";
+$font-family-monospace: "VT323";
+
+$btn-font-family: "Silkscreen";
+// $btn-font-family: "Monomaniac One";
+// $btn-font-family: "VT323";
+
+$navbar-dark-toggler-border-color: #ffffff;
+$navbar-dark-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#ffffff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+
+//Adding to theme
+$custom-theme-colors: (
+  "midDark": #13315c,
+  "altLight": #f6f4f3,
+  "blueLight": #ebfcff,
+  "aquaLight": #d7fef2,
+  "darkLight": #dceaf9
+);
+
+$theme-colors: map-merge($custom-theme-colors, $theme-colors);
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

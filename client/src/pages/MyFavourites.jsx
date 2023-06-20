@@ -54,7 +54,7 @@ function MyFavourites() {
           {fav.map((meal, index) => (
             <li key={index}>
               {meal.recipe_title}
-              <Link to={`/private/recipe/${meal.recipe_id}`}>
+              <Link to={`/private/dashboard/recipe/${meal.recipe_id}`}>
                 <img src={meal.recipe_image} alt={meal.recipe_title} />
               </Link>
               <button

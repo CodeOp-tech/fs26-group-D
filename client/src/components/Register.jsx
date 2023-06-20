@@ -121,141 +121,223 @@ function Register(props) {
   };
 
   return (
-    <div>
-      <section>
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        ></p>
+    <>
+      <section className="bg-altLight ">
+        <div className="container-lg ">
+          <div className="row justify-content-center">
+            <div className="col-10 m-4">
+              <div className="card">
+                <div className="row g-0 rounded">
+                  <div className="col-md-5 bg-aquaLight">
+                    <div className="container">img placeholder</div>
+                  </div>
+                  <div className="col-md-7">
+                    <div className="card-body text-center">
+                      <div className="text-end">
+                        <h1 className="card-title display-5 fs-4 mb-4">
+                          Sign Up
+                        </h1>
+                      </div>
+
+                      <div className="card-contents">
+                        <section>
+                          <p
+                            ref={errRef}
+                            className={errMsg ? "errmsg" : "offscreen"}
+                            aria-live="assertive"
+                          ></p>
+                        </section>
+
+                        <form onSubmit={handleSubmit} className="login-form">
+                          <div className="row">
+                            <div className="col-6">
+                              <label
+                                htmlFor="firstname"
+                                className="font-monospace"
+                              >
+                                First Name
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="First Name"
+                                id="firstname"
+                                name="firstname"
+                                required
+                                onChange={handleInputChange}
+                              />
+                            </div>
+                            <div className="col-6">
+                              {" "}
+                              <label
+                                htmlFor="lastname"
+                                className="font-monospace"
+                              >
+                                Last Name
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="Last Name"
+                                id="lastname"
+                                name="lastname"
+                                required
+                                onChange={handleInputChange}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="row">
+                            <label htmlFor="email" className="font-monospace">
+                              Email address
+                              <span className={validEmail ? "valid" : "hide"}>
+                                <FontAwesomeIcon icon={faCheck} />
+                              </span>
+                              <span
+                                className={
+                                  !validEmail || email ? "invalid" : "hide"
+                                }
+                              >
+                                <FontAwesomeIcon icon={faTimes} />
+                              </span>
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="youremail@domain.com"
+                              id="email"
+                              name="email"
+                              ref={userRef}
+                              autoComplete="off"
+                              onChange={handleInputChange}
+                              required
+                              aria-invalid={validEmail ? "false" : "true"}
+                              aria-describedby="uidnote"
+                              onFocus={() => setEmailFocus(true)}
+                              onBlur={() => setEmailFocus(false)}
+                            />
+                            <p
+                              id="uidnote"
+                              className={
+                                emailFocus && !email && !validEmail
+                                  ? "instructions"
+                                  : "offscreen"
+                              }
+                            >
+                              <FontAwesomeIcon icon={faInfoCircle} />
+                              Valid email address required.
+                            </p>
+                          </div>
+                          <label htmlFor="password" className="font-monospace">
+                            Password
+                            <span className={validPwd ? "valid" : "hide"}>
+                              <FontAwesomeIcon icon={faCheck} />
+                            </span>
+                            <span
+                              className={
+                                !validPwd || password ? "invalid" : "hide"
+                              }
+                            >
+                              <FontAwesomeIcon icon={faTimes} />
+                            </span>
+                          </label>
+                          <input
+                            type="password"
+                            placeholder="***********"
+                            id="password"
+                            name="password"
+                            required
+                            onChange={handleInputChange}
+                            aria-invalid={validPwd ? "false" : "true"}
+                            aria-describedby="pwdnote"
+                            onFocus={() => setPwdFocus(true)}
+                            onBlur={() => setPwdFocus(false)}
+                          />
+                          <p
+                            id="pwdnote"
+                            className={
+                              pwdFocus && !validPwd
+                                ? "instructions"
+                                : "offscreen"
+                            }
+                          >
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            8 to 24 characters. <br />
+                            Must include uppercase and lowercase letters, a
+                            number and special character.
+                            <br />
+                            Allowed special characters:{" "}
+                            <span aria-label="exclamation mark">!</span>
+                            <span aria-label="at symbol">@</span>
+                            <span aria-label="hashtag">#</span>
+                            <span aria-label="dollar sign">$</span>
+                            <span aria-label="percent">%</span>
+                          </p>
+                          <label
+                            htmlFor="confirm_pwd"
+                            className="font-monospace"
+                          >
+                            Confirm Password
+                            <span
+                              className={
+                                validMatch && matchPwd ? "valid" : "hide"
+                              }
+                            >
+                              <FontAwesomeIcon icon={faCheck} />
+                            </span>
+                            <span
+                              className={
+                                !validMatch || !matchPwd ? "invalid" : "hide"
+                              }
+                            >
+                              <FontAwesomeIcon icon={faTimes} />
+                            </span>
+                          </label>
+                          <input
+                            type="password"
+                            placeholder="***********"
+                            id="confirm_pwd"
+                            required
+                            onChange={e => setMatchPwd(e.target.value)}
+                            aria-invalid={validMatch ? "false" : "true"}
+                            aria-describedby="confirmnote"
+                            onFocus={() => setMatchFocus(true)}
+                            onBlur={() => setMatchFocus(false)}
+                          />
+                          <p
+                            id="confirm_pwd"
+                            className={
+                              !validMatch ? "instructions" : "offscreen"
+                            }
+                          >
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            Must match the first password input field.
+                          </p>
+                          <button
+                            className="btn btn-primary"
+                            type="submit"
+                            disabled={
+                              !validEmail || !validPwd || !validMatch
+                                ? true
+                                : false
+                            }
+                          >
+                            Sign up
+                          </button>
+                        </form>
+                        <button
+                          className="link-btn"
+                          onClick={() => props.onFormSwitch("login")}
+                        >
+                          Already have an account? Login here.
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label htmlFor="firstname">Firstname</label>
-        <input
-          type="text"
-          placeholder="firstname"
-          id="firstname"
-          name="firstname"
-          required
-          onChange={handleInputChange}
-        />
-        <label htmlFor="lastname">Lastname</label>
-        <input
-          type="text"
-          placeholder="lastname"
-          id="lastname"
-          name="lastname"
-          required
-          onChange={handleInputChange}
-        />
-        <label htmlFor="email">
-          Email address
-          <span className={validEmail ? "valid" : "hide"}>
-            <FontAwesomeIcon icon={faCheck} />
-          </span>
-          <span className={!validEmail || email ? "invalid" : "hide"}>
-            <FontAwesomeIcon icon={faTimes} />
-          </span>
-        </label>
-        <input
-          type="text"
-          placeholder="youremail@domain.com"
-          id="email"
-          name="email"
-          ref={userRef}
-          autoComplete="off"
-          onChange={handleInputChange}
-          required
-          aria-invalid={validEmail ? "false" : "true"}
-          aria-describedby="uidnote"
-          onFocus={() => setEmailFocus(true)}
-          onBlur={() => setEmailFocus(false)}
-        />
-        <p
-          id="uidnote"
-          className={
-            emailFocus && !email && !validEmail ? "instructions" : "offscreen"
-          }
-        >
-          <FontAwesomeIcon icon={faInfoCircle} />
-          Valid email address required.
-        </p>
-        <label htmlFor="password">
-          Password
-          <span className={validPwd ? "valid" : "hide"}>
-            <FontAwesomeIcon icon={faCheck} />
-          </span>
-          <span className={!validPwd || password ? "invalid" : "hide"}>
-            <FontAwesomeIcon icon={faTimes} />
-          </span>
-        </label>
-        <input
-          type="password"
-          placeholder="***********"
-          id="password"
-          name="password"
-          required
-          onChange={handleInputChange}
-          aria-invalid={validPwd ? "false" : "true"}
-          aria-describedby="pwdnote"
-          onFocus={() => setPwdFocus(true)}
-          onBlur={() => setPwdFocus(false)}
-        />
-        <p
-          id="pwdnote"
-          className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
-        >
-          <FontAwesomeIcon icon={faInfoCircle} />
-          8 to 24 characters. <br />
-          Must include uppercase and lowercase letters, a number and special
-          character.
-          <br />
-          Allowed special characters:{" "}
-          <span aria-label="exclamation mark">!</span>
-          <span aria-label="at symbol">@</span>
-          <span aria-label="hashtag">#</span>
-          <span aria-label="dollar sign">$</span>
-          <span aria-label="percent">%</span>
-        </p>
-        <label htmlFor="confirm_pwd">
-          Confirm Password
-          <span className={validMatch && matchPwd ? "valid" : "hide"}>
-            <FontAwesomeIcon icon={faCheck} />
-          </span>
-          <span className={!validMatch || !matchPwd ? "invalid" : "hide"}>
-            <FontAwesomeIcon icon={faTimes} />
-          </span>
-        </label>
-        <input
-          type="password"
-          placeholder="***********"
-          id="confirm_pwd"
-          required
-          onChange={e => setMatchPwd(e.target.value)}
-          aria-invalid={validMatch ? "false" : "true"}
-          aria-describedby="confirmnote"
-          onFocus={() => setMatchFocus(true)}
-          onBlur={() => setMatchFocus(false)}
-        />
-        <p
-          id="confirm_pwd"
-          className={!validMatch ? "instructions" : "offscreen"}
-        >
-          <FontAwesomeIcon icon={faInfoCircle} />
-          Must match the first password input field.
-        </p>
-        <button
-          type="submit"
-          disabled={!validEmail || !validPwd || !validMatch ? true : false}
-        >
-          Sign up
-        </button>
-      </form>
-      <button className="link-btn" onClick={() => props.onFormSwitch("login")}>
-        Already have an account? Login here.
-      </button>
-    </div>
+    </>
   );
 }
 
