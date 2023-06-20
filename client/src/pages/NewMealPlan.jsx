@@ -129,7 +129,7 @@ function NewMealPlan() {
           <div>
             <form onSubmit={handleSubmit}>
               <div className="row">
-                <div className="col  shadow-lg border-bottom border-secondary border-5 p-0">
+                <div className="col  shadow border-bottom border-secondary border-5 p-0">
                   <Accordion defaultActiveKey="0" flush>
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>Food Search</Accordion.Header>
@@ -335,45 +335,71 @@ function NewMealPlan() {
 
           <div className="col-5 vh overflow-y-auto">
             {recipes.map(recipe => (
-              <div key={recipe.id}>
-                <div>
-                  <h2>{recipe.title}</h2>
+              <div
+                key={recipe.id}
+                className="my-2 bg-aquaLight shadow border-bottom border-secondary border-5 container"
+              >
+                <div className="row">
+                  <h2 className="h5 pt-2">{recipe.title}</h2>
+                </div>
+                <div className="row">
                   <Link to={`/private/dashboard/recipe/${recipe.id}`}>
                     <img
                       src={recipe.image}
                       alt={recipe.title}
-                      className="img-fluid"
+                      className="img-fluid border-bottom border-secondary border-5 shadow my-1 justify-content-center"
                     />
                   </Link>
                 </div>
-                <div>
-                  <label htmlFor="date">Date:</label>
+
+                <div className="row mb-2 px-3">
+                  <label
+                    className="form-label font-monospace fs-4 mb-2"
+                    htmlFor="date"
+                  >
+                    Date:
+                  </label>
                   <input
                     placeholder="DD/MM/YYYY"
                     type="date"
                     id="date"
                     value={date}
                     onChange={e => setDate(e.target.value)}
+                    className="form-control border-secondary"
                   />
                 </div>
-                <div>
-                  <label htmlFor="mealType">Meal Type:</label>
+                <div className="row mb-2 px-3">
+                  <label
+                    className="form-label font-monospace fs-4 mb-2"
+                    htmlFor="mealType"
+                  >
+                    Meal Type:
+                  </label>
                   <select
                     id="mealType"
                     value={mealType}
                     onChange={e => setMealType(e.target.value)}
+                    className="form-control border-secondary shadow-sm "
                   >
                     <option value="">Select a meal type</option>
                     <option value="breakfast">Breakfast</option>
                     <option value="elevensies">Elevensies</option>
                     <option value="lunch">Lunch</option>
                     <option value="afternoon tea">Afternoon tea</option>
-                    <option value="diner">Diner</option>
+                    <option value="dinner">Diner</option>
                   </select>
                 </div>
-                <div>
-                  <button onClick={() => addMealToCalendar(recipe)}>
+                <div className="text-end">
+                  {/* <button onClick={() => addMealToCalendar(recipe)}>
                     Add to Calendar
+                  </button> */}
+                  <button
+                    className="btn pushable-b-sm mt-2 mb-3"
+                    onClick={() => addMealToCalendar(recipe)}
+                  >
+                    <span className="shadow-btn-b-sm"></span>
+                    <span className="edge-b-sm"></span>
+                    <span className="front-b-sm">Add to Calendar </span>
                   </button>
                 </div>
               </div>
@@ -381,12 +407,23 @@ function NewMealPlan() {
           </div>
 
           <div className="col-7 vh">
-            <button
+            {/* <button
               onClick={() => setQueryToggle(true)}
               className="btn btn-primary"
             >
               New search
-            </button>
+            </button> */}
+            <div className="text-end">
+              <button
+                className="btn pushable-s"
+                onClick={() => setQueryToggle(true)}
+              >
+                <span className="shadow-btn-s"></span>
+                <span className="edge-s"></span>
+                <span className="front-s">NEW SEARCH </span>
+              </button>
+            </div>
+
             <Calendar />
           </div>
         </div>

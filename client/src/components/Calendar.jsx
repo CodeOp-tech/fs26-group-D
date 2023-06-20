@@ -12,7 +12,7 @@ export default function Calendar() {
     "elevensies",
     "lunch",
     "afternoon tea",
-    "diner"
+    "dinner"
   ];
   const [startDate, setStartDate] = useState(new Date()); // Start with the current date
   const [days, setDays] = useState([]);
@@ -40,15 +40,7 @@ export default function Calendar() {
   // function to create an array with 7 days of the current week, starting from Monday
   const getDays = (startDate, data = mealPlan) => {
     const days = [];
-    const weekday = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
+    const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const currentDay = new Date(startDate || new Date());
     currentDay.setDate(currentDay.getDate() - currentDay.getDay() + 1); // Set the current day to Monday
 
@@ -130,17 +122,25 @@ export default function Calendar() {
 
   return (
     <div>
-      <div>
-        <button onClick={seePreviousWeek}>⬅️</button>
-        <button onClick={seeNextWeek}>➡️</button>
+      <div className="m-3 text-end">
+        <button onClick={seePreviousWeek} className="btn">
+          <i class="bi bi-arrow-left-square-fill"></i>
+        </button>
+
+        <button onClick={seeNextWeek} className="btn">
+          <i class="bi bi-arrow-right-square-fill"></i>
+        </button>
       </div>
       <div className="table-responsive">
-        <table className="calendar table table-hover">
+        <table className="calendar table table-hover table-striped shadow border-bottom border-primary border-3">
           <thead className="table-primary">
             <tr>
               <th></th>
               {days.map((day, index) => (
-                <th key={index} className="dates">
+                <th
+                  key={index}
+                  className="text-center dates font-monospace text-lowercase fs-5"
+                >
                   {day.date ? day.date.toLocaleDateString() : ""}
                   <br />
                   {day.dayName}
@@ -151,7 +151,9 @@ export default function Calendar() {
           <tbody>
             {mealName.map((mealType, mealTypeIndex) => (
               <tr key={mealTypeIndex}>
-                <th className="mealName table-primary">{mealType}</th>
+                <th className="mealName table-primary font-monospace">
+                  {mealType}
+                </th>
                 {days.map((day, dayIndex) => (
                   <td key={dayIndex} className="meal">
                     {day.meal.find(meal => meal.type === mealType)?.name}

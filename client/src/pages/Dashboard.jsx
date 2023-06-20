@@ -25,8 +25,9 @@ function Dashboard() {
 
   return (
     <>
-      <div className="container my-4">
+      <div className="container my-4 ">
         <Tabs
+          className="h6"
           activeKey={key}
           onSelect={k => {
             setKey(k), navigateToDestination(k), setInitialPageLoad(false);

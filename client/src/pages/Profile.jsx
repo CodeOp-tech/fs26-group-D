@@ -37,10 +37,10 @@ export default function Profile() {
 
   return (
     <>
-      <div className="profile-container">
-        <div className="profile-pic">
+      <div className="container">
+        <div className="shadow">
           <img
-            className="pic"
+            className="shadow"
             src="https://i.pinimg.com/736x/44/76/18/447618cb49cf25bccc9ce1c252ca4c5a.jpg"
             height={300}
             width={300}
