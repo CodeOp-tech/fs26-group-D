@@ -53,93 +53,94 @@ function App() {
 
   return (
     <AuthContext.Provider value={authObject}>
-      <IngredientContext.Provider value={shoppingCartObject} />
-      <div>
+      <IngredientContext.Provider value={shoppingCartObject}>
         <div>
-          <NavBar />
+          <div>
+            <NavBar />
+          </div>
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            <Route
+              path="/private/dashboard"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            >
+              <Route
+                path="profile"
+                element={
+                  <RequireAuth>
+                    <Profile />
+                  </RequireAuth>
+                }
+              />
+
+              <Route
+                path="calendar"
+                element={
+                  <RequireAuth>
+                    <Calendar />
+                  </RequireAuth>
+                }
+              />
+
+              <Route
+                path="newmealplan"
+                element={
+                  <RequireAuth>
+                    <NewMealPlan />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="shoppinglist"
+                element={
+                  <RequireAuth>
+                    <ShoppingList />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="mymealplan"
+                element={
+                  <RequireAuth>
+                    <MyMealPlan />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="myfavourites"
+                element={
+                  <RequireAuth>
+                    <MyFavourites />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="settings"
+                element={
+                  <RequireAuth>
+                    <Settings />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="recipe/:id"
+                element={
+                  <RequireAuth>
+                    <Recipe />
+                  </RequireAuth>
+                }
+              />
+            </Route>
+          </Routes>
         </div>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-
-          <Route
-            path="/private/dashboard"
-            element={
-              <RequireAuth>
-                <Dashboard />
-              </RequireAuth>
-            }
-          >
-            <Route
-              path="profile"
-              element={
-                <RequireAuth>
-                  <Profile />
-                </RequireAuth>
-              }
-            />
-
-            <Route
-              path="calendar"
-              element={
-                <RequireAuth>
-                  <Calendar />
-                </RequireAuth>
-              }
-            />
-
-            <Route
-              path="newmealplan"
-              element={
-                <RequireAuth>
-                  <NewMealPlan />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="shoppinglist"
-              element={
-                <RequireAuth>
-                  <ShoppingList />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="mymealplan"
-              element={
-                <RequireAuth>
-                  <MyMealPlan />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="myfavourites"
-              element={
-                <RequireAuth>
-                  <MyFavourites />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="settings"
-              element={
-                <RequireAuth>
-                  <Settings />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="recipe/:id"
-              element={
-                <RequireAuth>
-                  <Recipe />
-                </RequireAuth>
-              }
-            />
-          </Route>
-        </Routes>
-      </div>
+      </IngredientContext.Provider>
     </AuthContext.Provider>
   );
 }

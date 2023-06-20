@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 export default function Profile() {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -48,13 +48,12 @@ export default function Profile() {
         </div>
         <div className="profile-info">
           <h2>User Information:</h2>
-          {user.map(obj => (
-            <div key={obj.id}>
-              <p>First Name: {obj.firstname}</p>
-              <p>Last Name: {obj.lastname}</p>
-              <p>Email: {obj.email}</p>
-            </div>
-          ))}
+
+          <div key={user.id}>
+            <p>First Name: {user.firstname}</p>
+            <p>Last Name: {user.lastname}</p>
+            <p>Email: {user.email}</p>
+          </div>
         </div>
       </div>
     </>
