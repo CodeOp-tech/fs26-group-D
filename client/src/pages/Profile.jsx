@@ -82,27 +82,51 @@ export default function Profile() {
                 <p className="h6 mb-0 pb-0">Email:</p>
                 <p className="mt-0 pt0">{user.email}</p>
               </div>
+              <div
+                className="
+              "
+              >
+                <button
+                  type="button"
+                  className="btn btn-link"
+                  onClick={() => setShowFavourites(!showFavourites)}
+                >
+                  {showFavourites ? "Hide Favourites" : "My Favourites"}
+                </button>
+              </div>
+              <div
+                className="
+              "
+              >
+                <button
+                  type="button"
+                  className="btn btn-link"
+                  onClick={() => setShowSettings(!showSettings)}
+                >
+                  {showSettings ? "Hide Settings" : "My Settings"}
+                </button>
+              </div>
             </div>
           </div>
           <div className="col col-7">
             <div>
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-link"
                 onClick={() => setShowFavourites(!showFavourites)}
               >
                 {showFavourites ? "Hide Favourites" : "My Favourites"}
-              </button>
+              </button> */}
               {showFavourites && <MyFavourites />}
             </div>
             <div>
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-link"
                 onClick={() => setShowSettings(!showSettings)}
               >
                 {showSettings ? "Hide Settings" : "My Settings"}
-              </button>
+              </button> */}
               {showSettings && <Settings />}
             </div>
           </div>
