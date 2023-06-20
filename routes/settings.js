@@ -19,7 +19,7 @@ router.get("/restrictions", userShouldBeLoggedIn, async function(req, res) {
 });
 
 router.post("/restrictions", userShouldBeLoggedIn, async (req, res) => {
-  const { diet, allergies, bad_food } = req.body;
+  const { type, value } = req.body;
 
   try {
     // await db(
@@ -27,9 +27,8 @@ router.post("/restrictions", userShouldBeLoggedIn, async (req, res) => {
     // );
     await Setting.create({
       user_id: req.user_id,
-      diet,
-      allergies,
-      bad_food
+      type,
+      value
     });
     res.send({ message: "Dietary restrictions added" });
   } catch (err) {

@@ -6,6 +6,7 @@ import "../App.css";
 function Settings() {
   const [diet, setDiet] = useState("");
   const [intolerances, setIntolerances] = useState([]);
+  const [intolerance, setIntolerance] = useState("");
   const [excludeIngredients, setExcludeIngredients] = useState("");
   const [restrictions, setRestrictions] = useState([]);
   const [error, setError] = useState("");
@@ -18,7 +19,7 @@ function Settings() {
     e.preventDefault();
     const input = {
       diet: diet,
-      allergies: intolerances,
+      allergies: intolerance, // intolerances,
       bad_food: excludeIngredients
     };
     console.log(input);
@@ -113,14 +114,20 @@ function Settings() {
           </label>
           <label>
             Intolerances
-            <Select
-              value={intolerances.map(intolerance => ({
+            {/* 
+            value={intolerances.map((intolerance) => ({
                 value: intolerance,
-                label: intolerance
+                label: intolerance,
               }))}
-              onChange={selectedOptions =>
-                setIntolerances(selectedOptions.map(option => option.value))
+            onChange={(selectedOptions) =>
+                setIntolerances(selectedOptions.map((option) => option.value))
               }
+               */}
+            <Select
+              value={
+                intolerance ? { value: intolerance, label: intolerance } : null
+              }
+              onChange={selectedOption => setIntolerance(selectedOption.value)}
               options={[
                 { value: "dairy", label: "Dairy" },
                 { value: "egg", label: "Egg" },
@@ -135,7 +142,6 @@ function Settings() {
                 { value: "tree nut", label: "Tree Nut" },
                 { value: "wheat", label: "Wheat" }
               ]}
-              isMulti
             />
           </label>
           <label>

@@ -15,9 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Setting.init(
     {
-      diet: DataTypes.STRING,
-      allergies: DataTypes.STRING,
-      bad_food: DataTypes.STRING
+      type: DataTypes.STRING,
+      value: DataTypes.STRING
     },
     {
       sequelize,
