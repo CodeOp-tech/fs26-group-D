@@ -96,10 +96,10 @@ function Settings() {
 
   return (
     <>
-      <div>
+      <div className="px-4">
         <div className="container">
-          <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
-            <h2 className="h4">Settings</h2>
+          <div className="row py-3 mt-3 border-bottom border-end border-secondary border-3 shadow">
+            <h1 className="">Settings</h1>
 
             <div className="container">
               <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm">
@@ -175,10 +175,10 @@ function Settings() {
                     </label>
                   </div>
                   <div className="text-end pt-3 pb-0 mb-0">
-                    <button type="submit" className="btn mb-3 pushable-b">
-                      <span className="shadow-btn-b"></span>
-                      <span className="edge-b"></span>
-                      <span className="front-b"> Add Dietary Preferences </span>
+                    <button type="submit" className="btn mb-3 pushable-s">
+                      <span className="shadow-btn-s"></span>
+                      <span className="edge-s"></span>
+                      <span className="front-s"> Add Dietary Preferences </span>
                     </button>
                   </div>
                 </form>
@@ -186,7 +186,7 @@ function Settings() {
 
               <div>
                 <div className="container">
-                  <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
+                  <div className="row py-3 mt-3 border-bottom border-end border-secondary border-3 shadow">
                     <h3 className="h5">Restrictions Summary:</h3>
                     <div>
                       <ul className="list-group-flush">
@@ -196,7 +196,7 @@ function Settings() {
                             <div key={index}>
                               {restriction.type === "diet" && (
                                 <li className="list-group-item d-flex py-1">
-                                  <span className="bg-blueLight p-2 rounded border-bottom border-primary border-3">
+                                  <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
                                     {" "}
                                     {restriction.value}
                                     <span className="ms-2">
@@ -246,7 +246,7 @@ function Settings() {
                             <div key={index}>
                               {restriction.type === "bad_food" && (
                                 <li className="list-group-item d-flex  py-1 ">
-                                  <span className="bg-blueLight p-2 rounded border-bottom border-primary border-3">
+                                  <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
                                     {" "}
                                     {restriction.value}
                                     <span className="ms-2">
