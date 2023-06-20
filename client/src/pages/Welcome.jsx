@@ -25,8 +25,8 @@ function Welcome() {
 
   return (
     <>
-      <section id="hero" className="text-light bg-dark vh-nav">
-        <div className="container-lg">
+      <section id="hero">
+        <div className="text-light bg-dark vh-nav parent">
           <div className="row">
             <div className="col text-start ">
               <h1 className="display-3 mt-5 pt-5 mb-3">
@@ -65,15 +65,13 @@ function Welcome() {
                         <Register onFormSwitch={toggleForm} />
                       )}
                     </Modal.Body>
-                    {/* <Modal.Footer>This is the footer</Modal.Footer> */}
-                    {/* <button onClick={hideModal}>Cancel</button> */}
                   </Modal>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="row justify-content-center text-center mt-4">
+          <div id="learn_more" className=" absolute width100 text-center">
             <p className="mb-0 pb-0 h6">Learn more </p>
 
             <i className="bi bi-caret-down-fill white pt-0"></i>

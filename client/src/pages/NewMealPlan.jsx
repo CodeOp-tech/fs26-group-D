@@ -17,7 +17,23 @@ function NewMealPlan() {
   const [excludeIngredients, setExcludeIngredients] = useState("");
   const [cuisine, setCuisine] = useState("");
   const [maxReadyTime, setMaxReadyTime] = useState("");
+  const [minCalories, setMinCalories] = useState("");
   const [maxCalories, setMaxCalories] = useState("");
+  const [minCarbs, setMinCarbs] = useState("");
+  const [maxCarbs, setMaxCarbs] = useState("");
+  const [minProtein, setMinProtein] = useState("");
+  const [maxProtein, setMaxProtein] = useState("");
+  const [minFat, setMinFat] = useState("");
+  const [maxFat, setMaxFat] = useState("");
+  const [minCholesterol, setMinCholesterol] = useState("");
+  const [maxCholesterol, setMaxCholesterol] = useState("");
+  const [minSaturatedFat, setMinSaturatedFat] = useState("");
+  const [maxSaturatedFat, setMaxSaturatedFat] = useState("");
+  const [minFiber, setMinFiber] = useState("");
+  const [maxFiber, setMaxFiber] = useState("");
+  const [minSugar, setMinSugar] = useState("");
+  const [maxSugar, setMaxSugar] = useState("");
+
   const [recipes, setRecipes] = useState([]);
   const [date, setDate] = useState("");
   const [mealType, setMealType] = useState("");
@@ -42,7 +58,22 @@ function NewMealPlan() {
         cuisine,
         equipment,
         maxReadyTime,
-        maxCalories
+        minCalories,
+        maxCalories,
+        minCarbs,
+        maxCarbs,
+        minProtein,
+        maxProtein,
+        minFat,
+        maxFat,
+        minCholesterol,
+        maxCholesterol,
+        minSaturatedFat,
+        maxSaturatedFat,
+        minFiber,
+        maxFiber,
+        minSugar,
+        maxSugar
       };
 
       // Remove parameters with empty values
@@ -74,7 +105,22 @@ function NewMealPlan() {
       cuisine,
       equipment,
       maxReadyTime,
-      maxCalories
+      minCalories,
+      maxCalories,
+      minCarbs,
+      maxCarbs,
+      minProtein,
+      maxProtein,
+      minFat,
+      maxFat,
+      minCholesterol,
+      maxCholesterol,
+      minSaturatedFat,
+      maxSaturatedFat,
+      minFiber,
+      maxFiber,
+      minSugar,
+      maxSugar
     };
     searchRecipes(formData);
     setQuery("");
@@ -86,7 +132,22 @@ function NewMealPlan() {
     setCuisine("");
     setEquipment("");
     setMaxReadyTime("");
+    setMinCalories("");
     setMaxCalories("");
+    setMinCarbs("");
+    setMaxCarbs("");
+    setMinProtein("");
+    setMaxProtein("");
+    setMinFat("");
+    setMaxFat("");
+    setMinCholesterol("");
+    setMaxCholesterol("");
+    setMinSaturatedFat("");
+    setMaxSaturatedFat("");
+    setMinFiber("");
+    setMaxFiber("");
+    setMinSugar("");
+    setMaxSugar("");
   }
 
   const addMealToCalendar = async recipe => {
@@ -330,17 +391,343 @@ function NewMealPlan() {
                     <Accordion.Item eventKey="4">
                       <Accordion.Header>Nutrition</Accordion.Header>
                       <Accordion.Body>
+                        <label className="font-monospace fs-5">Calories:</label>
+
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="minCalories"
+                              placeholder="min"
+                              value={minCalories}
+                              onChange={e => setMinCalories(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxCalories"
+                              placeholder="max"
+                              value={maxCalories}
+                              onChange={e => setMaxCalories(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <label className="font-monospace fs-5">Carbs:</label>
+                        <div className="row">
+                          <div className="col-6">
+                            {" "}
+                            <input
+                              type="text"
+                              name="minCarbs"
+                              placeholder="min"
+                              value={minCarbs}
+                              onChange={e => setMinCarbs(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxCarbs"
+                              placeholder="max"
+                              value={maxCarbs}
+                              onChange={e => setMaxCarbs(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <label className="font-monospace fs-5">Protein:</label>
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="minProtein"
+                              placeholder="min"
+                              value={minProtein}
+                              onChange={e => setMinProtein(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxProtein"
+                              placeholder="max"
+                              value={maxProtein}
+                              onChange={e => setMaxProtein(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <label className="font-monospace fs-5">Fat:</label>
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="minFat"
+                              placeholder="min"
+                              value={minFat}
+                              onChange={e => setMinFat(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxFat"
+                              placeholder="max"
+                              value={maxFat}
+                              onChange={e => setMaxFat(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
                         <label className="font-monospace fs-5">
-                          Maximum Calories:
+                          Cholesterol:
                         </label>
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="minCholesterol"
+                              placeholder="min"
+                              value={minCholesterol}
+                              onChange={e => setMinCholesterol(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxCholesterol"
+                              placeholder="max"
+                              value={maxCholesterol}
+                              onChange={e => setMaxCholesterol(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <label className="font-monospace fs-5">
+                          Saturated Fat:
+                        </label>
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="minSaturatedFat"
+                              placeholder="min"
+                              value={minSaturatedFat}
+                              onChange={e => setMinSaturatedFat(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxSaturatedFat"
+                              placeholder="max"
+                              value={maxSaturatedFat}
+                              onChange={e => setMaxSaturatedFat(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <label className="font-monospace fs-5">Fiber:</label>
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="minFiber"
+                              placeholder="min"
+                              value={minFiber}
+                              onChange={e => setMinFiber(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxFiber"
+                              placeholder="max"
+                              value={maxFiber}
+                              onChange={e => setMaxFiber(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <label className="font-monospace fs-5">Sugar:</label>
+                        <div className="row">
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="minSugar"
+                              placeholder="min"
+                              value={minSugar}
+                              onChange={e => setMinSugar(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                          <div className="col-6">
+                            <input
+                              type="text"
+                              name="maxSugar"
+                              placeholder="max"
+                              value={maxSugar}
+                              onChange={e => setMaxSugar(e.target.value)}
+                              className="form-control"
+                            />
+                          </div>
+                        </div>
+
+                        <br />
+                        <input
+                          type="text"
+                          name="minCalories"
+                          placeholder="min"
+                          value={minCalories}
+                          onChange={e => setMinCalories(e.target.value)}
+                        />
                         <input
                           type="text"
                           name="maxCalories"
-                          placeholder="e.g. 250"
+                          placeholder="max"
                           value={maxCalories}
                           onChange={e => setMaxCalories(e.target.value)}
-                          className="form-control"
                         />
+                        <br />
+                        <label className="font-monospace fs-5">Carbs:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minCarbs"
+                          placeholder="min"
+                          value={minCarbs}
+                          onChange={e => setMinCarbs(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxCarbs"
+                          placeholder="max"
+                          value={maxCarbs}
+                          onChange={e => setMaxCarbs(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Protein:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minProtein"
+                          placeholder="min"
+                          value={minProtein}
+                          onChange={e => setMinProtein(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxProtein"
+                          placeholder="max"
+                          value={maxProtein}
+                          onChange={e => setMaxProtein(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Fat:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minFat"
+                          placeholder="min"
+                          value={minFat}
+                          onChange={e => setMinFat(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxFat"
+                          placeholder="max"
+                          value={maxFat}
+                          onChange={e => setMaxFat(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">
+                          Cholesterol:
+                        </label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minCholesterol"
+                          placeholder="min"
+                          value={minCholesterol}
+                          onChange={e => setMinCholesterol(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxCholesterol"
+                          placeholder="max"
+                          value={maxCholesterol}
+                          onChange={e => setMaxCholesterol(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">
+                          Saturated Fat:
+                        </label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minSaturatedFat"
+                          placeholder="min"
+                          value={minSaturatedFat}
+                          onChange={e => setMinSaturatedFat(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxSaturatedFat"
+                          placeholder="max"
+                          value={maxSaturatedFat}
+                          onChange={e => setMaxSaturatedFat(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Fiber:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minFiber"
+                          placeholder="min"
+                          value={minFiber}
+                          onChange={e => setMinFiber(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxFiber"
+                          placeholder="max"
+                          value={maxFiber}
+                          onChange={e => setMaxFiber(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Sugar:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minSugar"
+                          placeholder="min"
+                          value={minSugar}
+                          onChange={e => setMinSugar(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxSugar"
+                          placeholder="max"
+                          value={maxSugar}
+                          onChange={e => setMaxSugar(e.target.value)}
+                        />
+
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>
