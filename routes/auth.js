@@ -81,6 +81,17 @@ router.get("/calendar", userShouldBeLoggedIn, async (req, res) => {
   }
 });
 
+router.get("/favourites", userShouldBeLoggedIn, async (req, res) => {
+  try {
+    const calendarEvents = await Calendar.findAll({
+      where: { user_id: req.user_id, favourite: true }
+    });
+    res.send(calendarEvents);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
 router.delete("/calendar/:meal_id", userShouldBeLoggedIn, async (req, res) => {
   const { meal_id } = req.params;
   try {
