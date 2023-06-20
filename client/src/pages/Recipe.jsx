@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import IngredientContext from "../components/context/IngredientContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+
 import "../App.css";
 
 function Recipe() {
@@ -33,7 +32,6 @@ function Recipe() {
   const handleAddToShoppingList = ingredient => {
     setIngredientData(state => [...state, ingredient]);
     console.log(ingredientData);
-    alert(`${ingredient.name} has been added to the shopping list`);
   };
 
   return (
@@ -54,18 +52,19 @@ function Recipe() {
 
                 <ul className="list-group list-group-flush shadow me-5 border-bottom border-secondary border-3">
                   {recipe.extendedIngredients.map(ingredient => (
-                    <div className="">
-                      <li
-                        key={ingredient.id}
-                        className="list-group-item border-secondary"
-                      >
+                    <div className="" key={ingredient.id}>
+                      <li className="list-group-item border-secondary">
                         <input
-                          class="form-check-input me-1"
+                          className="form-check-input me-1"
                           type="checkbox"
                           value=""
-                          id="firstCheckbox"
+                          id={`checkbox-${ingredient.id}`}
+                          onChange={() => handleAddToShoppingList(ingredient)}
                         />
-                        <label class="form-check-label" for="firstCheckbox">
+                        <label
+                          className="form-check-label"
+                          htmlFor={`checkbox-${ingredient.id}`}
+                        >
                           {ingredient.original}
                         </label>
                       </li>
