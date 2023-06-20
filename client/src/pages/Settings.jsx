@@ -5,7 +5,6 @@ import "../App.css";
 
 function Settings() {
   const [diet, setDiet] = useState("");
-  const [intolerances, setIntolerances] = useState([]);
   const [intolerance, setIntolerance] = useState("");
   const [excludeIngredients, setExcludeIngredients] = useState("");
   const [restrictions, setRestrictions] = useState([]);
@@ -18,10 +17,20 @@ function Settings() {
   const addRestrictions = async e => {
     e.preventDefault();
     const input = {
-      diet: diet,
-      allergies: intolerance, // intolerances,
-      bad_food: excludeIngredients
+      data: []
     };
+    if (diet) {
+      input.data.push({ type: "diet", value: diet });
+    }
+
+    if (intolerance) {
+      input.data.push({ type: "allergies", value: intolerance });
+    }
+
+    if (excludeIngredients) {
+      input.data.push({ type: "bad_food", value: excludeIngredients });
+    }
+
     console.log(input);
     const options = {
       method: "POST",
@@ -39,7 +48,7 @@ function Settings() {
       // Handle successful response here
       alert(`Dietary restrictions have been added to your settings`);
       console.log("Restrictions added successfully");
-      setIntolerances([]);
+      setIntolerance("");
       setDiet("");
       setExcludeIngredients("");
       getRestrictions();
@@ -63,10 +72,10 @@ function Settings() {
     }
   }
 
-  const handleDelete = async restriction => {
+  const handleDelete = async restrictionId => {
     try {
       const response = await fetch(
-        `/api/settings/restrictions/${restriction}`,
+        `/api/settings/restrictions/${restrictionId}`,
         {
           method: "DELETE",
           headers: {
@@ -114,15 +123,6 @@ function Settings() {
           </label>
           <label>
             Intolerances
-            {/* 
-            value={intolerances.map((intolerance) => ({
-                value: intolerance,
-                label: intolerance,
-              }))}
-            onChange={(selectedOptions) =>
-                setIntolerances(selectedOptions.map((option) => option.value))
-              }
-               */}
             <Select
               value={
                 intolerance ? { value: intolerance, label: intolerance } : null
@@ -160,13 +160,13 @@ function Settings() {
           <h4>Your Diet</h4>
           {restrictions.map((restriction, index) => (
             <div key={index}>
-              {restriction.diet && (
+              {restriction.type === "diet" && (
                 <>
                   <p>
-                    {restriction.diet}
+                    {restriction.value}
                     <button
                       type="button"
-                      onClick={() => handleDelete(restriction.diet)}
+                      onClick={() => handleDelete(restriction.id)}
                     >
                       ❌
                     </button>
@@ -180,13 +180,13 @@ function Settings() {
           <h4>Your Allergies</h4>
           {restrictions.map((restriction, index) => (
             <div key={index}>
-              {restriction.allergies && (
+              {restriction.type === "allergies" && (
                 <>
                   <p>
-                    {restriction.allergies}
+                    {restriction.value}
                     <button
                       type="button"
-                      onClick={() => handleDelete(restriction.allergies)}
+                      onClick={() => handleDelete(restriction.id)}
                     >
                       ❌
                     </button>
@@ -200,13 +200,13 @@ function Settings() {
           <h4>Food you don't like</h4>
           {restrictions.map((restriction, index) => (
             <div key={index}>
-              {restriction.bad_food && (
+              {restriction.type === "bad_food" && (
                 <>
                   <p>
-                    {restriction.bad_food}
+                    {restriction.value}
                     <button
                       type="button"
-                      onClick={() => handleDelete(restriction.bad_food)}
+                      onClick={() => handleDelete(restriction.id)}
                     >
                       ❌
                     </button>
