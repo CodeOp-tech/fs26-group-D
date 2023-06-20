@@ -39,9 +39,11 @@ function NewMealPlan() {
   const [mealType, setMealType] = useState("");
   const [error, setError] = useState("");
   const [queryToggle, setQueryToggle] = useState(true);
+  const [restrictions, setRestrictions] = useState([]);
 
   useEffect(() => {
     setQueryToggle(true);
+    getRestrictions();
   }, []);
 
   const searchRecipes = async () => {
@@ -180,6 +182,22 @@ function NewMealPlan() {
     }
   };
 
+  async function getRestrictions() {
+    try {
+      const response = await fetch(`/api/settings/restrictions`, {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token")
+        }
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(response.statusText);
+      setRestrictions(data);
+      console.log(restrictions);
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
   return (
     <>
       <div className="container py-3">
@@ -251,7 +269,15 @@ function NewMealPlan() {
                         <input
                           type="text"
                           name="excludeIngredients"
-                          value={excludeIngredients}
+                          value={
+                            restrictions.some(
+                              restriction => restriction.type === "bad_food"
+                            )
+                              ? restrictions.find(
+                                  restriction => restriction.type === "bad_food"
+                                ).value
+                              : ""
+                          }
                           onChange={e => setExcludeIngredients(e.target.value)}
                           className="form-control"
                         />
@@ -262,7 +288,20 @@ function NewMealPlan() {
                       <Accordion.Body>
                         <label className="font-monospace fs-5">Diet</label>
                         <Select
-                          value={diet ? { value: diet, label: diet } : null}
+                          value={
+                            restrictions.find(
+                              restriction => restriction.type === "diet"
+                            )
+                              ? {
+                                  value: restrictions.find(
+                                    restriction => restriction.type === "diet"
+                                  ).value,
+                                  label: restrictions.find(
+                                    restriction => restriction.type === "diet"
+                                  ).value
+                                }
+                              : { value: "", label: "Select a diet" }
+                          }
                           onChange={selectedOption =>
                             setDiet(selectedOption.value)
                           }
@@ -293,10 +332,14 @@ function NewMealPlan() {
                           Intolerances
                         </label>
                         <Select
-                          value={intolerances.map(intolerance => ({
-                            value: intolerance,
-                            label: intolerance
-                          }))}
+                          value={restrictions
+                            .filter(
+                              restriction => restriction.type === "allergies"
+                            )
+                            .map(restriction => ({
+                              value: restriction.value,
+                              label: restriction.value
+                            }))}
                           onChange={selectedOptions =>
                             setIntolerances(
                               selectedOptions.map(option => option.value)
