@@ -95,129 +95,185 @@ function Settings() {
   };
 
   return (
-    <div>
-      <h2>Settings page</h2>
+    <>
       <div>
-        <h3>Default Dietary restrictions</h3>
-        <form onSubmit={addRestrictions}>
-          <label>
-            Diet
-            <Select
-              value={diet ? { value: diet, label: diet } : null}
-              onChange={selectedOption => setDiet(selectedOption.value)}
-              options={[
-                { value: "", label: "Select a diet" },
-                { value: "gluten free", label: "Gluten Free" },
-                { value: "ketogenic", label: "Ketogenic" },
-                { value: "vegetarian", label: "Vegetarian" },
-                { value: "lacto-vegetarian", label: "Lacto-Vegetarian" },
-                { value: "ovo-vegetarian", label: "Ovo-Vegetarian" },
-                { value: "vegan", label: "Vegan" },
-                { value: "pescetarian", label: "Pescetarian" },
-                { value: "paleo", label: "Paleo" },
-                { value: "primal", label: "Primal" },
-                { value: "low FODMAP", label: "Low FODMAP" },
-                { value: "whole30", label: "Whole30" }
-              ]}
-            />
-          </label>
-          <label>
-            Intolerances
-            <Select
-              value={
-                intolerance ? { value: intolerance, label: intolerance } : null
-              }
-              onChange={selectedOption => setIntolerance(selectedOption.value)}
-              options={[
-                { value: "dairy", label: "Dairy" },
-                { value: "egg", label: "Egg" },
-                { value: "gluten", label: "Gluten" },
-                { value: "grain", label: "Grain" },
-                { value: "peanut", label: "Peanut" },
-                { value: "seafood", label: "Seafood" },
-                { value: "sesame", label: "Sesame" },
-                { value: "shellfish", label: "Shellfish" },
-                { value: "soy", label: "Soy" },
-                { value: "sulfite", label: "Sulfite" },
-                { value: "tree nut", label: "Tree Nut" },
-                { value: "wheat", label: "Wheat" }
-              ]}
-            />
-          </label>
-          <label>
-            {" "}
-            Ingredients to exclude:
-            <input
-              type="text"
-              name="excludeIngredients"
-              value={excludeIngredients}
-              onChange={e => setExcludeIngredients(e.target.value)}
-            />
-          </label>
-          <button type="submit">Add Dietary Preferences</button>
-        </form>
-        <div>
-          <h4>Your Diet</h4>
-          {restrictions.map((restriction, index) => (
-            <div key={index}>
-              {restriction.type === "diet" && (
-                <>
-                  <p>
-                    {restriction.value}
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(restriction.id)}
-                    >
-                      ❌
+        <div className="container">
+          <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
+            <h2 className="h4">Settings</h2>
+
+            <div className="container">
+              <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm">
+                {" "}
+                <h3 className="h5">Set Defaults:</h3>
+                <form onSubmit={addRestrictions}>
+                  <div className="row">
+                    <label>
+                      Diet
+                      <Select
+                        value={diet ? { value: diet, label: diet } : null}
+                        onChange={selectedOption =>
+                          setDiet(selectedOption.value)
+                        }
+                        options={[
+                          { value: "", label: "Select a diet" },
+                          { value: "gluten free", label: "Gluten Free" },
+                          { value: "ketogenic", label: "Ketogenic" },
+                          { value: "vegetarian", label: "Vegetarian" },
+                          {
+                            value: "lacto-vegetarian",
+                            label: "Lacto-Vegetarian"
+                          },
+                          { value: "ovo-vegetarian", label: "Ovo-Vegetarian" },
+                          { value: "vegan", label: "Vegan" },
+                          { value: "pescetarian", label: "Pescetarian" },
+                          { value: "paleo", label: "Paleo" },
+                          { value: "primal", label: "Primal" },
+                          { value: "low FODMAP", label: "Low FODMAP" },
+                          { value: "whole30", label: "Whole30" }
+                        ]}
+                      />
+                    </label>
+
+                    <label>
+                      Intolerances
+                      <Select
+                        value={
+                          intolerance
+                            ? { value: intolerance, label: intolerance }
+                            : null
+                        }
+                        onChange={selectedOption =>
+                          setIntolerance(selectedOption.value)
+                        }
+                        options={[
+                          { value: "dairy", label: "Dairy" },
+                          { value: "egg", label: "Egg" },
+                          { value: "gluten", label: "Gluten" },
+                          { value: "grain", label: "Grain" },
+                          { value: "peanut", label: "Peanut" },
+                          { value: "seafood", label: "Seafood" },
+                          { value: "sesame", label: "Sesame" },
+                          { value: "shellfish", label: "Shellfish" },
+                          { value: "soy", label: "Soy" },
+                          { value: "sulfite", label: "Sulfite" },
+                          { value: "tree nut", label: "Tree Nut" },
+                          { value: "wheat", label: "Wheat" }
+                        ]}
+                      />
+                    </label>
+
+                    <label>
+                      {" "}
+                      Ingredients to exclude:
+                      <input
+                        type="text"
+                        name="excludeIngredients"
+                        value={excludeIngredients}
+                        onChange={e => setExcludeIngredients(e.target.value)}
+                        className="form-control"
+                      />
+                    </label>
+                  </div>
+                  <div className="text-end pt-3 pb-0 mb-0">
+                    <button type="submit" className="btn mb-3 pushable-b">
+                      <span className="shadow-btn-b"></span>
+                      <span className="edge-b"></span>
+                      <span className="front-b"> Add Dietary Preferences </span>
                     </button>
-                  </p>
-                </>
-              )}
+                  </div>
+                </form>
+              </div>
+
+              <div>
+                <div className="container">
+                  <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
+                    <h3 className="h5">Restrictions Summary:</h3>
+                    <div>
+                      <ul className="list-group-flush">
+                        <div className="mb-2">
+                          <h4 className="h6">Diet</h4>
+                          {restrictions.map((restriction, index) => (
+                            <div key={index}>
+                              {restriction.type === "diet" && (
+                                <li className="list-group-item d-flex py-1">
+                                  <span className="bg-blueLight p-2 rounded border-bottom border-primary border-3">
+                                    {" "}
+                                    {restriction.value}
+                                    <span className="ms-2">
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleDelete(restriction.id)
+                                        }
+                                        className="btn-close"
+                                      ></button>
+                                    </span>
+                                  </span>
+                                </li>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="mb-2">
+                          <h4 className="h6">Allergies</h4>
+                          {restrictions.map((restriction, index) => (
+                            <div key={index}>
+                              {restriction.type === "allergies" && (
+                                <li className="list-group-item d-flex  py-1 ">
+                                  <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
+                                    {" "}
+                                    {restriction.value}
+                                    <span className="ms-2">
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleDelete(restriction.id)
+                                        }
+                                        className="btn-close"
+                                      ></button>
+                                    </span>
+                                  </span>
+                                </li>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+
+                        <div>
+                          <h4 className="h6">Always Exclude</h4>
+                          {restrictions.map((restriction, index) => (
+                            <div key={index}>
+                              {restriction.type === "bad_food" && (
+                                <li className="list-group-item d-flex  py-1 ">
+                                  <span className="bg-blueLight p-2 rounded border-bottom border-primary border-3">
+                                    {" "}
+                                    {restriction.value}
+                                    <span className="ms-2">
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          handleDelete(restriction.id)
+                                        }
+                                        className="btn-close"
+                                      ></button>
+                                    </span>
+                                  </span>
+                                </li>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-        <div>
-          <h4>Your Allergies</h4>
-          {restrictions.map((restriction, index) => (
-            <div key={index}>
-              {restriction.type === "allergies" && (
-                <>
-                  <p>
-                    {restriction.value}
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(restriction.id)}
-                    >
-                      ❌
-                    </button>
-                  </p>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-        <div>
-          <h4>Food you don't like</h4>
-          {restrictions.map((restriction, index) => (
-            <div key={index}>
-              {restriction.type === "bad_food" && (
-                <>
-                  <p>
-                    {restriction.value}
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(restriction.id)}
-                    >
-                      ❌
-                    </button>
-                  </p>
-                </>
-              )}
-            </div>
-          ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
