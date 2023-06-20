@@ -3,8 +3,18 @@ import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./context/AuthContext";
+import Modal from "react-bootstrap/Modal";
+import Login from "./Login";
+import Register from "./Register";
 
-function NavBar() {
+function NavBar({
+  currentForm,
+  setCurrentForm,
+  isOpen,
+  showModal,
+  hideModal,
+  toggleForm
+}) {
   const auth = useContext(AuthContext);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -51,7 +61,12 @@ function NavBar() {
                 >
                   <ul className="navbar-nav">
                     <li className="nav-item">
-                      <button className="btn pushable-b-sm logoutBtn">
+                      <button
+                        onClick={() => {
+                          setCurrentForm("login"), showModal();
+                        }}
+                        className="btn pushable-b-sm logoutBtn"
+                      >
                         <span className="shadow-btn-b-sm"></span>
                         <span className="edge-b-sm"></span>
                         <span className="front-b-sm">Sign In </span>
@@ -109,6 +124,15 @@ function NavBar() {
           </nav>
         )}
       </div>
+      <Modal show={isOpen} size="lg" onHide={hideModal} dialogClassName={""}>
+        <Modal.Body>
+          {currentForm === "login" ? (
+            <Login onFormSwitch={toggleForm} />
+          ) : (
+            <Register onFormSwitch={toggleForm} />
+          )}
+        </Modal.Body>
+      </Modal>
     </>
   );
 }

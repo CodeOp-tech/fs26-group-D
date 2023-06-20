@@ -46,6 +46,22 @@ function App() {
     logout
   };
 
+  const [currentForm, setCurrentForm] = useState("login");
+
+  const toggleForm = formName => {
+    setCurrentForm(formName);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const hideModal = () => {
+    setIsOpen(false);
+  };
+
   const shoppingCartObject = {
     ingredientData,
     setIngredientData
@@ -56,10 +72,29 @@ function App() {
       <IngredientContext.Provider value={shoppingCartObject}>
         <div>
           <div>
-            <NavBar />
+            <NavBar
+              currentForm={currentForm}
+              setCurrentForm={setCurrentForm}
+              isOpen={isOpen}
+              showModal={showModal}
+              hideModal={hideModal}
+              toggleForm={toggleForm}
+            />
           </div>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route
+              path="/"
+              element={
+                <Welcome
+                  currentForm={currentForm}
+                  setCurrentForm={setCurrentForm}
+                  isOpen={isOpen}
+                  showModal={showModal}
+                  hideModal={hideModal}
+                  toggleForm={toggleForm}
+                />
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 

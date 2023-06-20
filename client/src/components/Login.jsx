@@ -97,7 +97,7 @@ function Login(props) {
                         </form>
 
                         <p>
-                          Don't have an account?{" "}
+                          Don't have an account?
                           <button
                             onClick={() => props.onFormSwitch("register")}
                           >
