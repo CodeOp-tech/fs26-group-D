@@ -6,23 +6,14 @@ import "../App.css";
 
 import Modal from "react-bootstrap/Modal";
 
-function Welcome() {
-  const [currentForm, setCurrentForm] = useState("login");
-
-  const toggleForm = formName => {
-    setCurrentForm(formName);
-  };
-
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const showModal = () => {
-    setIsOpen(true);
-  };
-
-  const hideModal = () => {
-    setIsOpen(false);
-  };
-
+function Welcome({
+  currentForm,
+  setCurrentForm,
+  isOpen,
+  showModal,
+  hideModal,
+  toggleForm
+}) {
   return (
     <>
       <section id="hero">
@@ -46,7 +37,12 @@ function Welcome() {
               </div>
               <div className="row mt-5 pt-5 mb-0 pb-0 ">
                 <div className="text-end">
-                  <button className="btn pushable-b-lg" onClick={showModal}>
+                  <button
+                    className="btn pushable-b-lg"
+                    onClick={() => {
+                      setCurrentForm("register"), showModal();
+                    }}
+                  >
                     <span className="shadow-btn-b-lg"></span>
                     <span className="edge-b-lg"></span>
                     <span className="front-b-lg">GET STARTED </span>

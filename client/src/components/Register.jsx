@@ -48,18 +48,18 @@ function Register(props) {
 
   useEffect(() => {
     const result = EMAIL_REGEX.test(input.email);
-    console.log(result);
-    console.log(input.email);
+    // console.log(result);
+    // console.log(input.email);
     setValidEmail(result);
   }, [input.email]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(input.password);
-    console.log(result);
-    console.log(input.password);
+    // console.log(result);
+    // console.log(input.password);
     setValidPwd(result);
     const match = input.password === matchPwd;
-    console.log(match);
+    // console.log(match);
     setValidMatch(match);
   }, [input.password, matchPwd]);
 
