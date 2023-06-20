@@ -4,7 +4,16 @@ import AuthContext from "./context/AuthContext";
 import axios from "axios";
 import "../App.css";
 
-function Login(props) {
+function Login({
+  currentForm,
+  setCurrentForm,
+  isOpen,
+  setIsOpen,
+  showModal,
+  hideModal,
+  toggleForm,
+  onFormSwitch
+}) {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -87,29 +96,25 @@ function Login(props) {
                             <button
                               type="submit"
                               className="btn mb-3 pushable-s"
-                              // onClick={showModal}
+                              //  onClick={hideModal}
                             >
                               <span className="shadow-btn-s"></span>
                               <span className="edge-s"></span>
-                              <span className="front-s">LOG IN </span>
+                              <span className="front-s"> LOG IN </span>
                             </button>
                           </div>
                         </form>
 
-                        <p>
+                        <button
+                          className="btn font-monospace"
+                          onClick={() => onFormSwitch("register")}
+                        >
                           Don't have an account?
-                          <button
-                            onClick={() => props.onFormSwitch("register")}
-                          >
+                          <span className="font-monospace text-secondary">
+                            {" "}
                             Register here.
-                          </button>
-                        </p>
-                        {/* <button
-        className="btn btn-secondary"
-        onClick={() => props.onFormSwitch("register")}
-      >
-         Register here.
-      </button> */}
+                          </span>
+                        </button>
                       </div>
                     </div>
                   </div>

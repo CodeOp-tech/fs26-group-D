@@ -95,8 +95,35 @@ function App() {
                 />
               }
             />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  currentForm={currentForm}
+                  setCurrentForm={setCurrentForm}
+                  isOpen={isOpen}
+                  setIsOpen={() => {
+                    setIsOpen(false);
+                  }}
+                  showModal={showModal}
+                  hideModal={hideModal}
+                  toggleForm={toggleForm}
+                />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <Register
+                  currentForm={currentForm}
+                  setCurrentForm={setCurrentForm}
+                  isOpen={isOpen}
+                  showModal={showModal}
+                  hideModal={hideModal}
+                  toggleForm={toggleForm}
+                />
+              }
+            />
 
             <Route
               path="/private/dashboard"
