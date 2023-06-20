@@ -20,7 +20,6 @@ import IngredientContext from "./components/context/IngredientContext";
 import Profile from "./pages/Profile";
 import Calendar from "./components/Calendar";
 
-
 function App() {
   const [user, setUser] = useState(null);
   const [ingredientData, setIngredientData] = useState([]);
@@ -54,15 +53,15 @@ function App() {
 
   return (
     <AuthContext.Provider value={authObject}>
-      <IngredientContext.Provider value={shoppingCartObject}>
+      <IngredientContext.Provider value={shoppingCartObject} />
+      <div>
         <div>
-          <div>
-            <NavBar />
-          </div>
-          <Routes>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+          <NavBar />
+        </div>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           <Route
             path="/private/dashboard"

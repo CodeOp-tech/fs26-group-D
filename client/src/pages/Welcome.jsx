@@ -76,7 +76,7 @@ function Welcome() {
           <div className="row justify-content-center text-center mt-4">
             <p className="mb-0 pb-0 h6">Learn more </p>
 
-            <i class="bi bi-caret-down-fill white pt-0"></i>
+            <i className="bi bi-caret-down-fill white pt-0"></i>
           </div>
         </div>
       </section>
@@ -132,7 +132,7 @@ function Welcome() {
         <div className="row justify-content-center text-center mt-4">
           <p className="mb-0 pb-0 h6">About </p>
 
-          <i class="bi bi-caret-down-fill white pt-0"></i>
+          <i className="bi bi-caret-down-fill white pt-0"></i>
         </div>
       </section>
 
