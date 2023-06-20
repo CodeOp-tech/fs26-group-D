@@ -18,6 +18,7 @@ import Recipe from "./pages/Recipe";
 import IngredientContext from "./components/context/IngredientContext";
 
 import Profile from "./pages/Profile";
+import Calendar from "./components/Calendar";
 
 
 function App() {
@@ -63,26 +64,34 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
-
+          <Route
+            path="/private/dashboard"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          >
             <Route
-              path="/private/dashboard"
+              path="profile"
               element={
                 <RequireAuth>
-                  <Dashboard />
+                  <Profile />
                 </RequireAuth>
               }
             />
-                
-              <Route
-            path="/private/profile"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />   
+
             <Route
-              path="/private/newmealplan"
+              path="calendar"
+              element={
+                <RequireAuth>
+                  <Calendar />
+                </RequireAuth>
+              }
+            />
+
+            <Route
+              path="newmealplan"
               element={
                 <RequireAuth>
                   <NewMealPlan />
@@ -90,7 +99,7 @@ function App() {
               }
             />
             <Route
-              path="/private/shoppinglist"
+              path="shoppinglist"
               element={
                 <RequireAuth>
                   <ShoppingList />
@@ -98,7 +107,7 @@ function App() {
               }
             />
             <Route
-              path="/private/mymealplan"
+              path="mymealplan"
               element={
                 <RequireAuth>
                   <MyMealPlan />
@@ -106,7 +115,7 @@ function App() {
               }
             />
             <Route
-              path="/private/myfavourites"
+              path="myfavourites"
               element={
                 <RequireAuth>
                   <MyFavourites />
@@ -114,7 +123,7 @@ function App() {
               }
             />
             <Route
-              path="/private/settings"
+              path="settings"
               element={
                 <RequireAuth>
                   <Settings />
@@ -122,17 +131,16 @@ function App() {
               }
             />
             <Route
-              path="/private/recipe/:id"
+              path="recipe/:id"
               element={
                 <RequireAuth>
                   <Recipe />
                 </RequireAuth>
               }
             />
-          </Routes>
-        </div>
-      </IngredientContext.Provider>
-
+          </Route>
+        </Routes>
+      </div>
     </AuthContext.Provider>
   );
 }
