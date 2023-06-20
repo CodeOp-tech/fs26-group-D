@@ -98,12 +98,11 @@ function Login(props) {
 
                         <p>
                           Don't have an account?{" "}
-                          <a
-                            href=""
+                          <button
                             onClick={() => props.onFormSwitch("register")}
                           >
                             Register here.
-                          </a>
+                          </button>
                         </p>
                         {/* <button
         className="btn btn-secondary"

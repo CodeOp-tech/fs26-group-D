@@ -158,7 +158,7 @@ export default function Calendar() {
                   <td key={dayIndex} className="meal">
                     {day.meal.find(meal => meal.type === mealType)?.name}
                     <Link
-                      to={`/private/recipe/${
+                      to={`/private/dashboard/recipe/${
                         day.meal.find(meal => meal.type === mealType)?.recipe_id
                       }`}
                     >
