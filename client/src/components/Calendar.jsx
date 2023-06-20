@@ -124,11 +124,11 @@ export default function Calendar() {
     <div>
       <div className="m-3 text-end">
         <button onClick={seePreviousWeek} className="btn">
-          <i class="bi bi-arrow-left-square-fill"></i>
+          <i className="bi bi-arrow-left-square-fill"></i>
         </button>
 
         <button onClick={seeNextWeek} className="btn">
-          <i class="bi bi-arrow-right-square-fill"></i>
+          <i className="bi bi-arrow-right-square-fill"></i>
         </button>
       </div>
       <div className="table-responsive">

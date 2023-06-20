@@ -65,8 +65,6 @@ function Welcome() {
                         <Register onFormSwitch={toggleForm} />
                       )}
                     </Modal.Body>
-                    {/* <Modal.Footer>This is the footer</Modal.Footer> */}
-                    {/* <button onClick={hideModal}>Cancel</button> */}
                   </Modal>
                 </div>
               </div>
