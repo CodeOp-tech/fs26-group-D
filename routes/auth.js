@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
-const { User } = require("../models");
-const { Calendar } = require("../models");
+const { User, Calendar } = require("../models");
 
 require("dotenv").config();
 const bcrypt = require("bcrypt");
