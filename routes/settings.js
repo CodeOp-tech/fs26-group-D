@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
-const db = require("../model/helper");
 
 router.get("/restrictions", userShouldBeLoggedIn, function(req, res) {
   db(`SELECT * FROM settings WHERE user_id=${req.user_id};`)

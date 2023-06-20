@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "migrate": "node ./model/database.js"
+    "migrate": "npx sequelize-cli db:migrate"
   },
   "husky": {
     "hooks": {
