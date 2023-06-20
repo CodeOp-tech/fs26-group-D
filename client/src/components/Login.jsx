@@ -39,7 +39,7 @@ function Login(props) {
 
   return (
     <>
-      <section className="bg-altLight hero-banner vh-nav">
+      <section className="bg-altLight">
         <div className="container-lg ">
           <div className="row justify-content-center">
             <div className="col-10 m-4">
