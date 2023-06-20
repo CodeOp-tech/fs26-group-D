@@ -19,6 +19,7 @@
 .hide {
   visibility: hidden;
 }
+
 /* --------------------- */
 /* LARGE SECONDARY COLOUR BUTTON */
 .pushable-s-lg {
@@ -484,4 +485,17 @@
 
 .vh {
   height: 100vh;
+}
+
+div.parent {
+  position: relative;
+}
+
+div.absolute {
+  position: absolute;
+  bottom: 10px;
+}
+
+.width100 {
+  width: 100%;
 }

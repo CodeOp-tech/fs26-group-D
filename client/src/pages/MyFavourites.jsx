@@ -47,27 +47,41 @@ function MyFavourites() {
   };
 
   return (
-    <div>
-      My Favourites page
+    <>
       <div>
-        <ul>
+        <h1 className="py-3">Favourites</h1>
+        <div className="row">
           {fav.map((meal, index) => (
-            <li key={index}>
-              {meal.recipe_title}
-              <Link to={`/private/dashboard/recipe/${meal.recipe_id}`}>
-                <img src={meal.recipe_image} alt={meal.recipe_title} />
-              </Link>
-              <button
-                type="button"
-                onClick={() => toggleFavourite(meal.id, !meal.favourite)}
-              >
-                ⭐
-              </button>
-            </li>
+            <div key={index} className="col-4">
+              <div className="text-center border-bottom border-end border-primary border-3 shadow bg-blueLight my-3">
+                <div className="">
+                  <span className="float-end">
+                    <button
+                      type="button"
+                      className="btn"
+                      onClick={() => toggleFavourite(meal.id, !meal.favourite)}
+                    >
+                      ❌
+                    </button>
+                  </span>
+
+                  <Link to={`/private/dashboard/recipe/${meal.recipe_id}`}>
+                    <img
+                      src={meal.recipe_image}
+                      alt={meal.recipe_title}
+                      className="img-fluid b"
+                    />
+                  </Link>
+                </div>
+                <div className="cardbody p-2">
+                  <h5 className="card-title">{meal.recipe_title}</h5>
+                </div>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
