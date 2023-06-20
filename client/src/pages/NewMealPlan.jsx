@@ -130,7 +130,10 @@ function NewMealPlan() {
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col  shadow border-bottom border-secondary border-5 p-0">
-                  <Accordion defaultActiveKey="0" flush>
+                  <Accordion
+                    // defaultActiveKey="0"
+                    flush
+                  >
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>Food Search</Accordion.Header>
                       <Accordion.Body>
@@ -299,30 +302,15 @@ function NewMealPlan() {
                   </Accordion>
                 </div>
 
-                <div className="col">
-                  <div>
-                    <p>
-                      {}
-                      {/* MAKE A SUMMARY OF QUERY */}
-                    </p>
-
-                    <textarea
-                      className="form-control"
-                      name=""
-                      id=""
-                      cols="30"
-                      rows="10"
-                    ></textarea>
-                  </div>
-
+                <div className="col text-end ">
                   <button
                     type="submit"
                     onClick={() => setQueryToggle(false)}
-                    className="btn pushable-b-sm"
+                    className="btn pushable-b"
                   >
-                    <span className="shadow-btn-b-sm"></span>
-                    <span className="edge-b-sm"></span>
-                    <span className="front-b-sm">GET RECIPES </span>
+                    <span className="shadow-btn-b"></span>
+                    <span className="edge-b"></span>
+                    <span className="front-b">GET RECIPES </span>
                   </button>
                 </div>
               </div>
@@ -340,7 +328,7 @@ function NewMealPlan() {
                 className="my-2 bg-aquaLight shadow border-bottom border-secondary border-5 container"
               >
                 <div className="row">
-                  <h2 className="h5 pt-2">{recipe.title}</h2>
+                  <h2 className="h4 pt-2">{recipe.title}</h2>
                 </div>
                 <div className="row">
                   <Link to={`/private/dashboard/recipe/${recipe.id}`}>
@@ -354,7 +342,7 @@ function NewMealPlan() {
 
                 <div className="row mb-2 px-3">
                   <label
-                    className="form-label font-monospace fs-4 mb-2"
+                    className="form-label font-monospace fs-4 mb-1"
                     htmlFor="date"
                   >
                     Date:
@@ -370,7 +358,7 @@ function NewMealPlan() {
                 </div>
                 <div className="row mb-2 px-3">
                   <label
-                    className="form-label font-monospace fs-4 mb-2"
+                    className="form-label font-monospace fs-4 mb-1"
                     htmlFor="mealType"
                   >
                     Meal Type:
@@ -394,7 +382,7 @@ function NewMealPlan() {
                     Add to Calendar
                   </button> */}
                   <button
-                    className="btn pushable-b-sm mt-2 mb-3"
+                    className="btn pushable-b-sm mt-3 mb-3"
                     onClick={() => addMealToCalendar(recipe)}
                   >
                     <span className="shadow-btn-b-sm"></span>
