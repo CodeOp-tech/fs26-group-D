@@ -14,11 +14,16 @@ import AuthContext from "./components/context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import NavBar from "./components/NavBar";
 import Recipe from "./pages/Recipe";
+
+import IngredientContext from "./components/context/IngredientContext";
+
 import Profile from "./pages/Profile";
 import Calendar from "./components/Calendar";
 
+
 function App() {
   const [user, setUser] = useState(null);
+  const [ingredientData, setIngredientData] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -42,16 +47,22 @@ function App() {
     logout
   };
 
+  const shoppingCartObject = {
+    ingredientData,
+    setIngredientData
+  };
+
   return (
     <AuthContext.Provider value={authObject}>
-      <div>
+      <IngredientContext.Provider value={shoppingCartObject}>
         <div>
-          <NavBar />
-        </div>
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <div>
+            <NavBar />
+          </div>
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
           <Route
             path="/private/dashboard"

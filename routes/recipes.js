@@ -1,7 +1,7 @@
 const express = require("express");
 const spoonacular = require("../services/spoonacular");
 const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
-const db = require("../model/helper");
+const { Calendar } = require("../models");
 
 const router = express.Router();
 
@@ -86,9 +86,15 @@ router.get("/:id", async (req, res) => {
 router.post("/calendar", userShouldBeLoggedIn, async function(req, res) {
   const { date, meal_type, recipe_id, recipe_title, recipe_image } = req.body;
   try {
-    const results = await db(
-      `INSERT INTO calendar (user_id, date, meal_type, recipe_id, recipe_title, recipe_image, favourite) VALUES("${req.user_id}", "${date}","${meal_type}","${recipe_id}","${recipe_title}", "${recipe_image}", 0);`
-    );
+    const newCalendarEntry = await Calendar.create({
+      user_id: req.user_id,
+      date,
+      meal_type,
+      recipe_id,
+      recipe_title,
+      recipe_image,
+      favourite: false // Set the default value to false
+    });
     res.send({ message: `"${recipe_title}" was added to your calendar` });
   } catch (err) {
     console.log(err);
@@ -96,12 +102,13 @@ router.post("/calendar", userShouldBeLoggedIn, async function(req, res) {
   }
 });
 
-router.put("/:meal_id", userShouldBeLoggedIn, async (req, res) => {
-  const { meal_id } = req.params;
+router.put("/:recipe_id", userShouldBeLoggedIn, async (req, res) => {
+  const { recipe_id } = req.params;
   const { favourite } = req.body;
   try {
-    await db(
-      `UPDATE calendar SET favourite=${favourite} WHERE id = ${meal_id}; `
+    const updatedCalendarEntry = await Calendar.update(
+      { favourite },
+      { where: { id: recipe_id } }
     );
     res.send({ message: `Meal added to/removed from your favourites` });
   } catch (err) {

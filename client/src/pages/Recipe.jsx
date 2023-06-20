@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import IngredientContext from "../components/context/IngredientContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import "../App.css";
 
 function Recipe() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const { ingredientData, setIngredientData } = useContext(IngredientContext);
 
   useEffect(() => {
     handleRecipeInformation();
@@ -24,6 +28,12 @@ function Recipe() {
     } catch (error) {
       console.error("Error retrieving recipe information:", error);
     }
+  };
+
+  const handleAddToShoppingList = ingredient => {
+    setIngredientData(state => [...state, ingredient]);
+    console.log(ingredientData);
+    alert(`${ingredient.name} has been added to the shopping list`);
   };
 
   return (
