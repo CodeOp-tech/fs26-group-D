@@ -349,6 +349,7 @@ function NewMealPlan() {
                       <Accordion.Header>Nutrition</Accordion.Header>
                       <Accordion.Body>
                         <label className="font-monospace fs-5">Calories:</label>
+
                         <div className="row">
                           <div className="col-6">
                             <input
@@ -544,6 +545,146 @@ function NewMealPlan() {
                             />
                           </div>
                         </div>
+
+                        <br />
+                        <input
+                          type="text"
+                          name="minCalories"
+                          placeholder="min"
+                          value={minCalories}
+                          onChange={e => setMinCalories(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxCalories"
+                          placeholder="max"
+                          value={maxCalories}
+                          onChange={e => setMaxCalories(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Carbs:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minCarbs"
+                          placeholder="min"
+                          value={minCarbs}
+                          onChange={e => setMinCarbs(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxCarbs"
+                          placeholder="max"
+                          value={maxCarbs}
+                          onChange={e => setMaxCarbs(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Protein:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minProtein"
+                          placeholder="min"
+                          value={minProtein}
+                          onChange={e => setMinProtein(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxProtein"
+                          placeholder="max"
+                          value={maxProtein}
+                          onChange={e => setMaxProtein(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Fat:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minFat"
+                          placeholder="min"
+                          value={minFat}
+                          onChange={e => setMinFat(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxFat"
+                          placeholder="max"
+                          value={maxFat}
+                          onChange={e => setMaxFat(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">
+                          Cholesterol:
+                        </label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minCholesterol"
+                          placeholder="min"
+                          value={minCholesterol}
+                          onChange={e => setMinCholesterol(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxCholesterol"
+                          placeholder="max"
+                          value={maxCholesterol}
+                          onChange={e => setMaxCholesterol(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">
+                          Saturated Fat:
+                        </label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minSaturatedFat"
+                          placeholder="min"
+                          value={minSaturatedFat}
+                          onChange={e => setMinSaturatedFat(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxSaturatedFat"
+                          placeholder="max"
+                          value={maxSaturatedFat}
+                          onChange={e => setMaxSaturatedFat(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Fiber:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minFiber"
+                          placeholder="min"
+                          value={minFiber}
+                          onChange={e => setMinFiber(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxFiber"
+                          placeholder="max"
+                          value={maxFiber}
+                          onChange={e => setMaxFiber(e.target.value)}
+                        />
+                        <br />
+                        <label className="font-monospace fs-5">Sugar:</label>
+                        <br />
+                        <input
+                          type="text"
+                          name="minSugar"
+                          placeholder="min"
+                          value={minSugar}
+                          onChange={e => setMinSugar(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          name="maxSugar"
+                          placeholder="max"
+                          value={maxSugar}
+                          onChange={e => setMaxSugar(e.target.value)}
+                        />
+
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>

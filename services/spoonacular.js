@@ -25,6 +25,7 @@ async function searchRecipes(
   maxSaturatedFat,
   minFiber,
   maxFiber,
+  minSugar,
   maxSugar
 ) {
   try {
@@ -56,6 +57,7 @@ async function searchRecipes(
           maxSaturatedFat: maxSaturatedFat,
           minFiber: minFiber,
           maxFiber: maxFiber,
+          minSugar: minSugar,
           maxSugar: maxSugar
         }
       }
