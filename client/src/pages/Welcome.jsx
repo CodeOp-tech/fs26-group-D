@@ -53,6 +53,7 @@ function Welcome({
                     size="lg"
                     onHide={hideModal}
                     dialogClassName={""}
+                    centered
                   >
                     <Modal.Body>
                       {currentForm === "login" ? (

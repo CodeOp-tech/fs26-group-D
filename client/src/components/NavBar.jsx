@@ -124,7 +124,13 @@ function NavBar({
           </nav>
         )}
       </div>
-      <Modal show={isOpen} size="lg" onHide={hideModal} dialogClassName={""}>
+      <Modal
+        show={isOpen}
+        size="lg"
+        onHide={hideModal}
+        dialogClassName={""}
+        centered
+      >
         <Modal.Body>
           {currentForm === "login" ? (
             <Login onFormSwitch={toggleForm} />

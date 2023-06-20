@@ -164,10 +164,10 @@ function Register(props) {
                                 name="firstname"
                                 required
                                 onChange={handleInputChange}
+                                className="form-control"
                               />
                             </div>
                             <div className="col-6">
-                              {" "}
                               <label
                                 htmlFor="lastname"
                                 className="font-monospace"
@@ -181,11 +181,12 @@ function Register(props) {
                                 name="lastname"
                                 required
                                 onChange={handleInputChange}
+                                className="form-control"
                               />
                             </div>
                           </div>
 
-                          <div className="row">
+                          <div className="">
                             <label htmlFor="email" className="font-monospace">
                               Email address
                               <span className={validEmail ? "valid" : "hide"}>
@@ -212,6 +213,7 @@ function Register(props) {
                               aria-describedby="uidnote"
                               onFocus={() => setEmailFocus(true)}
                               onBlur={() => setEmailFocus(false)}
+                              className="form-control"
                             />
                             <p
                               id="uidnote"
@@ -249,6 +251,7 @@ function Register(props) {
                             aria-describedby="pwdnote"
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
+                            className="form-control"
                           />
                           <p
                             id="pwdnote"
@@ -290,43 +293,52 @@ function Register(props) {
                               <FontAwesomeIcon icon={faTimes} />
                             </span>
                           </label>
-                          <input
-                            type="password"
-                            placeholder="***********"
-                            id="confirm_pwd"
-                            required
-                            onChange={e => setMatchPwd(e.target.value)}
-                            aria-invalid={validMatch ? "false" : "true"}
-                            aria-describedby="confirmnote"
-                            onFocus={() => setMatchFocus(true)}
-                            onBlur={() => setMatchFocus(false)}
-                          />
-                          <p
-                            id="confirm_pwd"
-                            className={
-                              !validMatch ? "instructions" : "offscreen"
-                            }
-                          >
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            Must match the first password input field.
-                          </p>
-                          <button
-                            className="btn btn-primary"
-                            type="submit"
-                            disabled={
-                              !validEmail || !validPwd || !validMatch
-                                ? true
-                                : false
-                            }
-                          >
-                            Sign up
-                          </button>
+                          <div className="mb-3">
+                            <input
+                              type="password"
+                              placeholder="***********"
+                              id="confirm_pwd"
+                              required
+                              onChange={e => setMatchPwd(e.target.value)}
+                              aria-invalid={validMatch ? "false" : "true"}
+                              aria-describedby="confirmnote"
+                              onFocus={() => setMatchFocus(true)}
+                              onBlur={() => setMatchFocus(false)}
+                              className="form-control"
+                            />
+                            <p
+                              id="confirm_pwd"
+                              className={
+                                !validMatch ? "instructions" : "offscreen"
+                              }
+                            >
+                              <FontAwesomeIcon icon={faInfoCircle} />
+                              Must match the first password input field.
+                            </p>
+                          </div>
+
+                          <div>
+                            <button
+                              type="submit"
+                              className="btn mb-3 pushable-b"
+                              disabled={
+                                !validEmail || !validPwd || !validMatch
+                                  ? true
+                                  : false
+                              }
+                            >
+                              <span className="shadow-btn-b"></span>
+                              <span className="edge-b"></span>
+                              <span className="front-b">SIGN UP </span>
+                            </button>
+                          </div>
                         </form>
                         <button
-                          className="link-btn"
+                          className=" btn font-monospace"
                           onClick={() => props.onFormSwitch("login")}
                         >
-                          Already have an account? Login here.
+                          Already have an account? Login{" "}
+                          <span className="text-primary">here.</span>
                         </button>
                       </div>
                     </div>
