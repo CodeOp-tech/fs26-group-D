@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
-const { User } = require("../models");
-const { Calendar } = require("../models");
+const { User, Calendar } = require("../models");
 
 require("dotenv").config();
 const bcrypt = require("bcrypt");
@@ -75,6 +74,17 @@ router.get("/calendar", userShouldBeLoggedIn, async (req, res) => {
   try {
     const calendarEvents = await Calendar.findAll({
       where: { user_id: req.user_id }
+    });
+    res.send(calendarEvents);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
+router.get("/favourites", userShouldBeLoggedIn, async (req, res) => {
+  try {
+    const calendarEvents = await Calendar.findAll({
+      where: { user_id: req.user_id, favourite: true }
     });
     res.send(calendarEvents);
   } catch (err) {

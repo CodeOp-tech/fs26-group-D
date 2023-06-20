@@ -11,14 +11,14 @@ function MyFavourites() {
 
   async function getMealPlan() {
     try {
-      const response = await fetch(`/api/auth/calendar`, {
+      const response = await fetch(`/api/auth/favourites`, {
         headers: {
           authorization: "Bearer " + localStorage.getItem("token")
         }
       });
       const data = await response.json();
       if (!response.ok) throw new Error(response.statusText);
-      const results = data.filter(meal => meal.favourite === 1);
+      const results = data; //.filter((meal) => meal.favourite);
       setFav(results);
     } catch (err) {
       setError(err.message);
