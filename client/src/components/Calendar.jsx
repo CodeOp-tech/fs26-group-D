@@ -156,7 +156,7 @@ export default function Calendar() {
                 </th>
                 {days.map((day, dayIndex) => (
                   <td key={dayIndex} className="border border-primary">
-                    <div className="bg-secondary h6 p-0 text-center border-bottom border-primary border-3">
+                    <div className="bg-secondary h6 p-0 text-center border-bottom border-primary border-3 rounded">
                       {day.meal.find(meal => meal.type === mealType)?.name}
                     </div>
 
@@ -170,7 +170,7 @@ export default function Calendar() {
                         alt={
                           day.meal.find(meal => meal.type === mealType)?.name
                         }
-                        className="img-fluid border-bottom border-primary border-3"
+                        className="img-fluid border-bottom border-primary border-3 rounded"
                       />
                     </Link>
 

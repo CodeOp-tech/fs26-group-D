@@ -499,3 +499,9 @@ div.absolute {
 .width100 {
   width: 100%;
 }
+
+div.absolute-close {
+  position: absolute;
+  top: 1.25em;
+  right: 1em;
+}
