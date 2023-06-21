@@ -104,7 +104,7 @@ function ShoppingList() {
       )}
       {ingredientData.length > 0 && (
         <div>
-          <button onClick={sendShoppingListEmail}>Email Shopping List</button>
+          {/* <button onClick={sendShoppingListEmail}>Email Shopping List</button> */}
           <button onClick={handleDeleteShoppingList}>
             Delete Shopping List
           </button>

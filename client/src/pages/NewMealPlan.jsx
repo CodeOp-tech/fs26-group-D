@@ -683,10 +683,6 @@ function NewMealPlan() {
                     <span className="edge-b-sm"></span>
                     <span className="front-b-sm">Add to Calendar </span>
                   </button>
-
-                  <button className="btn" type="button">
-                    ⭐
-                  </button>
                 </div>
               </div>
             ))}
