@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import IngredientContext from "../components/context/IngredientContext";
-//import transporter from"../../../mailer";
+// import emailTransporter from "../mailer";
 import "../App.css";
 
 function ShoppingList() {
@@ -29,7 +29,17 @@ function ShoppingList() {
   }
 
   function isSmallUnit(unit) {
-    const smallUnits = ["tbsp", "tablespoon", "dash", "pinch"];
+    const smallUnits = [
+      "tbsp",
+      "tablespoon",
+      "tablespoons",
+      "dash",
+      "pinch",
+      "teaspoon",
+      "teaspoons",
+      "handful",
+      "tsp"
+    ];
     return smallUnits.includes(unit.toLowerCase());
   }
 
@@ -50,8 +60,8 @@ function ShoppingList() {
   //       from: "busybytes123@gmail.com",
   //       to: userEmail,
   //       subject: "Shopping List",
-  //       text: "Hello World",
-  //       html: "<em>hello world</em>"
+  //
+  //
   //       // text: ingredientData
   //       //   .map(
   //       //     (ingredient) =>
@@ -68,46 +78,79 @@ function ShoppingList() {
   //   }
   // };
 
+  const ingredientsByAisle = {};
+
+  ingredientData.forEach(ingredient => {
+    const { aisle } = ingredient;
+    if (!ingredientsByAisle[aisle]) {
+      ingredientsByAisle[aisle] = [];
+    }
+    ingredientsByAisle[aisle].push(ingredient);
+  });
+
   return (
     <div>
       {ingredientData.length === 0 ? (
         <div>
           <p>The shopping list is empty</p>
-          {/* <button onClick={sendShoppingListEmail}>Email Shopping List</button> */}
         </div>
       ) : (
         <table>
           <thead>
             <tr>
+              <th>Aisle</th>
               <th>Ingredient</th>
               <th>Amount</th>
             </tr>
           </thead>
+
           <tbody>
-            {ingredientData.map(ingredient => (
-              <tr
-                key={ingredient.id}
-                className={isIngredientBought(ingredient.id) ? "bought" : ""}
-                onClick={() => toggleBoughtStatus(ingredient.id)}
-                style={{ cursor: "pointer" }}
-              >
-                <td>{capitalizeFirstLetter(ingredient.name)}</td>
-                <td>
-                  {isSmallUnit(ingredient.unit)
-                    ? ""
-                    : `${ingredient.amount} ${ingredient.unit}`}
-                </td>
-              </tr>
-            ))}
+            {Object.entries(ingredientsByAisle).map(([aisle, ingredients]) => {
+              let previousAisle = null; // Track the previous aisle
+              return (
+                <React.Fragment key={aisle}>
+                  {ingredients.map((ingredient, index) => {
+                    const shouldRenderAisle = previousAisle !== aisle;
+                    previousAisle = aisle; // Update the previous aisle
+
+                    return (
+                      <tr
+                        key={ingredient.id}
+                        className={
+                          isIngredientBought(ingredient.id) ? "bought" : ""
+                        }
+                        onClick={() => toggleBoughtStatus(ingredient.id)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {shouldRenderAisle && index === 0 && (
+                          <td
+                            rowSpan={ingredients.length}
+                            className="aisle-row"
+                          >
+                            {aisle}
+                          </td>
+                        )}
+                        <td>{capitalizeFirstLetter(ingredient.name)}</td>
+                        <td>
+                          {isSmallUnit(ingredient.unit)
+                            ? ""
+                            : `${ingredient.amount} ${ingredient.unit}`}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       )}
       {ingredientData.length > 0 && (
         <div>
-          {/* <button onClick={sendShoppingListEmail}>Email Shopping List</button> */}
           <button onClick={handleDeleteShoppingList}>
             Delete Shopping List
           </button>
+          {/* <button onClick={sendShoppingListEmail}>Email Shopping List</button> */}
         </div>
       )}
     </div>

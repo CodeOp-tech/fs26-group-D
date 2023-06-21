@@ -88,7 +88,7 @@ function NewMealPlan() {
         params
       });
 
-      console.log(response.data.results);
+      console.log(response.data.results.nutrition);
       setRecipes(response.data.results);
     } catch (error) {
       console.error("Error searching recipes:", error);
@@ -223,7 +223,7 @@ function NewMealPlan() {
                         <input
                           type="text"
                           name="query"
-                          placeholder="e.g. pizza, chicken"
+                          placeholder="e.g. pizza, chicken..."
                           value={query}
                           onChange={e => setQuery(e.target.value)}
                           className="form-control mt-0 mb-2"
@@ -233,7 +233,7 @@ function NewMealPlan() {
                         <input
                           type="text"
                           name="type"
-                          placeholder="e.g. breakfast, drink, dinner, snack"
+                          placeholder="e.g. breakfast, drink, dinner, snack..."
                           value={type}
                           onChange={e => setType(e.target.value)}
                           className="form-control mb-2"
@@ -243,7 +243,7 @@ function NewMealPlan() {
                         <input
                           type="text"
                           name="cuisine"
-                          placeholder="e.g. Chinese, Korean, Latinamerican"
+                          placeholder="e.g. Chinese, Korean, Latinamerican..."
                           value={cuisine}
                           onChange={e => setCuisine(e.target.value)}
                           className="form-control mb-2"
@@ -385,7 +385,7 @@ function NewMealPlan() {
                         <input
                           type="text"
                           value={equipment}
-                          placeholder="e.g. oven, airfryer"
+                          placeholder="e.g. oven, airfryer, slow cooker..."
                           onChange={e => setEquipment(e.target.value)}
                           className="form-control"
                         />
@@ -417,6 +417,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>kcal</p>
                         </div>
 
                         <label className="font-monospace fs-5">Carbs:</label>
@@ -442,6 +443,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>g</p>
                         </div>
 
                         <label className="font-monospace fs-5">Protein:</label>
@@ -466,6 +468,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>g</p>
                         </div>
 
                         <label className="font-monospace fs-5">Fat:</label>
@@ -490,6 +493,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>g</p>
                         </div>
 
                         <label className="font-monospace fs-5">
@@ -516,6 +520,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>mg</p>
                         </div>
 
                         <label className="font-monospace fs-5">
@@ -542,6 +547,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>g</p>
                         </div>
 
                         <label className="font-monospace fs-5">Fiber:</label>
@@ -566,6 +572,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>g</p>
                         </div>
 
                         <label className="font-monospace fs-5">Sugar:</label>
@@ -590,6 +597,7 @@ function NewMealPlan() {
                               className="form-control"
                             />
                           </div>
+                          <p>g</p>
                         </div>
                       </Accordion.Body>
                     </Accordion.Item>

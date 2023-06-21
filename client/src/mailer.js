@@ -9,4 +9,4 @@ let emailTransporter = nodemailer.createTransport({
   }
 });
 
-module.exports = transporter;
+module.exports = emailTransporter;
