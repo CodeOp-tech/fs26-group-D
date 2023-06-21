@@ -51,7 +51,7 @@ export default function Profile() {
     <>
       <div className="container">
         <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
-          <div className="col-4 ms-3 p-3 bg-dark text-white">
+          <div className="col-md-4 ms-3 p-3 bg-dark text-white">
             <div className="ps-4 pb-2 justify-content-center">
               {selectedImage || user.profilePicture ? (
                 <img
@@ -136,7 +136,7 @@ export default function Profile() {
               </Accordion>
             </div>
           </div>
-          <div className="col">
+          <div className="col-md-7">
             <div>{showFavourites && <MyFavourites />}</div>
             <div>
               {showSettings && (

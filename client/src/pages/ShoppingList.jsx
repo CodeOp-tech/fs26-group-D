@@ -25,7 +25,7 @@ function ShoppingList() {
 
   return (
     <>
-      <div className="container col-8 mt-4 border-bottom border-end border-primary border-3 shadow text-center">
+      <div className="container col-md-8 mt-4 border-bottom border-end border-primary border-3 shadow text-center">
         <h1>Shopping List</h1>
         <div className="mx-auto  p-3 mb-4 ">
           {ingredientData.length === 0 ? (

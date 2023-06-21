@@ -424,7 +424,7 @@ function NewMealPlan() {
                       <label className="font-monospace fs-5">Calories:</label>
 
                       <div className="row">
-                        <div className="col-6">
+                        <div className="col-6 ">
                           <input
                             type="text"
                             name="minCalories"
@@ -627,7 +627,7 @@ function NewMealPlan() {
           </div>
 
           <div className={queryToggle ? "row hide " : "row meal-planner-div"}>
-            <div className="col-5 overflow-y-auto">
+            <div className="col-md-5 overflow-y-auto">
               {recipes.map(recipe => (
                 <div
                   key={recipe.id}
@@ -697,7 +697,7 @@ function NewMealPlan() {
               ))}
             </div>
 
-            <div className="col-7 vh">
+            <div className="col-md-7 vh">
               <Calendar />
             </div>
           </div>
