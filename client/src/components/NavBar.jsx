@@ -43,22 +43,7 @@ function NavBar({
                   <span className="display-5 fs-5 align-middle">BusyBytes</span>
                 </a>
 
-                <button
-                  className="navbar-toggler "
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#main-nav"
-                  aria-controls="main-nav"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon"> </span>
-                </button>
-
-                <div
-                  className="collapse navbar-collapse justify-content-end align-center text-white"
-                  id="main-nav"
-                >
+                <div className=" text-white" id="main-nav">
                   <ul className="navbar-nav">
                     <li className="nav-item">
                       <button
@@ -85,28 +70,13 @@ function NavBar({
                 <span className="display-5 fs-5 align-middle">BusyBytes</span>
               </a>
 
-              <button
-                className="navbar-toggler "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#main-nav"
-                aria-controls="main-nav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon"> </span>
-              </button>
-
-              <div
-                className="collapse navbar-collapse justify-content-end align-center"
-                id="main-nav"
-              >
+              <div className="justify-content-end align-center" id="main-nav">
                 <ul className="navbar-nav ">
-                  <li>
+                  {/* <li>
                     <Link className="nav-link" to="/private/dashboard">
                       Dashboard
                     </Link>
-                  </li>
+                  </li> */}
 
                   <li className="nav-item">
                     <button
