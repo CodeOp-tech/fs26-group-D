@@ -128,10 +128,12 @@ export default function Profile() {
 
   return (
     <>
-      <div className="container">
-        <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
-          <div className="col-5  p-3">
-            <div className="ps-4 justify-content-center">
+
+
+      <div className="container my-3">
+        <div className="row shadow ">
+            <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 ">
+              <div className="ps-4 py-2">
               {!showUpdateProfilePicture ? (
                 <>
                   <button onClick={toggleUpdateProfilePictureView}>🖊</button>
@@ -143,6 +145,7 @@ export default function Profile() {
                     alt="Default Profile"
                   />
                 </>
+
               ) : (
                 <>
                   <form onSubmit={savePicture}>
@@ -231,7 +234,10 @@ export default function Profile() {
                 </button>
               </div>
             </div>
-            <div className="container mt-2 pt-4">
+
+
+            <div className="container">
+
               <Accordion flush>
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Update your details</Accordion.Header>
@@ -250,15 +256,17 @@ export default function Profile() {
               </Accordion>
             </div>
           </div>
-          <div className="col-md-7">
-            <div>{showFavourites && <MyFavourites />}</div>
-            <div>
-              {showSettings && (
-                <Settings
-                  setProfileSummary={setProfileSummary}
-                  profileSummary={profileSummary}
-                />
-              )}
+          <div className="col m-0 p-0">
+            <div className="">
+              <div>{showFavourites && <MyFavourites />}</div>
+              <div>
+                {showSettings && (
+                  <Settings
+                    setProfileSummary={setProfileSummary}
+                    profileSummary={profileSummary}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>
