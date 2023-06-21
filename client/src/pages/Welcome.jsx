@@ -49,7 +49,7 @@ function Welcome({
         dialogClassName={""}
         centered
       >
-        <Modal.Body>
+        <Modal.Body className="border-bottom  border-3 border-secondary shadow rounded">
           {currentForm === "login" ? (
             <Login
               onFormSwitch={toggleForm}
