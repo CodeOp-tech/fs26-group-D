@@ -121,18 +121,28 @@ export default function Calendar() {
   };
 
   return (
-    <div>
-      <div className="m-3 text-end">
-        <button onClick={seePreviousWeek} className="btn">
-          <i className="bi bi-arrow-left-square-fill"></i>
-        </button>
+    <div className="border-bottom border-end border-primary border-3 shadow container bg-aquaLight mt-2">
+      <h1 className="mt-1 pt-2 mb-0">Calendar</h1>
+      <div className="row">
+        <div className="col-6">
+          {" "}
+          [PLACE HOLDER FOR SETTING HOW MANY DAYS TO VIEW]
+        </div>
+        <div className="col-6">
+          <div className="mb-3 mx-3 text-end">
+            <button onClick={seePreviousWeek} className="btn">
+              <i className="bi bi-arrow-left-square-fill"></i>
+            </button>
 
-        <button onClick={seeNextWeek} className="btn">
-          <i className="bi bi-arrow-right-square-fill"></i>
-        </button>
+            <button onClick={seeNextWeek} className="btn">
+              <i className="bi bi-arrow-right-square-fill"></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="table-responsive">
-        <table className="calendar table table-hover table-striped shadow border-bottom border-primary border-3">
+
+      <div className="table-responsive ">
+        <table className="calendar table table-hover table-striped shadow border-bottom border-end border-primary border-3 mb-3 pb-0">
           <thead className="table-primary border border-primary">
             <tr>
               <th></th>
@@ -155,61 +165,78 @@ export default function Calendar() {
                   {mealType}
                 </th>
                 {days.map((day, dayIndex) => (
-                  <td key={dayIndex} className="border border-primary">
-                    <div className="bg-secondary h6 p-0 text-center border-bottom border-primary border-3 rounded">
-                      {day.meal.find(meal => meal.type === mealType)?.name}
-                    </div>
-
-                    <Link
-                      to={`/private/dashboard/recipe/${
-                        day.meal.find(meal => meal.type === mealType)?.recipe_id
-                      }`}
-                    >
-                      <img
-                        src={day.meal.find(meal => meal.type === mealType)?.img}
-                        alt={
-                          day.meal.find(meal => meal.type === mealType)?.name
-                        }
-                        className="img-fluid border-bottom border-primary border-3 rounded"
-                      />
-                    </Link>
-
-                    {day.meal.find(meal => meal.type === mealType) && (
-                      <div className="row my-2 text-center">
-                        {/* ROWS OVERSPILLING TABLE */}
-                        {/* <div className="row my-2 border border-dark text-center"> */}
-                        <div className="col-6">
-                          <button
-                            className="btn"
-                            type="button"
-                            onClick={() =>
-                              toggleFavourite(
-                                day.meal.find(meal => meal.type === mealType)
-                                  ?.id,
-                                !day.meal.find(meal => meal.type === mealType)
-                                  ?.favourite
-                              )
+                  <td key={dayIndex} className="border border-primary ">
+                    <div className="table-size bg-aquaLight shadow-sm rounded">
+                      <div className="container pt-2">
+                        <Link
+                          className="text-decoration-none"
+                          to={`/private/dashboard/recipe/${
+                            day.meal.find(meal => meal.type === mealType)
+                              ?.recipe_id
+                          }`}
+                        >
+                          <div className="bg-secondary h6 text-black text-center border-bottom border-primary border-3 rounded">
+                            {
+                              day.meal.find(meal => meal.type === mealType)
+                                ?.name
                             }
-                          >
-                            ⭐
-                          </button>
-                        </div>
-                        <div className="col">
-                          <button
-                            className="btn"
-                            type="button"
-                            onClick={() =>
-                              handleDelete(
-                                day.meal.find(meal => meal.type === mealType)
-                                  ?.id
-                              )
+                          </div>
+
+                          <img
+                            src={
+                              day.meal.find(meal => meal.type === mealType)?.img
                             }
-                          >
-                            ❌
-                          </button>
+                            alt={
+                              day.meal.find(meal => meal.type === mealType)
+                                ?.name
+                            }
+                            className="img-fluid border-bottom border-primary border-3 rounded "
+                          />
+                        </Link>
+
+                        <div className="text-center m-0 p-0">
+                          {day.meal.find(meal => meal.type === mealType) && (
+                            <div>
+                              <div className=" row text-center">
+                                <div className="col-md-6">
+                                  <button
+                                    className="btn"
+                                    type="button"
+                                    onClick={() =>
+                                      toggleFavourite(
+                                        day.meal.find(
+                                          meal => meal.type === mealType
+                                        )?.id,
+                                        !day.meal.find(
+                                          meal => meal.type === mealType
+                                        )?.favourite
+                                      )
+                                    }
+                                  >
+                                    <i className="bi bi-star-fill"></i>
+                                  </button>
+                                </div>
+                                <div className="col-md-6">
+                                  <button
+                                    className="btn"
+                                    type="button"
+                                    onClick={() =>
+                                      handleDelete(
+                                        day.meal.find(
+                                          meal => meal.type === mealType
+                                        )?.id
+                                      )
+                                    }
+                                  >
+                                    <i className="bi bi-x-lg"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
-                    )}
+                    </div>
                   </td>
                 ))}
               </tr>
