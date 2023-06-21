@@ -8,12 +8,16 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
   const [showFavourites, setShowFavourites] = useState(false);
-  const [showSettings, setShowSettings] = useState(true);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [profileSummary, setProfileSummary] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
+  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [showUpdateEmail, setShowUpdateEmail] = useState(false);
+  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(false);
 
   useEffect(() => {
     getUserInfo();
+    return () => URL.revokeObjectURL(imageUrl);
   }, []);
 
   async function getUserInfo() {
@@ -26,58 +30,167 @@ export default function Profile() {
       if (response.ok) {
         const data = await response.json();
         setUser(data);
-        // console.log(data)
+        // Set the image URL if available
+        if (data.profile_pic) {
+          const blob = new Blob([new Uint8Array(data.profile_pic.data)]);
+          const url = URL.createObjectURL(blob);
+          setImageUrl(url);
+        }
       } else {
         throw new Error(response.statusText);
       }
     } catch (err) {
       setError(err.message);
     }
-    if (error) {
-      return <div>Error: {error}</div>;
-    }
+  }
 
-    if (!user) {
-      return <div>Loading...</div>;
+  function toggleUpdateEmailView() {
+    setShowUpdateEmail(prevShowUpdateEmail => !prevShowUpdateEmail);
+  }
+
+  async function updateEmail(event) {
+    event.preventDefault();
+    try {
+      const response = await fetch("/api/auth/user/email", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ email: newEmail })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        getUserInfo();
+        setNewEmail(""); // Clear the input field
+        toggleUpdateEmailView();
+      } else {
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  const handleImageChange = event => {
-    const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
+  function toggleUpdateProfilePictureView() {
+    setShowUpdateProfilePicture(
+      prevShowUpdateProfilePicture => !prevShowUpdateProfilePicture
+    );
+  }
+
+  function handleChange(e) {
+    console.log(e.target.files);
+    setImage(e.target.files[0]);
+  }
+
+  const savePicture = async event => {
+    event.preventDefault();
+    try {
+      const imageFile = image;
+
+      // Read the image file as binary data
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const imageData = reader.result; // Binary data of the image
+
+        try {
+          const response = await fetch(`/api/auth/user/pic`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: "Bearer " + localStorage.getItem("token")
+            },
+            body: JSON.stringify({ image: imageData })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            getUserInfo();
+            toggleUpdateProfilePictureView();
+          } else {
+            console.log("Error:", response.status);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      reader.readAsDataURL(imageFile);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  console.log(image);
+  console.log(imageUrl);
 
   return (
     <>
       <div className="container">
         <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
-          <div className="col-md-4 ms-3 p-3 bg-dark text-white">
-            <div className="ps-4 pb-2 justify-content-center">
-              {selectedImage || user.profilePicture ? (
-                <img
-                  className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
-                  src={selectedImage || user.profilePicture}
-                  height={150}
-                  width={150}
-                  alt="Profile"
-                />
+          <div className="col-5  p-3">
+            <div className="ps-4 justify-content-center">
+              {!showUpdateProfilePicture ? (
+                <>
+                  <button onClick={toggleUpdateProfilePictureView}>🖊</button>
+                  <img
+                    className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
+                    src="https://static.vecteezy.com/system/resources/previews/007/224/792/original/robot-modern-style-vector.jpg"
+                    height={150}
+                    width={150}
+                    alt="Default Profile"
+                  />
+                </>
               ) : (
-                <img
-                  className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
-                  src="https://static.vecteezy.com/system/resources/previews/007/224/792/original/robot-modern-style-vector.jpg"
-                  height={150}
-                  width={150}
-                  alt="Default Profile"
-                />
+                <>
+                  <form onSubmit={savePicture}>
+                    <input type="file" onChange={handleChange} />
+                    <button type="submit">Update profile picture</button>
+                    <button onClick={toggleUpdateProfilePictureView}>
+                      Cancel
+                    </button>
+                  </form>
+                  {imageUrl ? (
+                    <img
+                      className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
+                      src={imageUrl}
+                      height={150}
+                      width={150}
+                      alt="Profile"
+                    />
+                  ) : (
+                    <img
+                      className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
+                      src="https://static.vecteezy.com/system/resources/previews/007/224/792/original/robot-modern-style-vector.jpg"
+                      height={150}
+                      width={150}
+                      alt="Default Profile"
+                    />
+                  )}
+                </>
               )}
-
               <div key={user.id} className="mt-4">
                 <h2 className="display-5 fs-4">
                   {user.firstname} {user.lastname}
                 </h2>
 
                 <p className="h6 mb-0 pb-0">Email:</p>
-                <p className="mt-0 pt0">{user.email}</p>
+                {!showUpdateEmail ? (
+                  <>
+                    <button onClick={toggleUpdateEmailView}>🖊</button>
+                    <p className="mt-0 pt0">{user.email}</p>
+                  </>
+                ) : (
+                  <form onSubmit={updateEmail}>
+                    <input
+                      type="email"
+                      value={newEmail}
+                      onChange={e => setNewEmail(e.target.value)}
+                    />
+                    <button type="submit">Update Email</button>
+                    <button onClick={toggleUpdateEmailView}>Cancel</button>
+                  </form>
+                )}
               </div>
             </div>
             <div className="ps-2 py-3">
