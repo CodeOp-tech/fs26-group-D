@@ -54,7 +54,7 @@ function Login({
 
   return (
     <>
-      <section className="bg-aqua container">
+      <section className=" container">
         <div className="container   m-2">
           {/* <div className="row justify-content-center"> */}
 
