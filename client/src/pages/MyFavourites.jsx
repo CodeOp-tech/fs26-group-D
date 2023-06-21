@@ -102,7 +102,7 @@ function MyFavourites() {
                     <img
                       src={meal.recipe_image}
                       alt={meal.recipe_title}
-                      className="img-fluid rounded border-bottom border-3 border-primary parent"
+                      className="img-fluid rounded border-bottom border-3 border-primary parent "
                     />
                   </Link>
                   <div className="absolute-close ">

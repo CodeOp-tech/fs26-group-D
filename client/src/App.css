@@ -537,3 +537,8 @@ div.absolute-close {
   bottom: 25%;
   right: 10%;
 }
+
+.table-size {
+  width: 175px;
+  /* height: 225px */
+}
