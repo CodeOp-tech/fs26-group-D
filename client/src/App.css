@@ -507,6 +507,10 @@ div.absolute {
   font-size: 4.7em;
 }
 
+.emphasis-title {
+  /* font-size: 4.7em; */
+}
+
 .hero-position {
   position: absolute;
   left: 10%;
