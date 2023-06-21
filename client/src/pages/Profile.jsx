@@ -13,7 +13,9 @@ export default function Profile() {
   const [imageUrl, setImageUrl] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [showUpdateEmail, setShowUpdateEmail] = useState(false);
-  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(false);
+  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(
+    false
+  );
 
   useEffect(() => {
     getUserInfo();
@@ -229,7 +231,6 @@ export default function Profile() {
                 </button>
               </div>
             </div>
-
             <div className="container mt-2 pt-4">
               <Accordion flush>
                 <Accordion.Item eventKey="0">
@@ -241,7 +242,7 @@ export default function Profile() {
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={handleImageChange}
+                      onChange={handleChange}
                       className="form-control text-primary border border-primary border-3"
                     />
                   </Accordion.Body>
