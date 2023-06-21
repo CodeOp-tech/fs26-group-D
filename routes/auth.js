@@ -102,4 +102,33 @@ router.delete("/calendar/:meal_id", userShouldBeLoggedIn, async (req, res) => {
   }
 });
 
+router.put("/user/pic", userShouldBeLoggedIn, async (req, res) => {
+  const { user_id } = req;
+  const { profile_pic } = req.body;
+
+  try {
+    const updateProfilePic = await User.update(
+      { profile_pic },
+      { where: { id: user_id } }
+    );
+    res.send({ message: `Profile picture updated` });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+router.put("/user/email", userShouldBeLoggedIn, async (req, res) => {
+  const { user_id } = req;
+  const { email } = req.body;
+  try {
+    const updateProfilePic = await User.update(
+      { email },
+      { where: { id: user_id } }
+    );
+    res.send({ message: `Profile picture updated` });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 module.exports = router;
