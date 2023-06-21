@@ -29,7 +29,10 @@ function ShoppingList() {
         <h1>Shopping List</h1>
         <div className="mx-auto  p-3 mb-4 ">
           {ingredientData.length === 0 ? (
-            <p>The shopping list is empty</p>
+            <p>
+              Shopping list is empty. <br />
+              View recipes to add ingredents.
+            </p>
           ) : (
             <div className="row justify-content-center">
               <div className="col-auto">

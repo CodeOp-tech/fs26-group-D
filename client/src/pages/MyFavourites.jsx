@@ -95,9 +95,8 @@ function MyFavourites() {
         <div className="row">
           {uniqueFavourites.map((meal, index) => (
             <div key={index} className="col-lg-4 col-md-6">
-              <div className="text-center border-bottom border-end border-primary border-3 shadow bg-blueLight mt-1 mb-3 ">
-                <div className="parent"></div>
-                <div className="parent py-3">
+              <div className="text-center border-bottom border-end border-primary border-3 shadow bg-blueLight mt-1 mb-3 meal-card ">
+                <div className="parent py-3 px-2">
                   <Link to={`/private/dashboard/recipe/${meal.recipe_id}`}>
                     <img
                       src={meal.recipe_image}
@@ -114,12 +113,12 @@ function MyFavourites() {
                   </div>
                 </div>
 
-                <div className="cardbody p-2">
+                <div className="card-body">
                   <h5 className="card-title">{meal.recipe_title}</h5>
                 </div>
 
                 {/* here */}
-                <Accordion flush>
+                <Accordion flush className="meal-accordion">
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>Add to Calendar</Accordion.Header>
                     <Accordion.Body>
