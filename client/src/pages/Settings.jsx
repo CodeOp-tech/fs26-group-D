@@ -201,7 +201,7 @@ function Settings({ setProfileSummary, profileSummary }) {
                       to={`/private/dashboard/settings`}
                       className="text-decoration-none"
                     >
-                      <button className="my-auto btn  pushable-b ">
+                      <button className="my-auto btn  pushable-b">
                         <span className="shadow-btn-b"></span>
                         <span className="edge-b"></span>
                         <span className="front-b">
