@@ -542,3 +542,11 @@ div.absolute-close {
   width: 175px;
   /* height: 225px */
 }
+
+.meals-height {
+  height: 100%;
+}
+
+.meal-planner-div {
+  overflow: auto;
+}
