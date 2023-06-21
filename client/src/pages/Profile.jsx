@@ -10,6 +10,7 @@ export default function Profile() {
   const [showFavourites, setShowFavourites] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [profileSummary, setProfileSummary] = useState(false);
 
   useEffect(() => {
     getUserInfo();
@@ -105,7 +106,8 @@ export default function Profile() {
                   }
                   onClick={() => {
                     setShowSettings(!showSettings),
-                      setShowFavourites(!showFavourites);
+                      setShowFavourites(!showFavourites),
+                      setProfileSummary(true);
                   }}
                 >
                   {" "}
@@ -136,7 +138,14 @@ export default function Profile() {
           </div>
           <div className="col">
             <div>{showFavourites && <MyFavourites />}</div>
-            <div>{showSettings && <Settings />}</div>
+            <div>
+              {showSettings && (
+                <Settings
+                  setProfileSummary={setProfileSummary}
+                  profileSummary={profileSummary}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
