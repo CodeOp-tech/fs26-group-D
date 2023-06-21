@@ -24,6 +24,9 @@
   visibility: hidden;
 }
 
+.profile-min-height {
+  min-height: 77vh;
+}
 /* --------------------- */
 /* LARGE SECONDARY COLOUR BUTTON */
 .pushable-s-lg {

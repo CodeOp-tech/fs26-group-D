@@ -51,7 +51,7 @@ export default function Profile() {
     <>
       <div className="container my-3">
         <div className="row shadow ">
-          <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 ">
+          <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 profile-min-height ">
             <div className="ps-4 py-2">
               {selectedImage || user.profilePicture ? (
                 <img
@@ -136,7 +136,7 @@ export default function Profile() {
               </Accordion>
             </div>
           </div>
-          <div className="col m-0 p-0">
+          <div className="col m-0 p-0 profile-min-height">
             <div className="">
               <div>{showFavourites && <MyFavourites />}</div>
               <div>
