@@ -7,10 +7,10 @@ import Accordion from "react-bootstrap/Accordion";
 export default function Profile() {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
-  const [showFavourites, setShowFavourites] = useState(true);
-  const [showSettings, setShowSettings] = useState(false);
+  const [showFavourites, setShowFavourites] = useState(false);
+  const [showSettings, setShowSettings] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [profileSummary, setProfileSummary] = useState(false);
+  const [profileSummary, setProfileSummary] = useState(true);
 
   useEffect(() => {
     getUserInfo();
