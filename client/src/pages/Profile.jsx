@@ -8,7 +8,7 @@ export default function Profile() {
   const [error, setError] = useState("");
   const [showFavourites, setShowFavourites] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     getUserInfo();
@@ -40,10 +40,34 @@ export default function Profile() {
     }
   }
 
-  const handleImageChange = event => {
-    const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
+  const savePicture = async event => {
+    event.preventDefault();
+    try {
+      const response = await fetch(`/api/auth/user/pic`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ profile_pic: image })
+      });
+      if (response.ok) {
+        const data = await response.json();
+        getUserInfo();
+      } else {
+        console.log("Error:", response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  function handleChange(e) {
+    console.log(e.target.files);
+    setImage(URL.createObjectURL(e.target.files[0]));
+  }
+
+  console.log(user);
 
   return (
     <>
@@ -51,15 +75,14 @@ export default function Profile() {
         <div className="row py-3 mt-3 border-bottom border-end border-primary border-3 shadow">
           <div className="col-5  p-3">
             <div className="ps-4 justify-content-center">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-              {selectedImage || user.profilePicture ? (
+              <form onSubmit={savePicture}>
+                <input type="file" onChange={handleChange} />
+                <button type="submit">Update profile picture</button>
+              </form>
+              {user.profile_pic ? (
                 <img
                   className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
-                  src={selectedImage || user.profilePicture}
+                  src={user.profile_pic}
                   height={150}
                   width={150}
                   alt="Profile"
@@ -73,7 +96,6 @@ export default function Profile() {
                   alt="Default Profile"
                 />
               )}
-
               <div key={user.id} className="mt-4">
                 <h2>
                   {user.firstname} {user.lastname}
