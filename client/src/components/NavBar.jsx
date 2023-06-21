@@ -79,7 +79,7 @@ function NavBar({
           </div>
         ) : (
           // Logged in
-          <nav className="navbar navbar-expand-md p-2 sticky-top bg-secondary border-bottom border-solid border-primary rounded border-4">
+          <nav className="navbar navbar-expand-md p-2 sticky-top bg-primary  border-bottom border-solid border-dark rounded border-4">
             <div className="container-xxl">
               <a href="/" className="navbar-brand p-0">
                 <span className="display-5 fs-5 align-middle">BusyBytes</span>
