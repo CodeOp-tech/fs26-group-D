@@ -16,27 +16,45 @@ function Welcome({
 }) {
   return (
     <>
+      <Modal
+        show={isOpen}
+        size="lg"
+        onHide={hideModal}
+        dialogClassName={""}
+        centered
+      >
+        <Modal.Body>
+          {currentForm === "login" ? (
+            <Login onFormSwitch={toggleForm} />
+          ) : (
+            <Register onFormSwitch={toggleForm} />
+          )}
+        </Modal.Body>
+      </Modal>
+
       <section id="hero">
-        <div className="text-light bg-dark vh-nav parent">
-          <div className="row">
-            <div className="col text-start ">
-              <h1 className="display-3 mt-5 pt-5 mb-3">
-                EAT, <span className="text-secondary">CODE, </span>{" "}
-                <span className="text-primary display-2">REPEAT</span>
-              </h1>
-              <p className="lead text-white text-opacity-50">
-                Debug your meal prep with Busy Bytes!
-              </p>
+        <div className="text-light bg-dark vh-nav parent p-0 m-0">
+          <div className="row m-0">
+            <div className="col-7 text-start vh-nav parent">
+              <div className="hero-position">
+                <h1 className="display-3 title">
+                  EAT, <span className="text-secondary">CODE, </span>{" "}
+                  <span className="text-primary display-1">REPEAT</span>
+                </h1>
+                <p className="lead text-white text-opacity-50 tag-line">
+                  Debug your meal prep with Busy Bytes!
+                </p>
+              </div>
             </div>
 
-            <div className="col-6 text-center">
-              <div className=" container mt-5 pt-4 col-8">
-                <div className="mt-5 pt-5 text-secondary">
-                  placeholder for image
+            <div className="col ">
+              <div className="row vh-nav-66 ">
+                <div className="my-auto">
+                  <div className="text-white ms-5 p-5">[image placeholder]</div>
                 </div>
               </div>
-              <div className="row mt-5 pt-5 mb-0 pb-0 ">
-                <div className="text-end">
+              <div className="row vh-nav-33 parent">
+                <div className="text-end hero-button">
                   <button
                     className="btn pushable-b-lg"
                     onClick={() => {
@@ -47,28 +65,15 @@ function Welcome({
                     <span className="edge-b-lg"></span>
                     <span className="front-b-lg">GET STARTED </span>
                   </button>
-
-                  <Modal
-                    show={isOpen}
-                    size="lg"
-                    onHide={hideModal}
-                    dialogClassName={""}
-                    centered
-                  >
-                    <Modal.Body>
-                      {currentForm === "login" ? (
-                        <Login onFormSwitch={toggleForm} />
-                      ) : (
-                        <Register onFormSwitch={toggleForm} />
-                      )}
-                    </Modal.Body>
-                  </Modal>
                 </div>
               </div>
             </div>
           </div>
 
-          <div id="learn_more" className=" absolute width100 text-center">
+          <div
+            id="learn_more"
+            className=" absolute width100 text-center text-white"
+          >
             <p className="mb-0 pb-0 h6">Learn more </p>
 
             <i className="bi bi-caret-down-fill white pt-0"></i>
@@ -76,7 +81,7 @@ function Welcome({
         </div>
       </section>
 
-      <section id="features">
+      {/* <section id="features">
         <div className="">
           <div className="container-lg text-center p-5 pb-0 text-dark">
             <h1 className="display-5 fs-3 text-dark border-bottom border-dark border-3">
@@ -139,7 +144,7 @@ function Welcome({
             laborum!
           </small>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
