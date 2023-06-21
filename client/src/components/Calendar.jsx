@@ -121,7 +121,7 @@ export default function Calendar() {
   };
 
   return (
-    <div className="border-bottom border-end border-primary border-3 shadow container bg-aquaLight mt-2">
+    <div className="border-bottom border-end border-primary border-3 shadow container mt-2">
       <h1 className="mt-1 pt-2 mb-0">Calendar</h1>
       <div className="row">
         <div className="col-6">
@@ -142,7 +142,7 @@ export default function Calendar() {
       </div>
 
       <div className="table-responsive ">
-        <table className="calendar table table-hover table-striped shadow border-bottom border-end border-primary border-3 mb-3 pb-0">
+        <table className="calendar table table-hover  shadow border-bottom border-end border-primary border-3 mb-3 pb-0">
           <thead className="table-primary border border-primary">
             <tr>
               <th></th>

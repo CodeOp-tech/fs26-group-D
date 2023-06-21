@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import { Link } from "react-router-dom";
 
 import "../App.css";
 
-function Settings() {
+function Settings({ setProfileSummary, profileSummary }) {
   const [diet, setDiet] = useState("");
   const [intolerance, setIntolerance] = useState("");
   const [excludeIngredients, setExcludeIngredients] = useState("");
@@ -102,87 +103,111 @@ function Settings() {
             <h1 className="">Settings</h1>
 
             <div className="container">
-              <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm">
-                {" "}
-                <h3 className="h5">Set Defaults:</h3>
-                <form onSubmit={addRestrictions}>
-                  <div className="row">
-                    <label>
-                      Diet
-                      <Select
-                        value={diet ? { value: diet, label: diet } : null}
-                        onChange={selectedOption =>
-                          setDiet(selectedOption.value)
-                        }
-                        options={[
-                          { value: "", label: "Select a diet" },
-                          { value: "gluten free", label: "Gluten Free" },
-                          { value: "ketogenic", label: "Ketogenic" },
-                          { value: "vegetarian", label: "Vegetarian" },
-                          {
-                            value: "lacto-vegetarian",
-                            label: "Lacto-Vegetarian"
-                          },
-                          { value: "ovo-vegetarian", label: "Ovo-Vegetarian" },
-                          { value: "vegan", label: "Vegan" },
-                          { value: "pescetarian", label: "Pescetarian" },
-                          { value: "paleo", label: "Paleo" },
-                          { value: "primal", label: "Primal" },
-                          { value: "low FODMAP", label: "Low FODMAP" },
-                          { value: "whole30", label: "Whole30" }
-                        ]}
-                      />
-                    </label>
+              {profileSummary || (
+                <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm">
+                  <h3 className="h5">Set Defaults:</h3>
+                  <form onSubmit={addRestrictions}>
+                    <div className="row">
+                      <label>
+                        Diet
+                        <Select
+                          value={diet ? { value: diet, label: diet } : null}
+                          onChange={selectedOption =>
+                            setDiet(selectedOption.value)
+                          }
+                          options={[
+                            { value: "", label: "Select a diet" },
+                            { value: "gluten free", label: "Gluten Free" },
+                            { value: "ketogenic", label: "Ketogenic" },
+                            { value: "vegetarian", label: "Vegetarian" },
+                            {
+                              value: "lacto-vegetarian",
+                              label: "Lacto-Vegetarian"
+                            },
+                            {
+                              value: "ovo-vegetarian",
+                              label: "Ovo-Vegetarian"
+                            },
+                            { value: "vegan", label: "Vegan" },
+                            { value: "pescetarian", label: "Pescetarian" },
+                            { value: "paleo", label: "Paleo" },
+                            { value: "primal", label: "Primal" },
+                            { value: "low FODMAP", label: "Low FODMAP" },
+                            { value: "whole30", label: "Whole30" }
+                          ]}
+                        />
+                      </label>
 
-                    <label>
-                      Intolerances
-                      <Select
-                        value={
-                          intolerance
-                            ? { value: intolerance, label: intolerance }
-                            : null
-                        }
-                        onChange={selectedOption =>
-                          setIntolerance(selectedOption.value)
-                        }
-                        options={[
-                          { value: "dairy", label: "Dairy" },
-                          { value: "egg", label: "Egg" },
-                          { value: "gluten", label: "Gluten" },
-                          { value: "grain", label: "Grain" },
-                          { value: "peanut", label: "Peanut" },
-                          { value: "seafood", label: "Seafood" },
-                          { value: "sesame", label: "Sesame" },
-                          { value: "shellfish", label: "Shellfish" },
-                          { value: "soy", label: "Soy" },
-                          { value: "sulfite", label: "Sulfite" },
-                          { value: "tree nut", label: "Tree Nut" },
-                          { value: "wheat", label: "Wheat" }
-                        ]}
-                      />
-                    </label>
+                      <label>
+                        Intolerances
+                        <Select
+                          value={
+                            intolerance
+                              ? { value: intolerance, label: intolerance }
+                              : null
+                          }
+                          onChange={selectedOption =>
+                            setIntolerance(selectedOption.value)
+                          }
+                          options={[
+                            { value: "dairy", label: "Dairy" },
+                            { value: "egg", label: "Egg" },
+                            { value: "gluten", label: "Gluten" },
+                            { value: "grain", label: "Grain" },
+                            { value: "peanut", label: "Peanut" },
+                            { value: "seafood", label: "Seafood" },
+                            { value: "sesame", label: "Sesame" },
+                            { value: "shellfish", label: "Shellfish" },
+                            { value: "soy", label: "Soy" },
+                            { value: "sulfite", label: "Sulfite" },
+                            { value: "tree nut", label: "Tree Nut" },
+                            { value: "wheat", label: "Wheat" }
+                          ]}
+                        />
+                      </label>
 
-                    <label>
-                      {" "}
-                      Ingredients to exclude:
-                      <input
-                        type="text"
-                        name="excludeIngredients"
-                        value={excludeIngredients}
-                        onChange={e => setExcludeIngredients(e.target.value)}
-                        className="form-control"
-                      />
-                    </label>
-                  </div>
-                  <div className="text-end pt-3 pb-0 mb-0">
-                    <button type="submit" className="btn mb-3 pushable-s">
-                      <span className="shadow-btn-s"></span>
-                      <span className="edge-s"></span>
-                      <span className="front-s"> Add Dietary Preferences </span>
+                      <label>
+                        {" "}
+                        Ingredients to exclude:
+                        <input
+                          type="text"
+                          name="excludeIngredients"
+                          value={excludeIngredients}
+                          onChange={e => setExcludeIngredients(e.target.value)}
+                          className="form-control"
+                        />
+                      </label>
+                    </div>
+                    <div className="text-end pt-3 pb-0 mb-0">
+                      <button type="submit" className="btn mb-3 pushable-s">
+                        <span className="shadow-btn-s"></span>
+                        <span className="edge-s"></span>
+                        <span className="front-s">
+                          {" "}
+                          Add Dietary Preferences{" "}
+                        </span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
+
+              {profileSummary && (
+                <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm text-end">
+                  <Link
+                    to={`/private/dashboard/settings`}
+                    className="text-decoration-none"
+                  >
+                    <button className="my-auto btn  pushable-b ">
+                      <span className="shadow-btn-b"></span>
+                      <span className="edge-b"></span>
+                      <span className="front-b">
+                        Update your dietary preferences{" "}
+                      </span>
                     </button>
-                  </div>
-                </form>
-              </div>
+                  </Link>
+                </div>
+              )}
 
               <div>
                 <div className="container">
