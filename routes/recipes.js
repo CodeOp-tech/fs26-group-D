@@ -32,7 +32,8 @@ router.get("/search", async (req, res) => {
       minFiber,
       maxFiber,
       minSugar,
-      maxSugar
+      maxSugar,
+      includeNutrition
     } = req.query;
     const recipes = await spoonacular.searchRecipes(
       query,
@@ -59,7 +60,8 @@ router.get("/search", async (req, res) => {
       minFiber,
       maxFiber,
       minSugar,
-      maxSugar
+      maxSugar,
+      includeNutrition
     );
     res.json(recipes);
   } catch (error) {

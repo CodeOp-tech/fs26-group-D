@@ -26,7 +26,8 @@ async function searchRecipes(
   minFiber,
   maxFiber,
   minSugar,
-  maxSugar
+  maxSugar,
+  includeNutrition
 ) {
   try {
     const response = await axios.get(
@@ -58,7 +59,8 @@ async function searchRecipes(
           minFiber: minFiber,
           maxFiber: maxFiber,
           minSugar: minSugar,
-          maxSugar: maxSugar
+          maxSugar: maxSugar,
+          includeNutrition: includeNutrition
         }
       }
     );

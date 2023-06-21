@@ -118,7 +118,7 @@ function Recipe() {
                   return null;
                 })}
               </ul>
-              <button>Add to favorites</button>
+              <button>back to mealplan</button>
             </div>
           </div>
         )}

@@ -33,7 +33,11 @@ function Login(props) {
       navigate("/private/dashboard");
       console.log(data.message, data.token);
     } catch (err) {
-      console.log("Error:", err);
+      if (err.response && err.response.status === 400) {
+        alert("Incorrect email or password");
+      } else {
+        console.log("Error:", err);
+      }
     }
   };
 

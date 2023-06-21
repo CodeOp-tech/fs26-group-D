@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import IngredientContext from "../components/context/IngredientContext";
+//import transporter from"../../../mailer";
 import "../App.css";
 
 function ShoppingList() {
@@ -23,10 +24,57 @@ function ShoppingList() {
     setBoughtIngredients([]);
   };
 
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  function isSmallUnit(unit) {
+    const smallUnits = ["tbsp", "tablespoon", "dash", "pinch"];
+    return smallUnits.includes(unit.toLowerCase());
+  }
+
+  // const sendShoppingListEmail = async () => {
+  //   try {
+  //     // Fetch the user's email address from the database
+  //     const userResponse = await fetch(`/api/auth/user`, {
+  //       headers: {
+  //         authorization: "Bearer " + localStorage.getItem("token"),
+  //       },
+  //     });
+  //     const userData = await userResponse.json();
+  //     if (!userResponse.ok) throw new Error(userResponse.statusText);
+  //     const userEmail = userData.email;
+
+  //     // Compose the email
+  //     const emailOptions = {
+  //       from: "busybytes123@gmail.com",
+  //       to: userEmail,
+  //       subject: "Shopping List",
+  //       text: "Hello World",
+  //       html: "<em>hello world</em>"
+  //       // text: ingredientData
+  //       //   .map(
+  //       //     (ingredient) =>
+  //       //       `${ingredient.name} - ${ingredient.amount} ${ingredient.unit}`
+  //       //   )
+  //       //   .join("\n"),
+  //     };
+
+  //     // Send the email
+  //     const info = await transporter.sendMail(emailOptions);
+  //     console.log("Email sent:", info.response);
+  //   } catch (error) {
+  //     console.error("Error sending email:", error);
+  //   }
+  // };
+
   return (
     <div>
       {ingredientData.length === 0 ? (
-        <p>The shopping list is empty</p>
+        <div>
+          <p>The shopping list is empty</p>
+          {/* <button onClick={sendShoppingListEmail}>Email Shopping List</button> */}
+        </div>
       ) : (
         <table>
           <thead>
@@ -43,9 +91,11 @@ function ShoppingList() {
                 onClick={() => toggleBoughtStatus(ingredient.id)}
                 style={{ cursor: "pointer" }}
               >
-                <td>{ingredient.name}</td>
+                <td>{capitalizeFirstLetter(ingredient.name)}</td>
                 <td>
-                  {ingredient.amount} {ingredient.unit}
+                  {isSmallUnit(ingredient.unit)
+                    ? ""
+                    : `${ingredient.amount} ${ingredient.unit}`}
                 </td>
               </tr>
             ))}
@@ -53,7 +103,12 @@ function ShoppingList() {
         </table>
       )}
       {ingredientData.length > 0 && (
-        <button onClick={handleDeleteShoppingList}>Delete Shopping List</button>
+        <div>
+          <button onClick={sendShoppingListEmail}>Email Shopping List</button>
+          <button onClick={handleDeleteShoppingList}>
+            Delete Shopping List
+          </button>
+        </div>
       )}
     </div>
   );
