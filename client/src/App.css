@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .offscreen {
   display: none;
 }
@@ -516,6 +520,10 @@ div.absolute {
 }
 .width100 {
   width: 100%;
+}
+
+.test {
+  overflow-x: hidden;
 }
 
 div.absolute-close {

@@ -59,7 +59,7 @@ function Welcome({
                 </div>
               </div>
 
-              <div className="col ">
+              <div className="col-5">
                 <div className="row vh-nav-66 ">
                   <div className="my-auto">
                     <div className="text-white ms-5 p-5">
