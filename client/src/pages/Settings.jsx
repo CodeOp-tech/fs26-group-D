@@ -100,7 +100,7 @@ function Settings({ setProfileSummary, profileSummary }) {
       <div className="px-4">
         <div className="container">
           <div className="row py-3 mt-3 border-bottom border-end border-secondary border-3 shadow">
-            <h1 className="">Settings</h1>
+            {profileSummary || <h1 className="">Settings</h1>}
 
             <div className="container">
               {profileSummary || (

@@ -81,7 +81,7 @@ export default function Profile() {
               </div>
             </div>
             <div className="ps-2 py-3">
-              <h6 className="ps-3 h4 ">View Summary:</h6>
+              {/* <h6 className="ps-3 h4 ">View Summary:</h6> */}
 
               <div className="ps-1">
                 <button
@@ -94,7 +94,7 @@ export default function Profile() {
                       setShowSettings(!showSettings);
                   }}
                 >
-                  Favourites
+                  My Favourites
                   {/* {showFavourites ? "Hide Favourites" : "My Favourites"} */}
                 </button>
               </div>
@@ -111,7 +111,7 @@ export default function Profile() {
                   }}
                 >
                   {" "}
-                  Settings
+                  My Preferences
                   {/* {showSettings ? "Hide Settings" : "My Settings"} */}
                 </button>
               </div>

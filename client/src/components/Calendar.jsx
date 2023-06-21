@@ -141,8 +141,8 @@ export default function Calendar() {
         </div>
       </div>
 
-      <div className="table-responsive ">
-        <table className="calendar table table-hover  shadow border-bottom border-end border-primary border-3 mb-3 pb-0">
+      <div className="table-responsive">
+        <table className="calendar table table-hover shadow border-bottom border-end border-primary border-3 mb-3 pb-0">
           <thead className="table-primary border border-primary">
             <tr>
               <th></th>
