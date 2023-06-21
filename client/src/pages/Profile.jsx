@@ -40,6 +40,13 @@ export default function Profile() {
     }
   }
 
+  function handleChange(e) {
+    console.log(e.target.files);
+    setImage(URL.createObjectURL(e.target.files[0]));
+  }
+
+  console.log(image);
+
   const savePicture = async event => {
     event.preventDefault();
     try {
@@ -49,7 +56,7 @@ export default function Profile() {
           "Content-Type": "application/json",
           authorization: "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify({ profile_pic: image })
+        body: JSON.stringify({ image })
       });
       if (response.ok) {
         const data = await response.json();
@@ -62,12 +69,9 @@ export default function Profile() {
     }
   };
 
-  function handleChange(e) {
-    console.log(e.target.files);
-    setImage(URL.createObjectURL(e.target.files[0]));
-  }
-
   console.log(user);
+  console.log(user.profile_pic);
+  // const url = URL.createObjectURL(user.profile_pic);
 
   return (
     <>
