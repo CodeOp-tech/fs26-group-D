@@ -13,6 +13,9 @@ function Login({
   hideModal,
   toggleForm,
   onFormSwitch
+  // login,
+  // credentials,
+  // setCredentials
 }) {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -31,6 +34,7 @@ function Login({
 
   const login = async e => {
     e.preventDefault();
+
     try {
       const { data } = await axios("/api/auth/login", {
         method: "POST",
@@ -39,7 +43,9 @@ function Login({
 
       localStorage.setItem("token", data.token);
       auth.login();
+
       navigate("/private/dashboard");
+
       console.log(data.message, data.token);
     } catch (err) {
       console.log("Error:", err);
@@ -48,7 +54,7 @@ function Login({
 
   return (
     <>
-      <section className="bg-altLight">
+      <section className="bg-altLight vh-nav">
         <div className="container-lg ">
           <div className="row justify-content-center">
             <div className="col-10 m-4">
@@ -96,7 +102,9 @@ function Login({
                             <button
                               type="submit"
                               className="btn mb-3 pushable-s"
-                              //  onClick={hideModal}
+                              onClick={() => {
+                                hideModal();
+                              }}
                             >
                               <span className="shadow-btn-s"></span>
                               <span className="edge-s"></span>

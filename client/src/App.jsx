@@ -23,6 +23,8 @@ import Calendar from "./components/Calendar";
 function App() {
   const [user, setUser] = useState(null);
   const [ingredientData, setIngredientData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentForm, setCurrentForm] = useState("login");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -46,15 +48,12 @@ function App() {
     logout
   };
 
-  const [currentForm, setCurrentForm] = useState("login");
-
   const toggleForm = formName => {
     setCurrentForm(formName);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-
   const showModal = () => {
+    // setIsOpen(true);
     setIsOpen(true);
   };
 
@@ -102,9 +101,7 @@ function App() {
                   currentForm={currentForm}
                   setCurrentForm={setCurrentForm}
                   isOpen={isOpen}
-                  setIsOpen={() => {
-                    setIsOpen(false);
-                  }}
+                  setIsOpen={() => setIsOpen(false)}
                   showModal={showModal}
                   hideModal={hideModal}
                   toggleForm={toggleForm}

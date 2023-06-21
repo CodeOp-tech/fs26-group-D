@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
-function Register(props) {
+function Register({ hideModal, onFormSwitch }) {
   const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
   const navigate = useNavigate();
@@ -90,6 +90,10 @@ function Register(props) {
     addUser()
       .then(() => {
         navigate("/login");
+        // navigate("/");
+        // setCurrentForm("login");
+        // showModal();
+        // () => onFormSwitch("login")
         setIsLoading(false);
       })
       .catch(err => {
@@ -114,6 +118,7 @@ function Register(props) {
     };
     try {
       const response = await fetch("/api/auth/register", options);
+
       if (!response.ok) throw new Error(response.statusText);
     } catch (err) {
       setErrMsg(err.message);
@@ -319,6 +324,9 @@ function Register(props) {
 
                           <div>
                             <button
+                              onClick={() => {
+                                hideModal();
+                              }}
                               type="submit"
                               className="btn mb-3 pushable-b"
                               disabled={
@@ -335,9 +343,9 @@ function Register(props) {
                         </form>
                         <button
                           className=" btn font-monospace"
-                          onClick={() => props.onFormSwitch("login")}
+                          onClick={() => onFormSwitch("login")}
                         >
-                          Already have an account? Login{" "}
+                          Already have an account? Login
                           <span className="text-primary">here.</span>
                         </button>
                       </div>

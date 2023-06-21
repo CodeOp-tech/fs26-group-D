@@ -3,6 +3,7 @@ import { useState } from "react";
 import Login from "../components/Login.jsx";
 import Register from "../components/Register.jsx";
 import "../App.css";
+import axios from "axios";
 
 import Modal from "react-bootstrap/Modal";
 
@@ -14,6 +15,31 @@ function Welcome({
   hideModal,
   toggleForm
 }) {
+  // const [credentials, setCredentials] = useState({
+  //   email: "",
+  //   password: ""
+  // });
+
+  // const login = async e => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const { data } = await axios("/api/auth/login", {
+  //       method: "POST",
+  //       data: credentials
+  //     });
+
+  //     localStorage.setItem("token", data.token);
+  //     auth.login();
+
+  //     navigate("/private/dashboard");
+
+  //     console.log(data.message, data.token);
+  //   } catch (err) {
+  //     console.log("Error:", err);
+  //   }
+  // };
+
   return (
     <>
       <Modal
@@ -25,9 +51,13 @@ function Welcome({
       >
         <Modal.Body>
           {currentForm === "login" ? (
-            <Login onFormSwitch={toggleForm} />
+            <Login
+              onFormSwitch={toggleForm}
+              hideModal={hideModal}
+              // login={login} credentials={credentials} setCredentials={setCredentials}
+            />
           ) : (
-            <Register onFormSwitch={toggleForm} />
+            <Register onFormSwitch={toggleForm} hideModal={hideModal} />
           )}
         </Modal.Body>
       </Modal>
