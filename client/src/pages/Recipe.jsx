@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import IngredientContext from "../components/context/IngredientContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import "../App.css";
 
@@ -36,6 +37,16 @@ function Recipe() {
 
   return (
     <>
+      <div className="text-end mt-3">
+        <Link to={`/private/dashboard/myfavourites`}>
+          <button className="btn pushable-s">
+            <span className="shadow-btn-s"></span>
+            <span className="edge-s"></span>
+            <span className="front-s">BACK </span>
+          </button>
+        </Link>
+      </div>
+
       <div className="container">
         {recipe && (
           <div>
