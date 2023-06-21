@@ -3,6 +3,10 @@ import { useState } from "react";
 import Login from "../components/Login.jsx";
 import Register from "../components/Register.jsx";
 import "../App.css";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+import AuthContext from "../components/context/AuthContext.js";
+import { useContext } from "react";
 
 import Modal from "react-bootstrap/Modal";
 
@@ -12,72 +16,87 @@ function Welcome({
   isOpen,
   showModal,
   hideModal,
-  toggleForm
+  toggleForm,
+  user
 }) {
-  return (
-    <>
-      <section id="hero">
-        <div className="text-light bg-dark vh-nav parent">
-          <div className="row">
-            <div className="col text-start ">
-              <h1 className="display-3 mt-5 pt-5 mb-3">
-                EAT, <span className="text-secondary">CODE, </span>{" "}
-                <span className="text-primary display-2">REPEAT</span>
-              </h1>
-              <p className="lead text-white text-opacity-50">
-                Debug your meal prep with Busy Bytes!
-              </p>
-            </div>
+  if (user) {
+    return <Navigate to="/private/dashboard" replace />;
+  } else {
+    return (
+      <>
+        <Modal
+          show={isOpen}
+          size="lg"
+          onHide={hideModal}
+          dialogClassName={""}
+          centered
+        >
+          <Modal.Body className="border-bottom  border-3 border-secondary shadow rounded">
+            {currentForm === "login" ? (
+              <Login
+                onFormSwitch={toggleForm}
+                hideModal={hideModal}
+                // login={login} credentials={credentials} setCredentials={setCredentials}
+              />
+            ) : (
+              <Register onFormSwitch={toggleForm} hideModal={hideModal} />
+            )}
+          </Modal.Body>
+        </Modal>
 
-            <div className="col-6 text-center">
-              <div className=" container mt-5 pt-4 col-8">
-                <div className="mt-5 pt-5 text-secondary">
-                  placeholder for image
+        <section id="hero">
+          <div className="text-light bg-dark vh-nav parent p-0 m-0">
+            <div className="row m-0">
+              <div className="col-7 text-start vh-nav parent">
+                <div className="hero-position">
+                  <h1 className="display-3 title">
+                    EAT, <span className="text-secondary">CODE, </span>{" "}
+                    <span className="text-primary display-1">REPEAT</span>
+                  </h1>
+                  <p className="lead text-white text-opacity-50 tag-line">
+                    Debug your meal prep with Busy Bytes!
+                  </p>
                 </div>
               </div>
-              <div className="row mt-5 pt-5 mb-0 pb-0 ">
-                <div className="text-end">
-                  <button
-                    className="btn pushable-b-lg"
-                    onClick={() => {
-                      setCurrentForm("register"), showModal();
-                    }}
-                  >
-                    <span className="shadow-btn-b-lg"></span>
-                    <span className="edge-b-lg"></span>
-                    <span className="front-b-lg">GET STARTED </span>
-                  </button>
 
-                  <Modal
-                    show={isOpen}
-                    size="lg"
-                    onHide={hideModal}
-                    dialogClassName={""}
-                  >
-                    <Modal.Body>
-                      {currentForm === "login" ? (
-                        <Login onFormSwitch={toggleForm} />
-                      ) : (
-                        <Register onFormSwitch={toggleForm} />
-                      )}
-                    </Modal.Body>
-                  </Modal>
+              <div className="col ">
+                <div className="row vh-nav-66 ">
+                  <div className="my-auto">
+                    <div className="text-white ms-5 p-5">
+                      [image placeholder]
+                    </div>
+                  </div>
+                </div>
+                <div className="row vh-nav-33 parent">
+                  <div className="text-end hero-button">
+                    <button
+                      className="btn pushable-b-lg"
+                      onClick={() => {
+                        setCurrentForm("register"), showModal();
+                      }}
+                    >
+                      <span className="shadow-btn-b-lg"></span>
+                      <span className="edge-b-lg"></span>
+                      <span className="front-b-lg">GET STARTED </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div
+              id="learn_more"
+              className=" absolute width100 text-center text-white"
+            >
+              <p className="mb-0 pb-0 h6">Learn more </p>
+
+              <i className="bi bi-caret-down-fill white pt-0"></i>
+            </div>
           </div>
+        </section>
 
-          <div id="learn_more" className=" absolute width100 text-center">
-            <p className="mb-0 pb-0 h6">Learn more </p>
-
-            <i className="bi bi-caret-down-fill white pt-0"></i>
-          </div>
-        </div>
-      </section>
-
-      <section id="features">
-        <div className="">
-          <div className="container-lg text-center p-5 pb-0 text-dark">
+        <section id="features">
+          <div className="text-center p-5 pb-0 text-dark">
             <h1 className="display-5 fs-3 text-dark border-bottom border-dark border-3">
               <span className="">Features</span>
             </h1>
@@ -122,25 +141,26 @@ function Welcome({
               </div>
             </div>
           </div>
-        </div>
-        <div className="row justify-content-center text-center mt-4">
-          <p className="mb-0 pb-0 h6">About </p>
 
-          <i className="bi bi-caret-down-fill white pt-0"></i>
-        </div>
-      </section>
+          <div className="row justify-content-center text-center mt-4 mx-0">
+            <p className="mb-0 pb-0 h6">About </p>
 
-      <section className=" text-light bg-dark text-center" id="about">
-        <div className="p-5">
-          <small>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-            sequi maxime beatae quasi quidem iusto unde fuga atque soluta
-            laborum!
-          </small>
-        </div>
-      </section>
-    </>
-  );
+            <i className="bi bi-caret-down-fill white pt-0"></i>
+          </div>
+        </section>
+
+        <section className=" text-light bg-dark text-center" id="about">
+          <div className="p-5">
+            <small>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consectetur sequi maxime beatae quasi quidem iusto unde fuga atque
+              soluta laborum!
+            </small>
+          </div>
+        </section>
+      </>
+    );
+  }
 }
 
 export default Welcome;

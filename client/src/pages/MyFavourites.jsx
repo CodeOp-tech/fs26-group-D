@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
+import Accordion from "react-bootstrap/Accordion";
 
 function MyFavourites() {
   const [fav, setFav] = useState([]);
@@ -79,7 +80,7 @@ function MyFavourites() {
       }
       // Handle successful response here
       alert(`${input.recipe_title} has been added to your calendar`);
-      console.log("Meal added successfully");
+      // console.log("Meal added successfully");
       setDate("");
       setMealType("");
     } catch (err) {
@@ -89,83 +90,89 @@ function MyFavourites() {
 
   return (
     <>
-      <div>
-        <h1 className="py-3">Favourites</h1>
+      <div className="border-bottom border-end border-primary border-3 shadow px-4">
+        <h1 className="pt-3 pb-1">Favourites</h1>
         <div className="row">
           {uniqueFavourites.map((meal, index) => (
-            <div key={index} className="col-4">
-              <div className="text-center border-bottom border-end border-primary border-3 shadow bg-blueLight my-3">
-                <div className="">
-                  <span className="float-end">
-                    <button
-                      type="button"
-                      className="btn"
-                      onClick={() => toggleFavourite(meal.id, !meal.favourite)}
-                    >
-                      ❌
-                    </button>
-                    <div className="row mb-2 px-3">
-                      <label
-                        className="form-label font-monospace fs-4 mb-1"
-                        htmlFor="date"
-                      >
-                        Date:
-                      </label>
-                      <input
-                        placeholder="DD/MM/YYYY"
-                        type="date"
-                        id="date"
-                        value={date}
-                        onChange={e => setDate(e.target.value)}
-                        className="form-control border-secondary"
-                      />
-                    </div>
-                    <div className="row mb-2 px-3">
-                      <label
-                        className="form-label font-monospace fs-4 mb-1"
-                        htmlFor="mealType"
-                      >
-                        Meal Type:
-                      </label>
-                      <select
-                        id="mealType"
-                        value={mealType}
-                        onChange={e => setMealType(e.target.value)}
-                        className="form-control border-secondary shadow-sm "
-                      >
-                        <option value="">Select a meal type</option>
-                        <option value="breakfast">Breakfast</option>
-                        <option value="elevensies">Elevensies</option>
-                        <option value="lunch">Lunch</option>
-                        <option value="afternoon tea">Afternoon tea</option>
-                        <option value="dinner">Diner</option>
-                      </select>
-                    </div>
-                    <div className="text-end">
-                      {/* <button onClick={() => addMealToCalendar(recipe)}>
-                    Add to Calendar
-                  </button> */}
-                      <button
-                        className="btn pushable-b-sm mt-3 mb-3"
-                        onClick={() => addMealToCalendar(recipe)}
-                      >
-                        <span className="shadow-btn-b-sm"></span>
-                        <span className="edge-b-sm"></span>
-                        <span className="front-b-sm">Add to Calendar </span>
-                      </button>
-                    </div>
-                  </span>
+            <div key={index} className="col-lg-4 col-md-6">
+              <div className="text-center border-bottom border-end border-primary border-3 shadow bg-blueLight mt-1 mb-3 ">
+                <div className="parent"></div>
+                <div className="parent py-3">
                   <Link to={`/private/dashboard/recipe/${meal.recipe_id}`}>
                     <img
                       src={meal.recipe_image}
                       alt={meal.recipe_title}
-                      className="img-fluid b"
+                      className="img-fluid rounded border-bottom border-3 border-primary parent "
                     />
                   </Link>
+                  <div className="absolute-close ">
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={() => toggleFavourite(meal.id, !meal.favourite)}
+                    ></button>
+                  </div>
                 </div>
+
                 <div className="cardbody p-2">
                   <h5 className="card-title">{meal.recipe_title}</h5>
                 </div>
+
+                {/* here */}
+                <Accordion flush>
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>Add to Calendar</Accordion.Header>
+                    <Accordion.Body>
+                      <div className="row mb-2 px-3">
+                        <label
+                          className="form-label font-monospace fs-4 mb-1"
+                          htmlFor="date"
+                        >
+                          Date:
+                        </label>
+                        <input
+                          placeholder="DD/MM/YYYY"
+                          type="date"
+                          id="date"
+                          value={date}
+                          onChange={e => setDate(e.target.value)}
+                          className="form-control border-primary border-2"
+                        />
+                      </div>
+                      <div className="row mb-2 px-3">
+                        <label
+                          className="form-label font-monospace fs-4 mb-1"
+                          htmlFor="mealType"
+                        >
+                          Meal Type:
+                        </label>
+                        <select
+                          id="mealType"
+                          value={mealType}
+                          onChange={e => setMealType(e.target.value)}
+                          className="form-control border-primary border-2 shadow-sm "
+                        >
+                          <option value="">Select a meal type</option>
+                          <option value="breakfast">Breakfast</option>
+                          <option value="elevensies">Elevensies</option>
+                          <option value="lunch">Lunch</option>
+                          <option value="afternoon tea">Afternoon tea</option>
+                          <option value="dinner">Diner</option>
+                        </select>
+                      </div>
+                      <div className="text-end">
+                        <button
+                          className="btn pushable-b-sm mt-3 mb-3"
+                          onClick={() => addMealToCalendar(recipe)}
+                        >
+                          <span className="shadow-btn-b-sm"></span>
+                          <span className="edge-b-sm"></span>
+                          <span className="front-b-sm">Add to Calendar </span>
+                        </button>
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
               </div>
             </div>
           ))}

@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import MyFavourites from "./MyFavourites";
 import Settings from "./Settings";
+import Accordion from "react-bootstrap/Accordion";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -12,9 +13,7 @@ export default function Profile() {
   const [imageUrl, setImageUrl] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [showUpdateEmail, setShowUpdateEmail] = useState(false);
-  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(
-    false
-  );
+  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(false);
 
   useEffect(() => {
     getUserInfo();
@@ -171,7 +170,7 @@ export default function Profile() {
                 </>
               )}
               <div key={user.id} className="mt-4">
-                <h2>
+                <h2 className="display-5 fs-4">
                   {user.firstname} {user.lastname}
                 </h2>
 
@@ -194,27 +193,71 @@ export default function Profile() {
                 )}
               </div>
             </div>
-          </div>
-          <div className="col col-7">
-            <div>
-              <button
-                type="button"
-                className="btn btn-link"
-                onClick={() => setShowFavourites(!showFavourites)}
-              >
-                {showFavourites ? "Hide Favourites" : "My Favourites"}
-              </button>
-              {showFavourites && <MyFavourites />}
+            <div className="ps-2 py-3">
+              {/* <h6 className="ps-3 h4 ">View Summary:</h6> */}
+
+              <div className="ps-1">
+                <button
+                  type="button"
+                  className={
+                    showFavourites ? "btn text-primary" : "btn text-white"
+                  }
+                  onClick={() => {
+                    setShowFavourites(!showFavourites),
+                      setShowSettings(!showSettings);
+                  }}
+                >
+                  My Favourites
+                  {/* {showFavourites ? "Hide Favourites" : "My Favourites"} */}
+                </button>
+              </div>
+              <div className="ps-1">
+                <button
+                  type="button"
+                  className={
+                    showSettings ? "btn text-primary" : "btn text-white"
+                  }
+                  onClick={() => {
+                    setShowSettings(!showSettings),
+                      setShowFavourites(!showFavourites),
+                      setProfileSummary(true);
+                  }}
+                >
+                  {" "}
+                  My Preferences
+                  {/* {showSettings ? "Hide Settings" : "My Settings"} */}
+                </button>
+              </div>
             </div>
+
+            <div className="container mt-2 pt-4">
+              <Accordion flush>
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Update your details</Accordion.Header>
+                  <Accordion.Body>
+                    <label htmlFor="" className="p-1 ">
+                      Upload new profile picture:
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="form-control text-primary border border-primary border-3"
+                    />
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+            </div>
+          </div>
+          <div className="col-md-7">
+            <div>{showFavourites && <MyFavourites />}</div>
             <div>
-              <button
-                type="button"
-                className="btn btn-link"
-                onClick={() => setShowSettings(!showSettings)}
-              >
-                {showSettings ? "Hide Settings" : "My Settings"}
-              </button>
-              {showSettings && <Settings />}
+              {showSettings && (
+                <Settings
+                  setProfileSummary={setProfileSummary}
+                  profileSummary={profileSummary}
+                />
+              )}
             </div>
           </div>
         </div>

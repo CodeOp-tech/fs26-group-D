@@ -43,22 +43,7 @@ function NavBar({
                   <span className="display-5 fs-5 align-middle">BusyBytes</span>
                 </a>
 
-                <button
-                  className="navbar-toggler "
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#main-nav"
-                  aria-controls="main-nav"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon"> </span>
-                </button>
-
-                <div
-                  className="collapse navbar-collapse justify-content-end align-center text-white"
-                  id="main-nav"
-                >
+                <div className=" text-white" id="main-nav">
                   <ul className="navbar-nav">
                     <li className="nav-item">
                       <button
@@ -79,34 +64,19 @@ function NavBar({
           </div>
         ) : (
           // Logged in
-          <nav className="navbar navbar-expand-md p-2 sticky-top bg-secondary border-bottom border-solid border-primary rounded border-4">
+          <nav className="navbar navbar-expand-md p-2 sticky-top bg-primary  border-bottom border-solid border-dark rounded border-4">
             <div className="container-xxl">
               <a href="/" className="navbar-brand p-0">
                 <span className="display-5 fs-5 align-middle">BusyBytes</span>
               </a>
 
-              <button
-                className="navbar-toggler "
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#main-nav"
-                aria-controls="main-nav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon"> </span>
-              </button>
-
-              <div
-                className="collapse navbar-collapse justify-content-end align-center"
-                id="main-nav"
-              >
+              <div className="justify-content-end align-center" id="main-nav">
                 <ul className="navbar-nav ">
-                  <li>
+                  {/* <li>
                     <Link className="nav-link" to="/private/dashboard">
                       Dashboard
                     </Link>
-                  </li>
+                  </li> */}
 
                   <li className="nav-item">
                     <button
@@ -124,7 +94,13 @@ function NavBar({
           </nav>
         )}
       </div>
-      <Modal show={isOpen} size="lg" onHide={hideModal} dialogClassName={""}>
+      <Modal
+        show={isOpen}
+        size="lg"
+        onHide={hideModal}
+        dialogClassName={""}
+        centered
+      >
         <Modal.Body>
           {currentForm === "login" ? (
             <Login onFormSwitch={toggleForm} />

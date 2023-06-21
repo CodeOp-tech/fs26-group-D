@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  const [key, setKey] = useState("/private/dashboard/calendar");
+  const [key, setKey] = useState("/private/dashboard/profile");
   const [initialPageLoad, setInitialPageLoad] = useState(true);
 
   let navigate = useNavigate();
@@ -33,10 +33,10 @@ function Dashboard() {
             setKey(k), navigateToDestination(k), setInitialPageLoad(false);
           }}
         >
-          <Tab eventKey="/private/dashboard/profile" title="Profile"></Tab>
-          <Tab eventKey="/private/dashboard/calendar" title="Calendar">
-            {initialPageLoad && <Calendar />}
+          <Tab eventKey="/private/dashboard/profile" title="Profile">
+            {initialPageLoad && <Profile />}
           </Tab>
+          <Tab eventKey="/private/dashboard/calendar" title="Calendar"></Tab>
           <Tab
             eventKey="/private/dashboard/newmealplan"
             title="New Meal Plan"
