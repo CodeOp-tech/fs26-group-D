@@ -22,7 +22,7 @@ function Recipe() {
         }
       });
       const recipeInfo = response.data;
-      console.log(recipeInfo);
+      // console.log(recipeInfo);
       setRecipe(recipeInfo);
     } catch (error) {
       console.error("Error retrieving recipe information:", error);
@@ -31,7 +31,7 @@ function Recipe() {
 
   const handleAddToShoppingList = ingredient => {
     setIngredientData(state => [...state, ingredient]);
-    console.log(ingredientData);
+    // console.log(ingredientData);
   };
 
   return (
@@ -39,16 +39,16 @@ function Recipe() {
       <div className="container">
         {recipe && (
           <div>
-            <div className="row text-end bg-blueLight shadow border-bottom border-5 border-primary my-3">
+            <div className="row text-end bg-blueLight shadow border-bottom border-end border-5 border-primary mb-3 mt-4">
               <h1>{recipe.title}</h1>
               <p className="lead text-muted">
                 Dish Types: {recipe.dishTypes.join(", ")}
               </p>
             </div>
 
-            <div className="row bg-aquaLight shadow border-bottom border-3 border-secondary my-2 container p-3">
+            <div className="row bg-aquaLight shadow border-bottom border-end border-3 border-secondary my-4  p-3">
               <div className="col col-7">
-                <h2 className="h5">Ingredients:</h2>
+                <h2 className="">Ingredients:</h2>
 
                 <ul className="list-group list-group-flush shadow me-5 border-bottom border-secondary border-3">
                   {recipe.extendedIngredients.map(ingredient => (
@@ -83,19 +83,32 @@ function Recipe() {
               </div>
             </div>
 
-            <div className="row">
-              <p>preparation time: {recipe.readyInMinutes} minutes</p>
-              <p>servings: {recipe.servings}</p>
-              <ol>
-                {recipe.analyzedInstructions[0].steps.map(step => (
-                  <li key={step.number}>{step.step}</li>
-                ))}
-              </ol>
+            <div className="row bg-blueLight shadow border-bottom border-end border-3 border-primary my-4  p-3">
+              <h2 className="text-end pb-3">Instructions:</h2>
+              <div className="col">
+                <h6>Preparation time </h6>
+                <p className="ps-2">{recipe.readyInMinutes} minutes</p>
+              </div>
+              <div className="col text-end">
+                <h6>Servings: </h6>
+                <p className="pe-2"> {recipe.servings}</p>
+              </div>
+
+              <h5>Instructions: </h5>
+              <div className="px-4">
+                <ol className="">
+                  {recipe.analyzedInstructions[0].steps.map(step => (
+                    <li className="pb-1" key={step.number}>
+                      {step.step}
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
 
-            <div className="row">
+            <div className="row bg-aquaLight shadow border-bottom border-end border-3 border-secondary my-4 p-3">
               <h2>Nutrition per Serving:</h2>
-              <ul>
+              <ul className="list-group-flush">
                 {recipe.nutrition.nutrients.map(nutrient => {
                   const nutrientNames = [
                     "Calories",
@@ -110,7 +123,7 @@ function Recipe() {
                   ];
                   if (nutrientNames.includes(nutrient.name)) {
                     return (
-                      <li key={nutrient.name}>
+                      <li className="list-group-item px-4" key={nutrient.name}>
                         {nutrient.name}: {nutrient.amount} {nutrient.unit}
                       </li>
                     );
@@ -118,7 +131,13 @@ function Recipe() {
                   return null;
                 })}
               </ul>
-              <button>Add to favorites</button>
+              <div className="col text-end">
+                <button className="btn pushable-b-lg">
+                  <span className="shadow-btn-b-lg"></span>
+                  <span className="edge-b-lg"></span>
+                  <span className="front-b-lg">Add to favorites</span>
+                </button>
+              </div>
             </div>
           </div>
         )}
