@@ -186,14 +186,16 @@ function Register({ hideModal, onFormSwitch }) {
                     <div className="">
                       <label htmlFor="email" className="font-monospace">
                         Email address
-                        <span className={validEmail ? "valid" : "hide"}>
+                        {/* <span className={validEmail ? "valid" : "hide"}>
+                          
+                        
                           <FontAwesomeIcon icon={faCheck} />
-                        </span>
-                        <span
+                        </span> */}
+                        {/* <span
                           className={!validEmail || email ? "invalid" : "hide"}
                         >
                           <FontAwesomeIcon icon={faTimes} />
-                        </span>
+                        </span> */}
                       </label>
                       <input
                         type="text"
@@ -224,14 +226,14 @@ function Register({ hideModal, onFormSwitch }) {
                     </div>
                     <label htmlFor="password" className="font-monospace">
                       Password
-                      <span className={validPwd ? "valid" : "hide"}>
+                      {/* <span className={validPwd ? "valid" : "hide"}>
                         <FontAwesomeIcon icon={faCheck} />
-                      </span>
-                      <span
+                      </span> */}
+                      {/* <span
                         className={!validPwd || password ? "invalid" : "hide"}
                       >
                         <FontAwesomeIcon icon={faTimes} />
-                      </span>
+                      </span> */}
                     </label>
                     <input
                       type="password"
@@ -266,18 +268,18 @@ function Register({ hideModal, onFormSwitch }) {
                     </p>
                     <label htmlFor="confirm_pwd" className="font-monospace">
                       Confirm Password
-                      <span
+                      {/* <span
                         className={validMatch && matchPwd ? "valid" : "hide"}
                       >
                         <FontAwesomeIcon icon={faCheck} />
-                      </span>
-                      <span
+                      </span> */}
+                      {/* <span
                         className={
                           !validMatch || !matchPwd ? "invalid" : "hide"
                         }
                       >
                         <FontAwesomeIcon icon={faTimes} />
-                      </span>
+                      </span> */}
                     </label>
                     <div className="mb-3">
                       <input

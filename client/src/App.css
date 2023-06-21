@@ -1,6 +1,6 @@
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 .offscreen {
   display: none;
@@ -498,17 +498,6 @@ div.parent {
 div.absolute {
   position: absolute;
   bottom: 10px;
-}
-
-.title {
-  /* position: absolute;
-  top: 30%;
-  left: 10%; */
-  font-size: 4.7em;
-}
-
-.emphasis-title {
-  /* font-size: 4.7em; */
 }
 
 .hero-position {
