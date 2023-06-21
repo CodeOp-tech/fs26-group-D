@@ -91,6 +91,7 @@ function App() {
                   showModal={showModal}
                   hideModal={hideModal}
                   toggleForm={toggleForm}
+                  user={user}
                 />
               }
             />
