@@ -46,6 +46,7 @@ function NewMealPlan() {
     getRestrictions();
   }, []);
 
+  // minor change
   const searchRecipes = async () => {
     try {
       const params = {
