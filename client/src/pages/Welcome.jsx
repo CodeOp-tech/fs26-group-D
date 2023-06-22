@@ -124,10 +124,11 @@ function Welcome({
                 <h2 className="display-5 fs-5">Program your Plates</h2>
 
                 <div className="">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Blanditiis dicta illum voluptas, provident et accusantium,
-                  necessitatibus nulla unde iusto neque voluptates dolor
-                  aliquam? Praesentium esse nemo aut nisi, dolorum natus!
+                  Plan your upcoming meals with the Busy Bytes Meal Planner!
+                  Search for recipes and schedule them into your calendar. Lorem
+                  ipsum dolor sit amet consectetur adipisicing elit. Ipsam
+                  corrupti illum iste beatae id quos repellendus odio ad tempore
+                  eius?
                 </div>
               </div>
             </div>
@@ -170,9 +171,9 @@ function Welcome({
         <section className=" text-light bg-dark text-center" id="about">
           <div className="p-5">
             <small>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consectetur sequi maxime beatae quasi quidem iusto unde fuga atque
-              soluta laborum!
+              This a student project made at the CodeOp FullStack Bootcamp in
+              Barcelona created by Camille Richet, Natalia Hernández and Calix
+              Rose.
             </small>
           </div>
         </section>
