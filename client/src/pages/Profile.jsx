@@ -125,18 +125,34 @@ export default function Profile() {
     }
   };
 
-  console.log(image);
-  console.log(imageUrl);
-
   return (
     <>
       <div className="container my-3">
         <div className="row shadow ">
           <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 profile-min-height ">
-            <div className="ps-4 py-2">
-              {!showUpdateProfilePicture ? (
+            <div className="ps-4 py-2 ">
+              <div className="text-end pe-2">
+                <button
+                  onClick={() => {
+                    toggleUpdateProfilePictureView();
+                  }}
+                  className="btn text-white "
+                >
+                  <i className="bi bi-pencil"></i>
+                </button>{" "}
+              </div>
+              {imageUrl ? (
                 <>
-                  <button onClick={toggleUpdateProfilePictureView}>🖊</button>
+                  <img
+                    className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
+                    src={imageUrl}
+                    height={150}
+                    width={150}
+                    alt="Profile"
+                  />
+                </>
+              ) : (
+                <>
                   <img
                     className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
                     src="https://static.vecteezy.com/system/resources/previews/007/224/792/original/robot-modern-style-vector.jpg"
@@ -144,57 +160,27 @@ export default function Profile() {
                     width={150}
                     alt="Default Profile"
                   />
-                </>
-              ) : (
-                <>
-                  <form onSubmit={savePicture}>
-                    <input type="file" onChange={handleChange} />
-                    <button type="submit">Update profile picture</button>
-                    <button onClick={toggleUpdateProfilePictureView}>
-                      Cancel
-                    </button>
-                  </form>
-                  {imageUrl ? (
-                    <img
-                      className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
-                      src={imageUrl}
-                      height={150}
-                      width={150}
-                      alt="Profile"
-                    />
-                  ) : (
-                    <img
-                      className="shadow img-fluid mt-1 mb-1 d-block bg-info rounded-circle selected"
-                      src="https://static.vecteezy.com/system/resources/previews/007/224/792/original/robot-modern-style-vector.jpg"
-                      height={150}
-                      width={150}
-                      alt="Default Profile"
-                    />
-                  )}
+                  {/* <button onClick={toggleUpdateProfilePictureView} className="btn text-white"><i className="bi bi-pencil"></i></button> */}
                 </>
               )}
+
               <div key={user.id} className="mt-4">
                 <h2 className="display-5 fs-4">
                   {user.firstname} {user.lastname}
                 </h2>
 
                 <p className="h6 mb-0 pb-0">Email:</p>
-                {!showUpdateEmail ? (
-                  <>
-                    <button onClick={toggleUpdateEmailView}>🖊</button>
-                    <p className="mt-0 pt0">{user.email}</p>
-                  </>
-                ) : (
-                  <form onSubmit={updateEmail}>
-                    <input
-                      type="email"
-                      value={newEmail}
-                      onChange={e => setNewEmail(e.target.value)}
-                    />
-                    <button type="submit">Update Email</button>
-                    <button onClick={toggleUpdateEmailView}>Cancel</button>
-                  </form>
-                )}
+                <p className="mt-0 pt0">
+                  {user.email}{" "}
+                  <span>
+                    <button
+                      onClick={toggleUpdateEmailView}
+                      className="btn text-white"
+                    >
+                      <i className="bi bi-pencil"></i>
+                    </button>
+                  </span>
+                </p>
               </div>
             </div>
             <div className="ps-2 py-3">
@@ -214,7 +200,6 @@ export default function Profile() {
                   }}
                 >
                   My Favourites
-                  {/* {showFavourites ? "Hide Favourites" : "My Favourites"} */}
                 </button>
               </div>
               <div className="ps-1">
@@ -230,32 +215,81 @@ export default function Profile() {
                       setFavouritesSummary(false);
                   }}
                 >
-                  {" "}
                   My Preferences
-                  {/* {showSettings ? "Hide Settings" : "My Settings"} */}
                 </button>
               </div>
             </div>
 
             <div className="container">
-              <Accordion flush>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>Update your details</Accordion.Header>
-                  <Accordion.Body>
-                    <label htmlFor="" className="p-1 ">
-                      Upload new profile picture:
-                    </label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleChange}
-                      className="form-control text-primary border border-primary border-3"
-                    />
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
+              {showUpdateProfilePicture && (
+                <form onSubmit={savePicture}>
+                  <label htmlFor="" className="p-1 ">
+                    Upload new profile picture:
+                  </label>
+                  <input
+                    type="file"
+                    onChange={handleChange}
+                    className="form-control text-primary border border-primary border-3"
+                  />
+
+                  <div className="row pb-2 pt-3">
+                    <div className="col">
+                      <button
+                        type="submit"
+                        className="btn pushable-s"
+                        onClick={toggleUpdateProfilePictureView}
+                      >
+                        <span className="shadow-btn-s"></span>
+                        <span className="edge-s"></span>
+                        <span className="front-s">Cancel </span>
+                      </button>
+                    </div>
+                    <div className="col text-end">
+                      <button type="submit" className="btn pushable-b">
+                        <span className="shadow-btn-b"></span>
+                        <span className="edge-b"></span>
+                        <span className="front-b">Update </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              )}
+              {showUpdateEmail && (
+                <form onSubmit={updateEmail}>
+                  <label htmlFor="" className="p-1">
+                    Update your email:
+                  </label>
+                  <input
+                    type="email"
+                    value={newEmail}
+                    onChange={e => setNewEmail(e.target.value)}
+                    className="form-control"
+                  />
+                  <div className="row pb-2 pt-3">
+                    <div className="col">
+                      <button
+                        type="submit"
+                        className="btn pushable-s"
+                        onClick={toggleUpdateEmailView}
+                      >
+                        <span className="shadow-btn-s"></span>
+                        <span className="edge-s"></span>
+                        <span className="front-s">Cancel </span>
+                      </button>
+                    </div>
+                    <div className="col text-end">
+                      <button type="submit" className="btn pushable-b">
+                        <span className="shadow-btn-b"></span>
+                        <span className="edge-b"></span>
+                        <span className="front-b">Update </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
+
           <div className="col m-0 p-0 profile-min-height">
             <div className="">
               <div>
