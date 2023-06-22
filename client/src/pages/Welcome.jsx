@@ -80,7 +80,11 @@ function Welcome({
                 <div className="row vh-nav-66 ">
                   <div className="my-auto">
                     <div className="text-white ms-5 p-5 d-none d-md-block">
-                      [image placeholder]
+                      <img
+                        className="img-fluid"
+                        src=".\images\BusyBytes.png"
+                        alt="BusyBytes robot"
+                      />
                     </div>
                   </div>
                 </div>

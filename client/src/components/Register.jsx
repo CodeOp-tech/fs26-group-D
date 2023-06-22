@@ -134,7 +134,13 @@ function Register({ hideModal, onFormSwitch }) {
               <div className="card"> */}
           <div className="row m-0 border-bottom border-3 border-primary shadow rounded">
             <div className="col-md-5 bg-blueLight rounded">
-              <div className="container">img placeholder</div>
+              <div className="container">
+                <img
+                  className="img-fluid my-auto py-5"
+                  src=".\images\BusyBytes.png"
+                  alt="BusyBytes robot"
+                />
+              </div>
             </div>
             <div className="col-md-7">
               <div className="card-body text-center">
