@@ -4,7 +4,19 @@ import AuthContext from "./context/AuthContext";
 import axios from "axios";
 import "../App.css";
 
-function Login(props) {
+function Login({
+  currentForm,
+  setCurrentForm,
+  isOpen,
+  setIsOpen,
+  showModal,
+  hideModal,
+  toggleForm,
+  onFormSwitch
+  // login,
+  // credentials,
+  // setCredentials
+}) {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -22,6 +34,7 @@ function Login(props) {
 
   const login = async e => {
     e.preventDefault();
+
     try {
       const { data } = await axios("/api/auth/login", {
         method: "POST",
@@ -30,7 +43,9 @@ function Login(props) {
 
       localStorage.setItem("token", data.token);
       auth.login();
+
       navigate("/private/dashboard");
+
       console.log(data.message, data.token);
     } catch (err) {
       if (err.response && err.response.status === 400) {
@@ -43,84 +58,82 @@ function Login(props) {
 
   return (
     <>
-      <section className="bg-altLight">
-        <div className="container-lg ">
-          <div className="row justify-content-center">
-            <div className="col-10 m-4">
-              <div className="card">
-                <div className="row g-0 rounded">
-                  <div className="col-md-5 bg-aquaLight">
-                    <div className="container">img placeholder</div>
-                  </div>
-                  <div className="col-md-7">
-                    <div className="card-body text-center">
-                      <div className="text-end">
-                        <h1 className="card-title display-5 fs-4 mb-4">
-                          Welcome Back
-                        </h1>
-                      </div>
+      <section className=" container">
+        <div className="container   m-2">
+          {/* <div className="row justify-content-center"> */}
 
-                      <div className="card-contents">
-                        <form onSubmit={login} className="login-form">
-                          <label htmlFor="email" className="h5">
-                            Email
-                          </label>
-                          <div className="input-group mb-3">
-                            <span className="input-group-text">@</span>
-                            <input
-                              value={email}
-                              type="email"
-                              placeholder="youremail@domain.com"
-                              name="email"
-                              onChange={handleChange}
-                              className="form-control"
-                            />
-                          </div>
-                          <label htmlFor="password" className="h5">
-                            Password
-                          </label>
-                          <input
-                            value={password}
-                            name="password"
-                            type="password"
-                            placeholder="***********"
-                            onChange={handleChange}
-                            className="form-control mb-3"
-                          />
-                          <div className="">
-                            <button
-                              type="submit"
-                              className="btn mb-3 pushable-s"
-                              // onClick={showModal}
-                            >
-                              <span className="shadow-btn-s"></span>
-                              <span className="edge-s"></span>
-                              <span className="front-s">LOG IN </span>
-                            </button>
-                          </div>
-                        </form>
+          {/* <div className="row g-0 border-bottom border-end border-3 border-secondary shadow"> */}
+          <div className="row m-0 border-bottom border-3 border-primary shadow rounded ">
+            <div className="col-md-5 bg-aquaLight rounded">
+              <div className="rounded">img placeholder</div>
+            </div>
+            <div className="col-md-7">
+              <div className="card-body text-center">
+                <div className="text-end">
+                  <h1 className="card-title display-5 fs-4 p-3">
+                    Welcome Back
+                  </h1>
+                </div>
 
-                        <p>
-                          Don't have an account?
-                          <button
-                            onClick={() => props.onFormSwitch("register")}
-                          >
-                            Register here.
-                          </button>
-                        </p>
-                        {/* <button
-        className="btn btn-secondary"
-        onClick={() => props.onFormSwitch("register")}
-      >
-         Register here.
-      </button> */}
-                      </div>
+                <div className="card-contents px-3 py-1">
+                  <form onSubmit={login} className="login-form">
+                    <label htmlFor="email" className="h5">
+                      Email
+                    </label>
+                    <div className="input-group mb-3">
+                      <span className="input-group-text">@</span>
+                      <input
+                        value={email}
+                        type="email"
+                        placeholder="youremail@domain.com"
+                        name="email"
+                        onChange={handleChange}
+                        className="form-control"
+                      />
                     </div>
-                  </div>
+                    <label htmlFor="password" className="h5">
+                      Password
+                    </label>
+                    <input
+                      value={password}
+                      name="password"
+                      type="password"
+                      placeholder="***********"
+                      onChange={handleChange}
+                      className="form-control mb-3"
+                    />
+                    <div className="">
+                      <button
+                        type="submit"
+                        className="btn mb-3 pushable-s"
+                        onClick={() => {
+                          hideModal();
+                        }}
+                      >
+                        <span className="shadow-btn-s"></span>
+                        <span className="edge-s"></span>
+                        <span className="front-s"> LOG IN </span>
+                      </button>
+                    </div>
+                  </form>
+
+                  <button
+                    className="btn font-monospace"
+                    onClick={() => onFormSwitch("register")}
+                  >
+                    Don't have an account?
+                    <span className="font-monospace text-secondary">
+                      {" "}
+                      Register here.
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* </div> */}
+          {/* </div> */}
         </div>
       </section>
     </>

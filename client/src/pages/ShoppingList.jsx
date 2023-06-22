@@ -89,31 +89,33 @@ function ShoppingList() {
   });
 
   return (
-    <div>
-      {ingredientData.length === 0 ? (
-        <div>
+    <>
+      <div className="container col-md-8 mt-4 border-bottom border-end border-primary border-3 shadow text-center">
+        <h1>Shopping List</h1>
+        <div className="mx-auto  p-3 mb-4 ">
+          {ingredientData.length === 0 ? (
+          <div>
           <p>The shopping list is empty</p>
-        </div>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Aisle</th>
-              <th>Ingredient</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {Object.entries(ingredientsByAisle).map(([aisle, ingredients]) => {
+          </div>
+          ) : (
+            <div className="row justify-content-center">
+              <div className="col-auto">
+                <table className="table table-responsive text-center">
+                  <thead>
+                    <tr>
+                      <th className="h5 px-4">Aisle</th>
+                      <th className="h5 px-4">Ingredient</th>
+                      <th className="h5 px-4">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(ingredientsByAisle).map(([aisle, ingredients]) => {
               let previousAisle = null; // Track the previous aisle
               return (
                 <React.Fragment key={aisle}>
                   {ingredients.map((ingredient, index) => {
                     const shouldRenderAisle = previousAisle !== aisle;
                     previousAisle = aisle; // Update the previous aisle
-
-                    return (
                       <tr
                         key={ingredient.id}
                         className={
@@ -124,14 +126,15 @@ function ShoppingList() {
                       >
                         {shouldRenderAisle && index === 0 && (
                           <td
+                            className="px-4"
                             rowSpan={ingredients.length}
                             className="aisle-row"
                           >
                             {aisle}
                           </td>
                         )}
-                        <td>{capitalizeFirstLetter(ingredient.name)}</td>
-                        <td>
+                        <td className="px-4">{capitalizeFirstLetter(ingredient.name)}</td>
+                        <td className="px-4">
                           {isSmallUnit(ingredient.unit)
                             ? ""
                             : `${ingredient.amount} ${ingredient.unit}`}
@@ -147,9 +150,14 @@ function ShoppingList() {
       )}
       {ingredientData.length > 0 && (
         <div>
-          <button onClick={handleDeleteShoppingList}>
-            Delete Shopping List
-          </button>
+          <button
+              className="btn mb-3 pushable-s m-3"
+              onClick={handleDeleteShoppingList}
+            >
+              <span className="shadow-btn-s"></span>
+              <span className="edge-s"></span>
+              <span className="front-s"> Delete Shopping List </span>
+            </button>
           {/* <button onClick={sendShoppingListEmail}>Email Shopping List</button> */}
         </div>
       )}

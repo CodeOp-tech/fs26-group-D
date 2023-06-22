@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .offscreen {
   display: none;
 }
@@ -474,7 +478,7 @@
 /* ------------------ */
 
 .vh-nav {
-  height: calc(100vh - 50.08px);
+  height: calc(100vh - 54.35px);
 }
 
 #hero-image {
@@ -496,6 +500,61 @@ div.absolute {
   bottom: 10px;
 }
 
+.title {
+  /* position: absolute;
+  top: 30%;
+  left: 10%; */
+  font-size: 4.7em;
+}
+
+.hero-position {
+  position: absolute;
+  left: 10%;
+  top: 25%;
+}
+
+.hero-right-position {
+  position: absolute;
+  right: 30%;
+  top: 25%;
+}
 .width100 {
   width: 100%;
+}
+
+.test {
+  overflow-x: hidden;
+}
+
+div.absolute-close {
+  position: absolute;
+  top: 1.25em;
+  right: 1em;
+}
+
+.vh-nav-66 {
+  height: calc(((100vh - 54.35px) / 3) * 2);
+}
+
+.vh-nav-33 {
+  height: calc((100vh - 54.35px) / 3);
+}
+
+.hero-button {
+  position: absolute;
+  bottom: 25%;
+  right: 10%;
+}
+
+.table-size {
+  width: 175px;
+  /* height: 225px */
+}
+
+.meals-height {
+  height: 100%;
+}
+
+.meal-planner-div {
+  overflow: auto;
 }
