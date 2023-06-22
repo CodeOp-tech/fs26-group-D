@@ -682,7 +682,7 @@ function NewMealPlan() {
                       <option value="elevensies">Elevensies</option>
                       <option value="lunch">Lunch</option>
                       <option value="afternoon tea">Afternoon tea</option>
-                      <option value="dinner">Diner</option>
+                      <option value="dinner">Dinner</option>
                     </select>
                   </div>
                   <div className="text-end">
