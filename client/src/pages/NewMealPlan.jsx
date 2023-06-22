@@ -95,6 +95,7 @@ function NewMealPlan() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log("submitted");
     const formData = {
       query,
       diet,
@@ -217,7 +218,9 @@ function NewMealPlan() {
             ) : (
               <button
                 className="btn pushable-s"
-                onClick={() => setQueryToggle(true)}
+                onClick={e => {
+                  setQueryToggle(true), handleSubmit(e);
+                }}
               >
                 <span className="shadow-btn-s"></span>
                 <span className="edge-s"></span>
