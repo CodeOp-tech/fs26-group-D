@@ -36,9 +36,10 @@ export default function Profile() {
         setUser(data);
         // Set the image URL if available
         if (data.profile_pic) {
-          const blob = new Blob([new Uint8Array(data.profile_pic.data)]);
-          const url = URL.createObjectURL(blob);
-          setImageUrl(url);
+          // const blob = new Blob([new Uint8Array(data.profile_pic.data)]);
+          // const url = URL.createObjectURL(blob);
+
+          setImageUrl(data.profile_pic);
         }
       } else {
         throw new Error(response.statusText);
@@ -105,7 +106,7 @@ export default function Profile() {
               "Content-Type": "application/json",
               authorization: "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify({ image: imageData })
+            body: JSON.stringify({ profile_pic: imageData })
           });
 
           if (response.ok) {
