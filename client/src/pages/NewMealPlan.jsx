@@ -95,6 +95,7 @@ function NewMealPlan() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log("submitted");
     const formData = {
       query,
       diet,
@@ -206,8 +207,10 @@ function NewMealPlan() {
           <div className="col text-end">
             {queryToggle ? (
               <button
-                type="submit"
-                onClick={() => setQueryToggle(false)}
+                // type="submit"
+                onClick={e => {
+                  setQueryToggle(false), handleSubmit(e);
+                }}
                 className="btn pushable-b"
               >
                 <span className="shadow-btn-b"></span>
