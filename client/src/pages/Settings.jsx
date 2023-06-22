@@ -100,7 +100,9 @@ function Settings({ settingsSummary }) {
       <div className="">
         <div className="">
           <div className="border-bottom border-end border-secondary border-3 shadow">
-            <div className={settingsSummary ? "p-3 profile-min-height" : "p-3"}>
+            <div
+              className={settingsSummary ? "p-3 profile-min-height " : "p-3"}
+            >
               {settingsSummary || <h1 className="">Settings</h1>}
 
               <div className="">

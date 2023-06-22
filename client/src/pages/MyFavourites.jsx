@@ -241,7 +241,7 @@ function MyFavourites({ favouritesSummary }) {
                               <option value="afternoon tea">
                                 Afternoon tea
                               </option>
-                              <option value="dinner">Diner</option>
+                              <option value="dinner">Dinner</option>
                             </select>
                           </div>
                           <div className="text-end">
