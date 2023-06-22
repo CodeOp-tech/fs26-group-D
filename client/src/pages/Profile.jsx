@@ -10,13 +10,14 @@ export default function Profile() {
   const [showFavourites, setShowFavourites] = useState(false);
   const [settingsSummary, setSettingsSummary] = useState(true);
   const [favouritesSummary, setFavouritesSummary] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettings, setShowSettings] = useState(true);
   const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [showUpdateEmail, setShowUpdateEmail] = useState(false);
-  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(false);
-
+  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(
+    false
+  );
 
   useEffect(() => {
     getUserInfo();
@@ -131,8 +132,8 @@ export default function Profile() {
     <>
       <div className="container my-3">
         <div className="row shadow ">
-            <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 profile-min-height ">
-              <div className="ps-4 py-2">
+          <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 profile-min-height ">
+            <div className="ps-4 py-2">
               {!showUpdateProfilePicture ? (
                 <>
                   <button onClick={toggleUpdateProfilePictureView}>🖊</button>
@@ -236,9 +237,7 @@ export default function Profile() {
               </div>
             </div>
 
-
             <div className="container">
-
               <Accordion flush>
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Update your details</Accordion.Header>
