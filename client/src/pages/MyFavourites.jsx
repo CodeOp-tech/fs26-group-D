@@ -88,6 +88,10 @@ function MyFavourites() {
     }
   };
 
+  if (uniqueFavourites.length === 0) {
+    return <p>No favourites yet, try adding some</p>;
+  }
+
   return (
     <>
       <div className="border-bottom border-end border-primary border-3 shadow px-4">

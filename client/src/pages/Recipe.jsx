@@ -90,6 +90,9 @@ function Recipe() {
 
                 <div className="row bg-white border-bottom border-secondary border-3 shadow ms-5">
                   <p>(Select ingredients to add to shopping list)</p>
+                  <button className="btn" type="button">
+                    ⭐
+                  </button>
                 </div>
               </div>
             </div>

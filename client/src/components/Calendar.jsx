@@ -49,6 +49,48 @@ export default function Calendar() {
       const mealsForCurrentDay = data.filter(
         meal => dayjs(meal.date).format("DD/MM/YYYY") === formattedCurrentDay
       );
+      // Calculate nutrition summary for the day
+      const nutritionSummary = {
+        calories: 0,
+        protein: 0,
+        carbs: 0,
+        fat: 0,
+        saturatedFat: 0,
+        cholesterol: 0,
+        sugar: 0
+      };
+
+      mealsForCurrentDay.forEach(meal => {
+        nutritionSummary.calories += meal.calories;
+        nutritionSummary.protein += meal.protein;
+        nutritionSummary.carbs += meal.carbs;
+        nutritionSummary.fat += meal.fat;
+        nutritionSummary.saturatedFat += meal.saturatedFat;
+        nutritionSummary.cholesterol += meal.cholesterol;
+        nutritionSummary.sugar += meal.sugar;
+        // nutritionSummary.calories += parseFloat(
+        //   meal.nutrition.nutrients.find((nutrient) => nutrient.name === 'Calories')?.amount
+        // );
+        // nutritionSummary.protein += parseFloat(
+        //   meal.nutrition.nutrients.find((nutrient) => nutrient.name === 'Protein')?.amount
+        // );
+        // nutritionSummary.carbs += parseFloat(
+        //   meal.nutrition.nutrients.find((nutrient) => nutrient.name === 'Carbohydrates')?.amount
+        // );
+        // nutritionSummary.fat += parseFloat(
+        //   meal.nutrition.nutrients.find((nutrient) => nutrient.name === 'Fat')?.amount
+        // );
+        // nutritionSummary.saturatedFat += parseFloat(
+        //   meal.nutrition.nutrients.find((nutrient) => nutrient.name === 'Saturated Fat')?.amount
+        // );
+        // nutritionSummary.cholesterol += parseFloat(
+        //   meal.nutrition.nutrients.find((nutrient) => nutrient.name === 'Cholesterol')?.amount
+        // );
+        // nutritionSummary.sugar += parseFloat(
+        //   meal.nutrition.nutrients.find((nutrient) => nutrient.name === 'Sugar')?.amount
+        // );
+      });
+
       days.push({
         date: new Date(currentDay),
         dayName: weekday[currentDay.getDay()],
@@ -59,7 +101,8 @@ export default function Calendar() {
           img: meal.recipe_image,
           recipe_id: meal.recipe_id,
           favourite: meal.favourite
-        }))
+        })),
+        nutritionSummary: nutritionSummary
       });
       currentDay.setDate(currentDay.getDate() + 1);
     }
@@ -241,6 +284,26 @@ export default function Calendar() {
                 ))}
               </tr>
             ))}
+            <tr>
+              <th className="mealName table-primary font-monospace border border-primary">
+                Nutrition Summary
+              </th>
+              {days.map((day, dayIndex) => (
+                <td key={dayIndex} className="border border-primary">
+                  {day.nutritionSummary.calories !== 0 && (
+                    <div className="nutrition-summary">
+                      <p>Calories: {day.nutritionSummary.calories}</p>
+                      <p>Protein: {day.nutritionSummary.protein}</p>
+                      <p>Carbs: {day.nutritionSummary.carbs}</p>
+                      <p>Fat: {day.nutritionSummary.fat}</p>
+                      <p>Saturated Fat: {day.nutritionSummary.saturatedFat}</p>
+                      <p>Cholesterol: {day.nutritionSummary.cholesterol}</p>
+                      <p>Sugar: {day.nutritionSummary.sugar}</p>
+                    </div>
+                  )}
+                </td>
+              ))}
+            </tr>
           </tbody>
         </table>
       </div>
