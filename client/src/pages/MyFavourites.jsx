@@ -7,6 +7,7 @@ function MyFavourites({ favouritesSummary }) {
   const [fav, setFav] = useState([]);
   const [date, setDate] = useState("");
   const [mealType, setMealType] = useState("");
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     getFavourites();
@@ -56,37 +57,37 @@ function MyFavourites({ favouritesSummary }) {
     return fav.find(meal => meal.recipe_id === recipeId);
   });
 
-  const addMealToCalendar = async recipe => {
-    const input = {
-      date,
-      meal_type: mealType,
-      recipe_id: recipe.id,
-      recipe_title: recipe.title,
-      recipe_image: recipe.image
-    };
-    console.log(input);
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: "Bearer " + localStorage.getItem("token")
-      },
-      body: JSON.stringify(input)
-    };
-    try {
-      const response = await fetch("/api/recipes/calendar", options);
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      // Handle successful response here
-      alert(`${input.recipe_title} has been added to your calendar`);
-      // console.log("Meal added successfully");
-      setDate("");
-      setMealType("");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
+  // const addMealToCalendar = async meal => {
+  //   const input = {
+  //     date,
+  //     meal_type: mealType,
+  //     recipe_id: meal.recipe.id,
+  //     recipe_title: meal.recipe.title,
+  //     recipe_image: meal.recipe.image
+  //   };
+  //   console.log(input);
+  //   const options = {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       authorization: "Bearer " + localStorage.getItem("token")
+  //     },
+  //     body: JSON.stringify(input)
+  //   };
+  //   try {
+  //     const response = await fetch("/api/recipes/calendar", options);
+  //     if (!response.ok) {
+  //       throw new Error(response.statusText);
+  //     }
+  //     // Handle successful response here
+  //     alert(`${input.recipe_title} has been added to your calendar`);
+  //     // console.log("Meal added successfully");
+  //     setDate("");
+  //     setMealType("");
+  //   } catch (err) {
+  //     setError(err.message);
+  //   }
+  // };
 
   return (
     <>
@@ -201,7 +202,7 @@ function MyFavourites({ favouritesSummary }) {
                     </div>
 
                     {/* here */}
-                    <Accordion flush className="meal-accordion">
+                    {/* <Accordion flush className="meal-accordion">
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>Add to Calendar</Accordion.Header>
                         <Accordion.Body>
@@ -247,7 +248,7 @@ function MyFavourites({ favouritesSummary }) {
                           <div className="text-end">
                             <button
                               className="btn pushable-b-sm mt-3 mb-3"
-                              onClick={() => addMealToCalendar(recipe)}
+                              onClick={() => addMealToCalendar(meal)}
                             >
                               <span className="shadow-btn-b-sm"></span>
                               <span className="edge-b-sm"></span>
@@ -258,7 +259,7 @@ function MyFavourites({ favouritesSummary }) {
                           </div>
                         </Accordion.Body>
                       </Accordion.Item>
-                    </Accordion>
+                    </Accordion> */}
                   </div>
                 </div>
               ))}
