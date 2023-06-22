@@ -58,8 +58,8 @@ function Login({
 
   return (
     <>
-      <section className=" container">
-        <div className="container   m-2">
+      <section className=" container my-3">
+        <div className=" mx-auto">
           {/* <div className="row justify-content-center"> */}
 
           {/* <div className="row g-0 border-bottom border-end border-3 border-secondary shadow"> */}
