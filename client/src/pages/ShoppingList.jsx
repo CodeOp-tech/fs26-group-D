@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import IngredientContext from "../components/context/IngredientContext";
 // import emailTransporter from "../mailer";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 function ShoppingList() {
   const { ingredientData, setIngredientData } = useContext(IngredientContext);
@@ -94,9 +95,22 @@ function ShoppingList() {
         <h1>Shopping List</h1>
         <div className="mx-auto  p-3 mb-4 ">
           {ingredientData.length === 0 ? (
-            <div>
-              <p>The shopping list is empty</p>
-            </div>
+            <p>
+              Shopping list is empty. <br />
+              View some recipes to add ingredents.
+              <div className="my-3">
+                <Link
+                  to={`/private/dashboard/newmealplan`}
+                  className="text-decoration-none"
+                >
+                  <button className="my-auto btn  pushable-b">
+                    <span className="shadow-btn-b"></span>
+                    <span className="edge-b"></span>
+                    <span className="front-b">SEARCH FOR RECIPES</span>
+                  </button>
+                </Link>
+              </div>
+            </p>
           ) : (
             <div className="row justify-content-center">
               <div className="col-auto">

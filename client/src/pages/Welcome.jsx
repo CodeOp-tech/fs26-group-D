@@ -45,32 +45,49 @@ function Welcome({
         </Modal>
 
         <section id="hero">
-          <div className="text-light bg-dark vh-nav parent p-0 m-0">
+          <div className="text-light bg-dark vh-nav parent p-0 m-0 ">
+            {/* <div className="text-light bg-dark  p-0 m-0 d-md-none "> */}
             <div className="row m-0">
-              <div className="col-7 text-start vh-nav parent">
+              <div className="col-md-7 text-start vh-nav parent">
                 <div className="hero-position">
-                  <h1 className="display-3 title">
-                    EAT, <span className="text-secondary">CODE, </span>{" "}
-                    <span className="text-primary display-1">REPEAT</span>
+                  {/* <div className="text-white ms-5 p-5 d-md-none ">
+                      [image placeholder]
+                    </div> */}
+
+                  <h1 className="display-2">
+                    EAT,{" "}
+                    <span className="text-secondary display-2">CODE, </span>{" "}
+                    <span className="text-primary display-1 ">REPEAT</span>
                   </h1>
-                  <p className="lead text-white text-opacity-50 tag-line">
+                  <p className="lead text-white text-opacity-50 tag-line d-none d-md-block">
                     Debug your meal prep with Busy Bytes!
                   </p>
+                  {/* <button>test </button> */}
+                  <button
+                    className="btn pushable-b-lg d-md-none "
+                    onClick={() => {
+                      setCurrentForm("register"), showModal();
+                    }}
+                  >
+                    <span className="shadow-btn-b-lg"></span>
+                    <span className="edge-b-lg"></span>
+                    <span className="front-b-lg">GET STARTED </span>
+                  </button>
                 </div>
               </div>
 
               <div className="col-5">
                 <div className="row vh-nav-66 ">
                   <div className="my-auto">
-                    <div className="text-white ms-5 p-5">
+                    <div className="text-white ms-5 p-5 d-none d-md-block">
                       [image placeholder]
                     </div>
                   </div>
                 </div>
                 <div className="row vh-nav-33 parent">
-                  <div className="text-end hero-button">
+                  <div className="text-end hero-button d-none d-md-block">
                     <button
-                      className="btn pushable-b-lg"
+                      className="btn pushable-b-lg "
                       onClick={() => {
                         setCurrentForm("register"), showModal();
                       }}
@@ -86,12 +103,13 @@ function Welcome({
 
             <div
               id="learn_more"
-              className=" absolute width100 text-center text-white"
+              className=" absolute width100 text-center text-white d-none d-md-block"
             >
               <p className="mb-0 pb-0 h6">Learn more </p>
 
               <i className="bi bi-caret-down-fill white pt-0"></i>
             </div>
+            {/* </div> */}
           </div>
         </section>
 

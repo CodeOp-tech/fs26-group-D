@@ -8,14 +8,15 @@ export default function Profile() {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
   const [showFavourites, setShowFavourites] = useState(false);
+  const [settingsSummary, setSettingsSummary] = useState(true);
+  const [favouritesSummary, setFavouritesSummary] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [image, setImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [showUpdateEmail, setShowUpdateEmail] = useState(false);
-  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(
-    false
-  );
+  const [showUpdateProfilePicture, setShowUpdateProfilePicture] = useState(false);
+
 
   useEffect(() => {
     getUserInfo();
@@ -128,11 +129,9 @@ export default function Profile() {
 
   return (
     <>
-
-
       <div className="container my-3">
         <div className="row shadow ">
-            <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 ">
+            <div className="col-md-4 bg-dark text-white m-0 p-0 border border-primary border-3 profile-min-height ">
               <div className="ps-4 py-2">
               {!showUpdateProfilePicture ? (
                 <>
@@ -145,7 +144,6 @@ export default function Profile() {
                     alt="Default Profile"
                   />
                 </>
-
               ) : (
                 <>
                   <form onSubmit={savePicture}>
@@ -209,7 +207,9 @@ export default function Profile() {
                   }
                   onClick={() => {
                     setShowFavourites(!showFavourites),
-                      setShowSettings(!showSettings);
+                      setShowSettings(!showSettings),
+                      setFavouritesSummary(true),
+                      setSettingsSummary(false);
                   }}
                 >
                   My Favourites
@@ -225,7 +225,8 @@ export default function Profile() {
                   onClick={() => {
                     setShowSettings(!showSettings),
                       setShowFavourites(!showFavourites),
-                      setProfileSummary(true);
+                      setSettingsSummary(true),
+                      setFavouritesSummary(false);
                   }}
                 >
                   {" "}
@@ -256,14 +257,18 @@ export default function Profile() {
               </Accordion>
             </div>
           </div>
-          <div className="col m-0 p-0">
+          <div className="col m-0 p-0 profile-min-height">
             <div className="">
-              <div>{showFavourites && <MyFavourites />}</div>
+              <div>
+                {showFavourites && (
+                  <MyFavourites favouritesSummary={favouritesSummary} />
+                )}
+              </div>
               <div>
                 {showSettings && (
                   <Settings
-                    setProfileSummary={setProfileSummary}
-                    profileSummary={profileSummary}
+                    // setSettingsSummary={setSettingsSummary}
+                    settingsSummary={settingsSummary}
                   />
                 )}
               </div>

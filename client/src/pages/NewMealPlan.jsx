@@ -40,7 +40,6 @@ function NewMealPlan() {
   const [error, setError] = useState("");
   const [queryToggle, setQueryToggle] = useState(true);
   const [restrictions, setRestrictions] = useState([]);
-  const [queryMode, setQueryMode] = useState(true);
 
   useEffect(() => {
     setQueryToggle(true);

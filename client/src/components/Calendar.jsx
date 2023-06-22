@@ -169,7 +169,7 @@ export default function Calendar() {
       <div className="row">
         <div className="col-6">
           {" "}
-          [PLACE HOLDER FOR SETTING HOW MANY DAYS TO VIEW]
+          {/* [PLACE HOLDER FOR SETTING HOW MANY DAYS TO VIEW] */}
         </div>
         <div className="col-6">
           <div className="mb-3 mx-3 text-end">

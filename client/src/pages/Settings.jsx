@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "../App.css";
 
-function Settings({ setProfileSummary, profileSummary }) {
+function Settings({ settingsSummary }) {
   const [diet, setDiet] = useState("");
   const [intolerance, setIntolerance] = useState("");
   const [excludeIngredients, setExcludeIngredients] = useState("");
@@ -100,11 +100,11 @@ function Settings({ setProfileSummary, profileSummary }) {
       <div className="">
         <div className="">
           <div className="border-bottom border-end border-secondary border-3 shadow">
-            <div className="p-3">
-              {profileSummary || <h1 className="">Settings</h1>}
+            <div className={settingsSummary ? "p-3 profile-min-height" : "p-3"}>
+              {settingsSummary || <h1 className="">Settings</h1>}
 
               <div className="">
-                {profileSummary || (
+                {settingsSummary || (
                   <div className="bg-aquaLight border-bottom border-end border-secondary border-3 shadow-sm">
                     <h3 className="h5">Set Defaults:</h3>
                     <form onSubmit={addRestrictions}>
@@ -195,105 +195,116 @@ function Settings({ setProfileSummary, profileSummary }) {
                   </div>
                 )}
 
-                {profileSummary && (
-                  <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm text-end">
-                    <Link
-                      to={`/private/dashboard/settings`}
-                      className="text-decoration-none"
-                    >
-                      <button className="my-auto btn  pushable-b ">
-                        <span className="shadow-btn-b"></span>
-                        <span className="edge-b"></span>
-                        <span className="front-b">
-                          Update your dietary preferences{" "}
-                        </span>
-                      </button>
-                    </Link>
-                  </div>
+                {settingsSummary && (
+                  <>
+                    {restrictions.length === 0 && (
+                      <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm text-end">
+                        <Link
+                          to={`/private/dashboard/settings`}
+                          className="text-decoration-none"
+                        >
+                          <button className="my-auto btn  pushable-b">
+                            <span className="shadow-btn-b"></span>
+                            <span className="edge-b"></span>
+                            <span className="front-b">
+                              Update your dietary preferences{" "}
+                            </span>
+                          </button>
+                        </Link>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 <div>
                   <div className="container">
                     <div className="row py-3 mt-3 border-bottom border-end border-secondary border-3 shadow">
                       <h3 className="h5">Restrictions Summary:</h3>
-                      <div>
-                        <ul className="list-group-flush">
-                          <div className="mb-2">
-                            <h4 className="h6">Diet</h4>
-                            {restrictions.map((restriction, index) => (
-                              <div key={index}>
-                                {restriction.type === "diet" && (
-                                  <li className="list-group-item d-flex py-1">
-                                    <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
-                                      {" "}
-                                      {restriction.value}
-                                      <span className="ms-2">
-                                        <button
-                                          type="button"
-                                          onClick={() =>
-                                            handleDelete(restriction.id)
-                                          }
-                                          className="btn-close"
-                                        ></button>
+                      {restrictions.length === 0 ? (
+                        <p>
+                          Despise dill pickles? Hate halloumi? Set your dietary
+                          preference to exclude foods you don't eat.{" "}
+                        </p>
+                      ) : (
+                        <div>
+                          <ul className="list-group-flush">
+                            <div className="mb-2">
+                              <h4 className="h6">Diet</h4>
+                              {restrictions.map((restriction, index) => (
+                                <div key={index}>
+                                  {restriction.type === "diet" && (
+                                    <li className="list-group-item d-flex py-1">
+                                      <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
+                                        {" "}
+                                        {restriction.value}
+                                        <span className="ms-2">
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              handleDelete(restriction.id)
+                                            }
+                                            className="btn-close"
+                                          ></button>
+                                        </span>
                                       </span>
-                                    </span>
-                                  </li>
-                                )}
-                              </div>
-                            ))}
-                          </div>
+                                    </li>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
 
-                          <div className="mb-2">
-                            <h4 className="h6">Allergies</h4>
-                            {restrictions.map((restriction, index) => (
-                              <div key={index}>
-                                {restriction.type === "allergies" && (
-                                  <li className="list-group-item d-flex  py-1 ">
-                                    <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
-                                      {" "}
-                                      {restriction.value}
-                                      <span className="ms-2">
-                                        <button
-                                          type="button"
-                                          onClick={() =>
-                                            handleDelete(restriction.id)
-                                          }
-                                          className="btn-close"
-                                        ></button>
+                            <div className="mb-2">
+                              <h4 className="h6">Allergies</h4>
+                              {restrictions.map((restriction, index) => (
+                                <div key={index}>
+                                  {restriction.type === "allergies" && (
+                                    <li className="list-group-item d-flex  py-1 ">
+                                      <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
+                                        {" "}
+                                        {restriction.value}
+                                        <span className="ms-2">
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              handleDelete(restriction.id)
+                                            }
+                                            className="btn-close"
+                                          ></button>
+                                        </span>
                                       </span>
-                                    </span>
-                                  </li>
-                                )}
-                              </div>
-                            ))}
-                          </div>
+                                    </li>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
 
-                          <div>
-                            <h4 className="h6">Always Exclude</h4>
-                            {restrictions.map((restriction, index) => (
-                              <div key={index}>
-                                {restriction.type === "bad_food" && (
-                                  <li className="list-group-item d-flex  py-1 ">
-                                    <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
-                                      {" "}
-                                      {restriction.value}
-                                      <span className="ms-2">
-                                        <button
-                                          type="button"
-                                          onClick={() =>
-                                            handleDelete(restriction.id)
-                                          }
-                                          className="btn-close"
-                                        ></button>
+                            <div>
+                              <h4 className="h6">Always Exclude</h4>
+                              {restrictions.map((restriction, index) => (
+                                <div key={index}>
+                                  {restriction.type === "bad_food" && (
+                                    <li className="list-group-item d-flex  py-1 ">
+                                      <span className="bg-aquaLight p-2 rounded border-bottom border-secondary border-3">
+                                        {" "}
+                                        {restriction.value}
+                                        <span className="ms-2">
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              handleDelete(restriction.id)
+                                            }
+                                            className="btn-close"
+                                          ></button>
+                                        </span>
                                       </span>
-                                    </span>
-                                  </li>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                        </ul>
-                      </div>
+                                    </li>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
