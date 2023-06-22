@@ -207,8 +207,10 @@ function NewMealPlan() {
           <div className="col text-end">
             {queryToggle ? (
               <button
-                type="submit"
-                onClick={() => setQueryToggle(false)}
+                // type="submit"
+                onClick={e => {
+                  setQueryToggle(false), handleSubmit(e);
+                }}
                 className="btn pushable-b"
               >
                 <span className="shadow-btn-b"></span>
