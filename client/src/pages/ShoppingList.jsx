@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useMemo } from "react";
 import IngredientContext from "../components/context/IngredientContext";
 // import emailTransporter from "../mailer";
 import "../App.css";
@@ -79,15 +79,19 @@ function ShoppingList() {
   //   }
   // };
 
-  const ingredientsByAisle = {};
+  const ingredientsByAisle = useMemo(() => {
+    const result = {};
 
-  ingredientData.forEach(ingredient => {
-    const { aisle } = ingredient;
-    if (!ingredientsByAisle[aisle]) {
-      ingredientsByAisle[aisle] = [];
-    }
-    ingredientsByAisle[aisle].push(ingredient);
-  });
+    ingredientData.forEach(ingredient => {
+      const { aisle } = ingredient;
+      if (!result[aisle]) {
+        result[aisle] = [];
+      }
+      result[aisle].push(ingredient);
+    });
+
+    return result;
+  }, [ingredientData]);
 
   return (
     <>
@@ -124,42 +128,44 @@ function ShoppingList() {
                   </thead>
                   <tbody>
                     {Object.entries(ingredientsByAisle).map(
-                      ([aisle, ingredients]) => {
+                      ([aisle, ingredients], i) => {
                         let previousAisle = null; // Track the previous aisle
                         return (
-                          <React.Fragment key={aisle}>
+                          <React.Fragment key={i}>
                             {ingredients.map((ingredient, index) => {
                               const shouldRenderAisle = previousAisle !== aisle;
                               previousAisle = aisle; // Update the previous aisle
-                              <tr
-                                key={ingredient.id}
-                                className={
-                                  isIngredientBought(ingredient.id)
-                                    ? "bought"
-                                    : ""
-                                }
-                                onClick={() =>
-                                  toggleBoughtStatus(ingredient.id)
-                                }
-                                style={{ cursor: "pointer" }}
-                              >
-                                {shouldRenderAisle && index === 0 && (
-                                  <td
-                                    className="px-4 aisle-row"
-                                    rowSpan={ingredients.length}
-                                  >
-                                    {aisle}
+                              return (
+                                <tr
+                                  key={ingredient.id}
+                                  className={
+                                    isIngredientBought(ingredient.id)
+                                      ? "bought"
+                                      : ""
+                                  }
+                                  onClick={() =>
+                                    toggleBoughtStatus(ingredient.id)
+                                  }
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  {shouldRenderAisle && index === 0 && (
+                                    <td
+                                      className="px-4 aisle-row"
+                                      rowSpan={ingredients.length}
+                                    >
+                                      {aisle}
+                                    </td>
+                                  )}
+                                  <td className="px-4">
+                                    {capitalizeFirstLetter(ingredient.name)}
                                   </td>
-                                )}
-                                <td className="px-4">
-                                  {capitalizeFirstLetter(ingredient.name)}
-                                </td>
-                                <td className="px-4">
-                                  {isSmallUnit(ingredient.unit)
-                                    ? ""
-                                    : `${ingredient.amount} ${ingredient.unit}`}
-                                </td>
-                              </tr>;
+                                  <td className="px-4">
+                                    {isSmallUnit(ingredient.unit)
+                                      ? ""
+                                      : `${ingredient.amount} ${ingredient.unit}`}
+                                  </td>
+                                </tr>
+                              );
                             })}
                           </React.Fragment>
                         );
