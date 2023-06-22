@@ -88,10 +88,6 @@ function MyFavourites({ favouritesSummary }) {
     }
   };
 
-  if (uniqueFavourites.length === 0) {
-    return <p>No favourites yet, try adding some</p>;
-  }
-
   return (
     <>
       <div
