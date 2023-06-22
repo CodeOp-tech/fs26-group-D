@@ -1,5 +1,6 @@
 const axios = require("axios");
-const API_KEY = "e6537df7daf94aa4874efb7d4c653df5";
+//const API_KEY = "e6537df7daf94aa4874efb7d4c653df5";
+const API_KEY = "16e506963575476daaaa9a37ebd0c0be";
 
 async function searchRecipes(
   query,
@@ -26,7 +27,8 @@ async function searchRecipes(
   minFiber,
   maxFiber,
   minSugar,
-  maxSugar
+  maxSugar,
+  includeNutrition
 ) {
   try {
     const response = await axios.get(
@@ -58,7 +60,8 @@ async function searchRecipes(
           minFiber: minFiber,
           maxFiber: maxFiber,
           minSugar: minSugar,
-          maxSugar: maxSugar
+          maxSugar: maxSugar,
+          includeNutrition: includeNutrition
         }
       }
     );
