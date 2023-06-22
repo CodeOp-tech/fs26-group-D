@@ -284,7 +284,7 @@ export default function Calendar() {
                 ))}
               </tr>
             ))}
-            <tr>
+            {/* <tr>
               <th className="mealName table-primary font-monospace border border-primary">
                 Nutrition Summary
               </th>
@@ -303,7 +303,7 @@ export default function Calendar() {
                   )}
                 </td>
               ))}
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>
