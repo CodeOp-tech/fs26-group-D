@@ -10,7 +10,8 @@ export default function Profile() {
   const [showFavourites, setShowFavourites] = useState(false);
   const [showSettings, setShowSettings] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [profileSummary, setProfileSummary] = useState(true);
+  const [settingsSummary, setSettingsSummary] = useState(true);
+  const [favouritesSummary, setFavouritesSummary] = useState(false);
 
   useEffect(() => {
     getUserInfo();
@@ -91,7 +92,9 @@ export default function Profile() {
                   }
                   onClick={() => {
                     setShowFavourites(!showFavourites),
-                      setShowSettings(!showSettings);
+                      setShowSettings(!showSettings),
+                      setFavouritesSummary(true),
+                      setSettingsSummary(false);
                   }}
                 >
                   My Favourites
@@ -107,7 +110,8 @@ export default function Profile() {
                   onClick={() => {
                     setShowSettings(!showSettings),
                       setShowFavourites(!showFavourites),
-                      setProfileSummary(true);
+                      setSettingsSummary(true),
+                      setFavouritesSummary(false);
                   }}
                 >
                   {" "}
@@ -138,12 +142,16 @@ export default function Profile() {
           </div>
           <div className="col m-0 p-0 profile-min-height">
             <div className="">
-              <div>{showFavourites && <MyFavourites />}</div>
+              <div>
+                {showFavourites && (
+                  <MyFavourites favouritesSummary={favouritesSummary} />
+                )}
+              </div>
               <div>
                 {showSettings && (
                   <Settings
-                    setProfileSummary={setProfileSummary}
-                    profileSummary={profileSummary}
+                    // setSettingsSummary={setSettingsSummary}
+                    settingsSummary={settingsSummary}
                   />
                 )}
               </div>

@@ -80,12 +80,12 @@ function NavBar({
 
                   <li className="nav-item">
                     <button
-                      className="btn pushable-b-sm logoutBtn"
+                      className="btn pushable-s-sm logoutBtn"
                       onClick={logout}
                     >
-                      <span className="shadow-btn-b-sm"></span>
-                      <span className="edge-b-sm"></span>
-                      <span className="front-b-sm">LOG OUT </span>
+                      <span className="shadow-btn-s-sm"></span>
+                      <span className="edge-s-sm"></span>
+                      <span className="front-s-sm">LOG OUT </span>
                     </button>
                   </li>
                 </ul>

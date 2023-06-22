@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "../App.css";
 
-function Settings({ setProfileSummary, profileSummary }) {
+function Settings({ settingsSummary }) {
   const [diet, setDiet] = useState("");
   const [intolerance, setIntolerance] = useState("");
   const [excludeIngredients, setExcludeIngredients] = useState("");
@@ -100,11 +100,11 @@ function Settings({ setProfileSummary, profileSummary }) {
       <div className="">
         <div className="">
           <div className="border-bottom border-end border-secondary border-3 shadow">
-            <div className={profileSummary ? "p-3 profile-min-height" : "p-3"}>
-              {profileSummary || <h1 className="">Settings</h1>}
+            <div className={settingsSummary ? "p-3 profile-min-height" : "p-3"}>
+              {settingsSummary || <h1 className="">Settings</h1>}
 
               <div className="">
-                {profileSummary || (
+                {settingsSummary || (
                   <div className="bg-aquaLight border-bottom border-end border-secondary border-3 shadow-sm">
                     <h3 className="h5">Set Defaults:</h3>
                     <form onSubmit={addRestrictions}>
@@ -195,21 +195,25 @@ function Settings({ setProfileSummary, profileSummary }) {
                   </div>
                 )}
 
-                {profileSummary && (
-                  <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm text-end">
-                    <Link
-                      to={`/private/dashboard/settings`}
-                      className="text-decoration-none"
-                    >
-                      <button className="my-auto btn  pushable-b">
-                        <span className="shadow-btn-b"></span>
-                        <span className="edge-b"></span>
-                        <span className="front-b">
-                          Update your dietary preferences{" "}
-                        </span>
-                      </button>
-                    </Link>
-                  </div>
+                {settingsSummary && (
+                  <>
+                    {restrictions.length === 0 && (
+                      <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-3 shadow-sm text-end">
+                        <Link
+                          to={`/private/dashboard/settings`}
+                          className="text-decoration-none"
+                        >
+                          <button className="my-auto btn  pushable-b">
+                            <span className="shadow-btn-b"></span>
+                            <span className="edge-b"></span>
+                            <span className="front-b">
+                              Update your dietary preferences{" "}
+                            </span>
+                          </button>
+                        </Link>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 <div>
