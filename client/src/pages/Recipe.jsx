@@ -88,12 +88,12 @@ function Recipe() {
                   <h3 className="h5">Shopping List</h3>
                 </div>
 
-                <div className="row bg-white border-bottom border-secondary border-3 shadow ms-5">
+                {/* <div className="row bg-white border-bottom border-secondary border-3 shadow ms-5">
                   <p>(Select ingredients to add to shopping list)</p>
                   <button className="btn" type="button">
                     ⭐
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -145,13 +145,13 @@ function Recipe() {
                   return null;
                 })}
               </ul>
-              <div className="col text-end">
+              {/* <div className="col text-end">
                 <button className="btn pushable-b-lg">
                   <span className="shadow-btn-b-lg"></span>
                   <span className="edge-b-lg"></span>
                   <span className="front-b-lg">Add to favorites</span>
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         )}
