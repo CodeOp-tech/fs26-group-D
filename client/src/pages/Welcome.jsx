@@ -117,36 +117,70 @@ function Welcome({
           </div>
         </section>
 
+        <section>
+          <div className="text-center p-5 pb-0 text-dark">
+            <h1 className="display-3 fs-1 text-dark border-bottom  border-dark border-3  p-2">
+              <span className="">Welcome to BusyBytes</span>
+            </h1>
+            <div className="mx-5 mt-5 border-bottom border-end border-primary border-3 rounded bg-blueLight text-start shadow">
+              <div className="container p-4">
+                <h2 className="display-5 fs-4 mb-2">
+                  Introducing BusyBytes...
+                </h2>
+
+                <blockquote className="blockquote text-center p-2">
+                  {/* <h3 className="font-monospace text-start">&lt; / hunger &gt;</h3> */}
+                  BusyBytes is the ultimate app designed specifically for tech
+                  enthusiasts like you, offering a seamless solution to
+                  streamline your meal planning, grocery shopping, and cooking
+                  processes. With BusyBytes , you can indulge in your coding
+                  passion while enjoying delicious, hassle-free meals.
+                </blockquote>
+
+                {/* <p className="display-5 fs-5 text-end">&lt; / hunger &gt;</p> */}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="features">
           <div className="text-center p-5 pb-0 text-dark">
-            <h1 className="display-5 fs-3 text-dark border-bottom border-dark border-3">
+            <h2 className="display-5 fs-3 text-dark border-bottom border-dark border-3">
               <span className="">Features</span>
-            </h1>
+            </h2>
 
             <div className="mx-5 my-5 border-bottom border-end border-secondary border-3 rounded bg-aquaLight text-end shadow-sm">
               <div className="container p-4">
-                <h2 className="display-5 fs-5">Program your Plates</h2>
+                <h2 className="display-5 fs-5">Program your plates</h2>
 
                 <div className="">
-                  Plan your upcoming meals with the Busy Bytes Meal Planner!
-                  Search for recipes and schedule them into your calendar. Lorem
-                  ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-                  corrupti illum iste beatae id quos repellendus odio ad tempore
-                  eius?
+                  Browse our extensive recipe library for some inspiration. Then
+                  plan your upcoming meals with the Busy Bytes Meal Planner! You
+                  can schedule a wide{" "}
+                  <span>
+                    <code className="fs-4 text-primary ">[array]</code>
+                  </span>{" "}
+                  of dishes into you calendar so that you can stop reaching for{" "}
+                  <span>
+                    <code className="fs-4 text-primary ">pizza.slice(1)</code>
+                  </span>
+                  .
                 </div>
               </div>
             </div>
 
             <div className="mx-5 mt-5 border-bottom border-end border-primary border-3 rounded bg-blueLight text-start shadow-sm">
               <div className="container p-4">
-                <h2 className="display-5 fs-5">Develop your dishes</h2>
+                <h2 className="display-5 fs-5">&lt; / emptyFridge &gt;</h2>
 
                 <div className="">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Repellendus, sequi tempore corrupti suscipit molestiae ducimus
-                  voluptate illo minus praesentium magni facilis maxime adipisci
-                  labore deserunt iste necessitatibus mollitia cumque
-                  quibusdam.y
+                  Is your shopping basket returning{" "}
+                  <span>
+                    <code className="fs-4 text-primary ">undefined</code>
+                  </span>{" "}
+                  ? Generate a shopping list of all the ingredients for your
+                  planned meal so you always have a{" "}
+                  <span className="fw-bold">byte</span> to eat.
                 </div>
               </div>
             </div>
@@ -156,10 +190,10 @@ function Welcome({
                 <h2 className="display-5 fs-5">Repo your recipes</h2>
 
                 <div className="">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Exercitationem totam, labore beatae quo accusantium doloremque
-                  repudiandae deleniti praesentium omnis esse eum voluptatem
-                  ipsum, voluptas eligendi sunt itaque nam commodi temporibus!
+                  Ready to <span className="fw-bold">commit</span> to a dish?
+                  Save all your favourite recipes to your recipe repository.
+                  We'll leave you to handle the{" "}
+                  <span className="fw-bold">forks... </span>
                 </div>
               </div>
             </div>
