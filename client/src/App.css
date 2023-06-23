@@ -35,6 +35,13 @@
   overflow: auto;
 }
 
+.meal-card {
+  min-height: 45vh;
+  position: relative;
+  /* max-height:50vh */
+  overflow: auto;
+}
+
 .meal-accordion {
   position: absolute;
   bottom: 0px;

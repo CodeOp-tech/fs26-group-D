@@ -630,80 +630,90 @@ function NewMealPlan() {
             </div>
           </div>
 
-          <div className={queryToggle ? "row hide " : "row meal-planner-div"}>
-            <div className="col-md-5 overflow-y-auto">
-              {recipes.map(recipe => (
-                <div
-                  key={recipe.id}
-                  className="my-2 bg-aquaLight shadow border-bottom border-secondary border-5 container"
-                >
-                  <div className="row">
-                    <h2 className="h4 pt-2">{recipe.title}</h2>
-                  </div>
-                  <div className="row">
-                    <Link to={`/private/dashboard/recipe/${recipe.id}`}>
-                      <img
-                        src={recipe.image}
-                        alt={recipe.title}
-                        className="img-fluid border-bottom border-secondary border-5 shadow my-1 justify-content-center"
-                      />
-                    </Link>
-                  </div>
-
-                  <div className="row mb-2 px-3">
-                    <label
-                      className="form-label font-monospace fs-4 mb-1"
-                      htmlFor="date"
-                    >
-                      Date:
-                    </label>
-                    <input
-                      placeholder="DD/MM/YYYY"
-                      type="date"
-                      id="date"
-                      value={date}
-                      onChange={e => setDate(e.target.value)}
-                      className="form-control border-secondary"
-                    />
-                  </div>
-                  <div className="row mb-2 px-3">
-                    <label
-                      className="form-label font-monospace fs-4 mb-1"
-                      htmlFor="mealType"
-                    >
-                      Meal Type:
-                    </label>
-                    <select
-                      id="mealType"
-                      value={mealType}
-                      onChange={e => setMealType(e.target.value)}
-                      className="form-control border-secondary shadow-sm "
-                    >
-                      <option value="">Select a meal type</option>
-                      <option value="breakfast">Breakfast</option>
-                      <option value="elevensies">Elevensies</option>
-                      <option value="lunch">Lunch</option>
-                      <option value="afternoon tea">Afternoon tea</option>
-                      <option value="dinner">Dinner</option>
-                    </select>
-                  </div>
-                  <div className="text-end">
-                    <button
-                      className="btn pushable-b-sm mt-3 mb-3"
-                      onClick={() => addMealToCalendar(recipe)}
-                    >
-                      <span className="shadow-btn-b-sm"></span>
-                      <span className="edge-b-sm"></span>
-                      <span className="front-b-sm">Add to Calendar </span>
-                    </button>
-                  </div>
+          {/* <div className={queryToggle ? "row hide " : "row meal-planner-div"}> */}
+          <div
+            className={
+              queryToggle ? "row hide " : "row p-0 m-0 justify-content-between"
+            }
+          >
+            {/* <div className="col-md-5 overflow-y-auto"> */}
+            {/* <div className=""> */}
+            {recipes.map(recipe => (
+              // <div
+              //   key={recipe.id}
+              //   className="my-2 bg-aquaLight shadow border-bottom border-secondary border-5 container"
+              // >
+              <div
+                key={recipe.id}
+                className="my-3 mx-3 bg-aquaLight shadow border-bottom border-secondary border-5 col-3"
+              >
+                <div className="row">
+                  <h2 className="h4 pt-2">{recipe.title}</h2>
                 </div>
-              ))}
-            </div>
+                <div className="row">
+                  <Link to={`/private/dashboard/recipe/${recipe.id}`}>
+                    <img
+                      src={recipe.image}
+                      alt={recipe.title}
+                      className="img-fluid border-bottom border-secondary border-5 shadow my-1 justify-content-center"
+                    />
+                  </Link>
+                </div>
 
-            <div className="col-md-7 vh">
+                <div className="row mb-2 px-3">
+                  <label
+                    className="form-label font-monospace fs-4 mb-1"
+                    htmlFor="date"
+                  >
+                    Date:
+                  </label>
+                  <input
+                    placeholder="DD/MM/YYYY"
+                    type="date"
+                    id="date"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                    className="form-control border-secondary"
+                  />
+                </div>
+                <div className="row mb-2 px-3">
+                  <label
+                    className="form-label font-monospace fs-4 mb-1"
+                    htmlFor="mealType"
+                  >
+                    Meal Type:
+                  </label>
+                  <select
+                    id="mealType"
+                    value={mealType}
+                    onChange={e => setMealType(e.target.value)}
+                    className="form-control border-secondary shadow-sm "
+                  >
+                    <option value="">Select a meal type</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="elevensies">Elevensies</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="afternoon tea">Afternoon tea</option>
+                    <option value="dinner">Dinner</option>
+                  </select>
+                </div>
+                <div className="text-end">
+                  <button
+                    className="btn pushable-b-sm mt-3 mb-3"
+                    onClick={() => addMealToCalendar(recipe)}
+                  >
+                    <span className="shadow-btn-b-sm"></span>
+                    <span className="edge-b-sm"></span>
+                    <span className="front-b-sm">Add to Calendar </span>
+                  </button>
+                </div>
+              </div>
+            ))}
+            {/* </div> */}
+
+            {/* <div className="col-md-7 vh">
               <Calendar />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

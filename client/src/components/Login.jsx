@@ -58,14 +58,20 @@ function Login({
 
   return (
     <>
-      <section className=" container">
-        <div className="container   m-2">
+      <section className=" container my-3">
+        <div className=" mx-auto">
           {/* <div className="row justify-content-center"> */}
 
           {/* <div className="row g-0 border-bottom border-end border-3 border-secondary shadow"> */}
           <div className="row m-0 border-bottom border-3 border-primary shadow rounded ">
             <div className="col-md-5 bg-aquaLight rounded">
-              <div className="rounded">img placeholder</div>
+              <div className="rounded">
+                <img
+                  className="img-fluid"
+                  src=".\images\BusyBytes.png"
+                  alt="BusyBytes robot"
+                />
+              </div>
             </div>
             <div className="col-md-7">
               <div className="card-body text-center">

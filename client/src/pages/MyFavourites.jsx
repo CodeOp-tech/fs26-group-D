@@ -106,7 +106,7 @@ function MyFavourites({ favouritesSummary }) {
               <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-4 my-3 shadow-sm text-end row">
                 <div className="col">
                   <p className="text-center my-auto lead">
-                    View recipes to add more favourites!
+                    View recipes to save your favourites!
                   </p>
                 </div>
                 <div className="col">
@@ -170,6 +170,30 @@ function MyFavourites({ favouritesSummary }) {
                     </Link>
                     </div>
                     </div> */}
+            </div>
+          )}
+
+          {!favouritesSummary && fav.length === 0 && (
+            <div className="bg-aquaLight border-bottom border-end border-secondary border-3 p-4 my-3 mx-auto shadow-sm text-end row">
+              <div className="col">
+                <p className="text-center my-auto lead">
+                  View recipes to save your favourites!
+                </p>
+              </div>
+              <div className="col">
+                <div className="text-end">
+                  <Link
+                    to={`/private/dashboard/newmealplan`}
+                    className="text-decoration-none"
+                  >
+                    <button className="my-auto btn  pushable-b">
+                      <span className="shadow-btn-b"></span>
+                      <span className="edge-b"></span>
+                      <span className="front-b">Search Recipes</span>
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </div>
           )}
 

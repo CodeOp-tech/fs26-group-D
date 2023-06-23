@@ -58,7 +58,7 @@ function Recipe() {
             </div>
 
             <div className="row bg-aquaLight shadow border-bottom border-end border-3 border-secondary my-4  p-3">
-              <div className="col col-7">
+              <div className="col">
                 <h2 className="">Ingredients:</h2>
 
                 <ul className="list-group list-group-flush shadow me-5 border-bottom border-secondary border-3">
@@ -83,18 +83,18 @@ function Recipe() {
                   ))}
                 </ul>
               </div>
-              <div className="col col-5 text-end">
-                <div className="row">
+              {/* <div className="col col-5 text-end"> */}
+              {/* <div className="row">
                   <h3 className="h5">Shopping List</h3>
-                </div>
+                </div> */}
 
-                {/* <div className="row bg-white border-bottom border-secondary border-3 shadow ms-5">
+              {/* <div className="row bg-white border-bottom border-secondary border-3 shadow ms-5">
                   <p>(Select ingredients to add to shopping list)</p>
                   <button className="btn" type="button">
                     ⭐
                   </button>
-                </div> */}
-              </div>
+                </div>
+              </div> */}
             </div>
 
             <div className="row bg-blueLight shadow border-bottom border-end border-3 border-primary my-4  p-3">
